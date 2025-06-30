@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fellowship Updates</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      color: #258BB0;
+      background-color: white;
+      padding-right: 1em;
+      padding-left: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    h1, h2, h3{
+      color: #258BB0;
+    }
+
+    strong{
+      color: #FF861C;
+    }
+
+    button{
+        border-radius: 5px;
+    }
+
+    #aboutButton {
+      background-color: #FF861C;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      height: calc(100% - 300px);
+    }
+
+    .sidebar {
+      width: 20%;
+      overflow-y: auto;
+      background-color: #f0f0f0;
+      padding: 1em;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1em;
+    }
+
+    .sidebar h2 {
+      color: #258BB0;
+    }
+
+    .item {
+      cursor: pointer;
+      padding: 0.5em;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .item:hover {
+      background-color: #e0e0e0;
+    }
+
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #aboutOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 2em;
+      box-sizing: border-box;
+    }
+
+    #aboutContent {
+      background-color: #258BB0;
+      padding: 2em;
+      max-width: 600px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    #closeAbout {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 1.2em;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    .copy-button {
+      background-color: #258BB0;
+      color: white;
+      border: none;
+      padding: 0.5em;
+      cursor: pointer;
+      margin-top: 1em;
+      margin-right: 0.5em;
+    }
+
+    .share-buttons {
+      margin-top: 1em;
+    }
+
+    .share-buttons button {
+      margin-right: 0.5em;
+      background-color: #FF861C;
+      color: white;
+      border: none;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/fellowship logo 1.png" alt="logo" height="100">
+    <h1><span style="color: #FF861C;">open</span>EHR <span style="color: black;">- Fellowship 2025 Documentation</span></h1>
+    <button id="aboutButton">About</button>
+  </header>
+  <main>
+    <div class="sidebar" id="blogList">
+      <h2>Blog Posts</h2>
+    </div>
+    <div class="content" id="mainContent">
+        <h2>Welcome to my openEHR Fellowship Documentation!</h2>
+        <p>
+          Throughout my fellowship, I will be regularly updating this page with new information, videos, and blog posts to document the progress of my project.
+        </p>
+        <p>
+          Feel free to browse the content and explore the resources available.
+        </p>
+        <p>
+          Select a blog post or video from the sidebar to view it here.
+        </p>
+    </div>
+    <div class="sidebar" id="videoList">
+      <h2>Videos</h2>
+    </div>
+  </main>
+  <div id="aboutOverlay">
+    <div id="aboutContent">
+      <button id="closeAbout">&times;</button>
+      <h2>About</h2>
+      <p>This page shares updates and media related to the fellowship program, including blogs and recorded content.</p>
+    </div>
+  </div>
+
+  <script>
+    const blogsFolder = 'blogs';
+    const videosFolder = 'videos';
+
+    async function loadBlogTitles() {
+      const response = await fetch(blogsFolder + '/index.json');
+      const blogs = await response.json();
+      const blogList = document.getElementById('blogList');
+      blogs.forEach(blog => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.textContent = blog.title;
+        item.onclick = () => {
+          loadBlogPost(blog.file, blog.title);
+          history.pushState(null, '', `?blog=${encodeURIComponent(blog.file)}`);
+        };
+        blogList.appendChild(item);
+      });
+    }
+
+    function loadBlogPost(file, title) {
+      fetch(`${blogsFolder}/${file}`)
+        .then(res => res.text())
+        .then(html => {
+          const link = `${location.origin}${location.pathname}?blog=${encodeURIComponent(file)}`;
+          document.getElementById('mainContent').innerHTML = `
+            <!--<h2>${title}</h2>-->
+            ${html}
+            <div class="share-buttons">
+              <button class="copy-button" onclick="copyToClipboard('${link}')">Copy Blog Link</button>
+            </div>
+          `;
+        });
+    }
+
+    async function loadVideoTitles() {
+      const response = await fetch(videosFolder + '/index.json');
+      const videos = await response.json();
+      const videoList = document.getElementById('videoList');
+      videos.forEach(video => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.textContent = video.title;
+        item.onclick = () => {
+          loadVideo(video);
+        };
+        videoList.appendChild(item);
+      });
+    }
+
+    function loadVideo(video) {
+      const videoUrl = `${location.origin}/${videosFolder}/${video.file}`;
+      const infoPath = `${videosFolder}/${video.info}`;
+      document.getElementById('mainContent').innerHTML = `
+        <h2>${video.title}</h2>
+        <video controls controlsList="nodownload" width="100%">
+          <source src="${videoUrl}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="share-buttons">
+          <button class="copy-button" onclick="copyToClipboard('${videoUrl}')">Copy Video Link</button>
+        </div>
+        <div id="videoInfo"></div>
+      `;
+      fetch(infoPath)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('videoInfo').innerHTML = html;
+        });
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Link copied to clipboard!');
+      });
+    }
+
+    function shareOn(platform, url, title = '') {
+      let shareUrl = '';
+      if (platform === 'twitter') {
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+      } else if (platform === 'facebook') {
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      }
+      window.open(shareUrl, '_blank');
+    }
+
+    document.getElementById('aboutButton').onclick = () => {
+      document.getElementById('aboutOverlay').style.display = 'flex';
+    };
+
+    document.getElementById('closeAbout').onclick = () => {
+      document.getElementById('aboutOverlay').style.display = 'none';
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogFile = urlParams.get('blog');
+
+    loadBlogTitles();
+    loadVideoTitles();
+
+    if (blogFile) {
+      fetch(blogsFolder + '/index.json')
+        .then(res => res.json())
+        .then(blogs => {
+          const blog = blogs.find(b => b.file === blogFile);
+          if (blog) loadBlogPost(blog.file, blog.title);
+        });
+    }
+  </script>
+</body>
+</html>
