@@ -229,7 +229,8 @@
     }
 
     function loadVideo(video) {
-      const videoUrl = `${location.origin}/${videosFolder}/${video.file}`;
+      //const videoUrl = `${location.origin}/${videosFolder}/${video.file}`;
+      const videoUrl = `${videosFolder}/${video.file}`;
       const infoPath = `${videosFolder}/${video.info}`;
       document.getElementById('mainContent').innerHTML = `
         <h2>${video.title}</h2>
