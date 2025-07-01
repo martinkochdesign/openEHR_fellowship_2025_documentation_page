@@ -1,0 +1,172 @@
+<h2>Project planning</h2>
+
+<h3>Research, Development, and Implementation Strategies</h3>
+<p>
+  The primary objective of this project is to create a stable working prototype that effectively demonstrates value to the end user. To achieve this, the following methodology for research, development, and implementation is going to be used.
+</p>
+
+<h4>Research</h4>
+<p>
+  The research phase involves conducting a questionnaire aimed at assessing the need for the proposed project and identifying users' pain points. This step is crucial as it helps to understand the specific requirements and challenges faced by potential users, ensuring that the final tool is tailored to meet their needs.
+</p>
+
+<h4>Development</h4>
+<p>
+  The development process is divided into two main parts:
+</p>
+<ul>
+  <li>
+    <strong>Part 1:</strong> This part focuses on creating a tool designed to acquire archetype ADL files from either a local or online repository. The tool will extract relevant data and store it in a data file, facilitating easy access and management of the information.
+  </li>
+  <li>
+    <strong>Part 2:</strong> The second part consists in developing an online search, visualization and planning tool. This tool will enable users to explore the previously generated data file, providing a user-friendly interface for data interaction and analysis.
+  </li>
+</ul>
+
+<h4>Implementation</h4>
+<p>
+  The implementation phase includes several key activities:
+</p>
+<ol>
+  <li>
+    <strong>Extraction of Archetypes:</strong> Archetypes can be extracted from online resources and local zip files. The online repositories include CKM or GitHub repositories. This flexibility ensures that the tool can be applied to a wide range of archetype sources.
+  </li>
+  <li>
+    <strong>Development of the Extraction Tool:</strong> The extraction tool will be developed in Python and compiled into an executable (.exe) file with a graphical user interface. Additionally, a “headless” mode is going to be implemented for an automatic update of the resulting data file. Both the source code and the executable will be published in a GitHub repository under the Apache 2.0 open-source license, making them freely available to the community.
+  </li>
+  <li>
+    <strong>Search, Visualization, and Planning Tool:</strong> This tool will be accessible to any user with an internet connection and a modern browser. HTML and JavaScript are going to be used to develop a user-friendly interface. Data visualization is going to be implemented with d3.js, a widely-used library with comprehensive documentation available at <a href="https://d3js.org/" target="_blank">https://d3js.org/</a>. The tool will also be published in a GitHub repository under the Apache 2.0 open-source license.
+  </li>
+  <li>
+    <strong>User Data and User Management:</strong> All data that is used by the user is going to be saved on their local hard drive. No user data is going to be collected or sent to third parties. There are no user accounts or user management planned.
+  </li>
+  <li>
+    <strong>User-Friendly Data Management:</strong> A special effort is going to be made to ensure that data input and output are as user-friendly as possible. Users will be able to upload data in easily manageable formats, such as .xlsx, simplifying the process of data interaction.
+  </li>
+  <li>
+    <strong>Maintenance and Transition:</strong> Both tools will be maintained in a public GitHub repository by Martin Koch from the Catalan Healthcare Service during the duration of the project. Upon completion of the project, there is potential for the content to be transitioned to an official openEHR domain. The future development and maintenance has to be discussed once the value of the project has been assessed.
+  </li>
+</ol>
+
+<h4>Engagement with openEHR Specifications</h4>
+<p>
+  This project aligns with the openEHR specifications by using and parsing archetype files that comply with the ADL standards. By adhering to these specifications, we ensure that our tools are compatible with the existing standard and can be effectively utilized within the broader openEHR community. Furthermore, the tools will utilize REST API calls to various CKM sources for retrieving archetypes.
+</p>
+
+<h4>Specific openEHR Tools, Platforms, or Clinical Modelling Approaches</h4>
+<p>
+  The primary source of the archetypes integrated into this project will be the international CKM. The tools to be developed are going to integrate into the common modelling approach, where a list of data elements is given in the beginning, followed by a search for archetypes and planning a layout and finally creating a template. The main focus here lies on the searching and planning.
+</p>
+
+<h4>Quality Assurance</h4>
+<p>
+  To assure a good quality of this project, the robustness of the data extraction tool will be rigorously tested against all available archetypes in the CKMs, including those from international, Norway, Catalan, and German sources. This comprehensive testing approach will help identify and rectify any issues, ensuring that the tool performs reliably across various scenarios.
+</p>
+<p>
+  Additionally, the quality of the visualization tool will be ensured through user feedback in real use cases. This feedback will be invaluable in refining the tool's functionality and user experience.
+</p>
+
+<h3>Timing by quarters</h3>
+
+<h4>Quarter 1 (Months 1-3)</h4>
+<h5>Activities</h5>
+<ul>
+    <li>Design and distribute initial questionnaire.</li>
+    <li>Conduct stakeholder interviews via questionnaire (developers, clinicians, etc.).</li>
+    <li>Analyze interview responses to extract needs and pain points.</li>
+    <li>Define features for both tools (must-have, nice-to-have).</li>
+    <li>Research existing tools/libraries for parsing ADL files.</li>
+    <li>Research existing archetype browser o searching tools</li>
+    <li>Develop initial version of the ADL extraction tool.</li>
+    <li>Define data model and schema for archetype representation.</li>
+</ul>
+<h5>Deliverables</h5>
+<ul>
+    <li>Full feature list (categorized: essential / optional).</li>
+    <li>Stakeholder interview analysis report.</li>
+    <li>Technical specification document for the extraction tool.</li>
+    <li>Architecture overview of the extraction tool (inputs/outputs/data flow).</li>
+</ul>
+<h5>Milestones</h5>
+<ul>
+    <li>Stakeholder needs assessment complete.</li>
+    <li>First working prototype of ADL extractor (alpha).</li>
+</ul>
+
+<h4>Quarter 2 (Months 4-6)</h4>
+<h5>Activities</h5>
+<ul>
+    <li>Finalize and publish the ADL extraction tool.</li>
+    <li>Design and begin implementation of the web-based visualization/search/planning tool.</li>
+    <li>Define UX/UI for visualization/planning tool.</li>
+    <li>Set up service for updating parsed archetypes data file automatically.</li>
+</ul>
+<h5>Deliverables</h5>
+<ul>
+    <li>Fully functioning archetype extractor.</li>
+    <li>Documentation for the ADL extractor.</li>
+    <li>GitHub repository with source code.</li>
+    <li>Wireframes/mockups for visualization tool.</li>
+    <li>Basic front-end prototype for searching and visualizing archetypes.</li>   
+</ul>
+<h5>Milestones</h5>
+<ul>
+    <li>Extraction tool publicly released.</li>
+    <li>Search tool can manage archetype and project information.</li>
+    <li>Technical specification document for the search and visualization tool.</li>
+</ul>
+
+<h4>Quarter 3 (Months 7-9)</h4>
+<h5>Activities</h5>
+<ul>
+    <li>Finalize visualization/planning tool.</li>
+    <li>Launch test version of the visualization/planning tool.</li>
+    <li>Recruit pilot user group (developers, clinicians) for user feedback.</li>
+    <li>Collect use cases for archetype creation and search.</li>
+    <li>Design and distribute usability questionnaire.</li>
+</ul>
+<h5>Deliverables</h5>
+<ul>
+    <li>Test version of the visualization and planning tool.</li>
+    <li>User guide and instructions.</li>
+    <li>Use case compilation document.</li>
+    <li>User feedback report from pilot test.</li>
+</ul>
+<h5>Milestones</h5>
+<ul>    
+    <li>Searching/visualization tool released for testing.</li>
+    <li>Real-world use cases documented.</li>
+    <li>User experience feedback collected and analyzed.</li>
+</ul>
+
+<h4>Quarter 4 (Months 10-12)</h4>
+<h5>Activities</h5>
+<ul>
+    <li>Implement final improvements based on user feedback.</li>
+    <li>Finalize full documentation.</li>
+    <li>Announce final public release.</li>
+    <li>Conduct final presentation/demo for stakeholders.</li>
+</ul>
+<h5>Deliverables</h5>
+<ul>
+    <li>Finalized visualization and planning tool.</li>
+    <li>Complete documentation (installation, user manual, technical guidevisualization).</li>
+    <li>Summary report of project progress, outcomes, and lessons learned.</li>
+    <li>Final code repositories.</li>
+</ul>
+<h5>Milestones</h5>
+<ul>
+    <li>All user feedback processed.</li>
+    <li>Tools packaged and documented.</li>
+    <li>Project completed and reviewed with stakeholders.</li>
+</ul>
+
+<h3>Detailled timing</h3>
+
+<p>The timing by activities is layed out in the following Gantt chart.</p> 
+
+<div style="text-align: center;">
+    <img src="images/gantt_2.png" alt="Gantt chart" width="800" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>

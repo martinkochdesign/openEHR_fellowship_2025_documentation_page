@@ -6,5 +6,38 @@
     {
       "title": "About Me",
       "file": "02_about_me.html"
+    },
+    {
+      "title": "Project Context",
+      "file": "03_project_context.html"
+    },
+    {
+      "title": "Value Proposition",
+      "file": "04_value_proposition.html"
+    }
+    ,
+    {
+      "title": "Project Planning",
+      "file": "05_project_planning.html"
+    }
+    ,
+    {
+      "title": "Scope",
+      "file": "08_scope.html"
+    }
+    ,
+    {
+      "title": "Ethical Considerations",
+      "file": "06_ethical_considerations.html"
+    }
+    ,
+    {
+      "title": "Reflective Journal I",
+      "file": "reflective_journal_1.html"
+    }
+    ,
+    {
+      "title": "Initial User Questionnaire",
+      "file": "07_user_questionnaire.html"
     }
 ]

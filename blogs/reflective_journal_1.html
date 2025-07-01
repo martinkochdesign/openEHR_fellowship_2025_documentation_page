@@ -1,0 +1,92 @@
+<h2>Reflective Journal 1</h2>
+<small>30/06/2025</small>
+<h3>On the Fellowship</h3>
+<p>
+  It’s incredible that a lot of time has passed in the fellowship. I would like to express my gratitude to everyone involved—this is a fantastic initiative, and I’m excited to become part of the “big picture” of openEHR, to see what others are doing, and to present my own results.
+</p>
+<p>
+  The presentations in the second month have been especially interesting. I completely agree with Heather Leslie’s vision that a lifelong Health Information System (HIS) should be standard, and that we can address the challenges of real-world data with appropriate strategy and open-source standards like openEHR. For me, a major takeaway was the importance of applications for all stakeholders—medical professionals, patients, and data modellers alike, as was presented in the Catalan and Slovenian implementation of openEHR.
+</p>
+<p>
+  The mention of Microsoft’s Common User Interface (CUI) was interesting from a tooling perspective. Although the original page is no longer hosted, I found much of the information on the Internet Archive: 
+  <a href="https://web.archive.org/web/20170409232122/http:/www.mscui.net:80/DesignGuide/DesignGuide.aspx" target="_blank">Microsoft Health CUI Design Guide</a>.
+</p>
+
+<h3>On My Project</h3>
+<p>
+  Speaking of tooling, this brings me to my project. At the start, I filled out the proforma document, which was challenging in itself because it required detailed planning, which is very difficult when starting out. In hindsight, completing the proforma helped me focus on the project’s goals and provided a clear outline, so I am quite happy with the resulting document.
+</p>
+<p>
+  Just to put you in context: In a nutshell, my project aims to create a tool (in the form of a webpage) to help modellers search for and organize openEHR archetypes.
+</p>
+<p>
+  Basically, a modeller with a list of clinical data elements on hand should be able to find appropriate existing archetypes and plan out the use of existing archetypes, the need for change requests in archetypes, and the proposal of possible new archetypes.
+</p>
+<p>
+  The project is divided into two main parts:
+</p>
+<ul>
+  <li>
+    <strong>Backend Automation:</strong>
+    <br>
+    First, a program will be developed that periodically downloads archetypes from an established repository (in this case, the international CKM). Each archetype will be parsed, and relevant information extracted into a proprietary JSON dictionary. This process will be fully automated and invisible to the user.
+  </li>
+  <li>
+    <strong>Web Application:</strong>
+    <br>
+    The second part is a web application that uses this dictionary to offer the following functionalities:
+    <ul>
+      <li>Fast search of archetypes and display of basic information</li>
+      <li>Visualization of dependencies (parent-child, exclusions, inclusions)</li>
+      <li>Recommendation of similar or related archetypes</li>
+      <li>Management of a collection of archetypes</li>
+      <li>Creation of “new archetypes” as placeholders, so users know which archetypes are missing and need to be created</li>
+      <li>Management of a checklist of predefined elements</li>
+      <li>Project-based organization of all activities</li>
+    </ul>
+  </li>
+</ul>
+<p>
+  You can already see that this project will have many interconnected moving parts. I’m also realizing that it will touch on various technical aspects (parsing, automation, web hosting) which will certainly expand my programming skills.
+</p>
+<p>
+  The development is based on my experience with two of my earlier projects:
+</p>
+<ul>
+  <li>
+    <strong>The AQL Manager</strong> (Live online here: 
+    <a href="https://martinkochdesign.github.io/openEHR_AQL_manager/" target="_blank">https://martinkochdesign.github.io/openEHR_AQL_manager/</a>; 
+    Explanation here: 
+    <a href="https://github.com/martinkochdesign/openEHR_AQL_manager" target="_blank">https://github.com/martinkochdesign/openEHR_AQL_manager</a>)
+    <br>
+    <img src="images/screenshot_AQL_manager.png" alt="AQL Manager Screenshot" width="700">
+  </li><br>
+  <li>
+    <strong>Visualization of CKM contents</strong> (Example online here: 
+    <a href="https://martinkochdesign.github.io/CKM_content_visualization/" target="_blank">https://martinkochdesign.github.io/CKM_content_visualization/</a>)
+    <br>
+    <img src="images/screenshot_CKM_vis.png" alt="CKM Visualization Screenshot" width="700">
+  </li>
+</ul>
+<p>
+  Currently, I’m investing a lot of hours to reach a working prototype of both parts. The idea is to include as much user feedback as possible (if the feedback can be implemented in time is another story...).
+</p>
+I am always reminded of the aphorism of the “Ninety–ninety rule” (Tom Cargill, Bell Labs):<br>
+<blockquote class="cool-blockquote">
+ 
+  <em>
+    The first 90 percent of the code accounts for the first 90 percent of the development time. The remaining 10 percent of the code accounts for the other 90 percent of the development time.
+  </em>
+</blockquote>
+<p>
+  This tongue-in-cheek observation leads me to speed development up in the beginning, because this might be beneficial to all the little details that a full-fledged GUI implicates in the end. However, this approach has an obvious drawback: it may create the impression that the project is “already done” early on, even though much work remains on the backend. If sometimes it looks like there are no changes in the tool, it is probable that I am working on some detail that is not perceived in the GUI.
+</p>
+<p>
+  As an interesting observation, I suspect that I am not only using the extracted archetype data for the tool, but I can also generate some valuable statistics, particularly regarding quality. Let me get the final numbers for the next journal or another publication, but I think I can pinpoint archetypes that might need minor changes to get a coherent format all over the International CKM repository.
+</p>
+<p>
+  Also, I’ve already noticed that about a third of archetypes lack keywords, which complicates semantic linking for the recommendation algorithm (don’t worry, I am working on a solution!).
+</p>
+<p>
+  So, what is planned as next steps? First of all, we have to lock in the proforma. I guess there are not going to be major changes, as we already discussed the scope of the project. Secondly, I have prepared a first questionnaire, which I am going to use to get feedback from stakeholders, so we can give more emphasis on aspects that are more important to future users. As already said, user feedback is important to this project.
+</p>

@@ -12,6 +12,7 @@
       flex-direction: column;
       height: 100vh;
       overflow: hidden;
+      line-height: 160%;
     }
 
     header {
@@ -142,6 +143,37 @@
       padding: 0.5em;
       cursor: pointer;
     }
+
+
+    .cool-blockquote {
+      background: #f9f9ff;
+      /*border-left: 6px solid #6c63ff;*/
+      margin: 2em auto;
+      padding: 1.5em 2em;
+      font-size: 1.2em;
+      font-style: italic;
+      color: #333;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(108, 99, 255, 0.08);
+      max-width: 800px;
+    }
+    .cool-blockquote::before {
+      content: "“";
+      font-size: 2.5em;
+      color: #6c63ff;
+      vertical-align: 0em;
+      margin-right: 0.1em;
+    }
+    .cool-blockquote::after {
+      content: "”";
+      font-size: 2.5em;
+      color: #6c63ff;
+      vertical-align: -0.6em;
+      margin-left: 0.1em;
+    }
+
+
+
   </style>
 </head>
 <body>
@@ -156,6 +188,11 @@
     </div>
     <div class="content" id="mainContent">
         <h2>Welcome to my openEHR Fellowship Documentation!</h2>
+        
+        <p>I would like to welcome you to the project documentation page of my project:</p>
+
+        <strong>Development of an Open Source openEHR Archetype Exploration, Mapping and Planning Tool</strong> (working title)
+                
         <p>
           Throughout my fellowship, I will be regularly updating this page with new information, videos, and blog posts to document the progress of my project.
         </p>
@@ -163,7 +200,7 @@
           Feel free to browse the content and explore the resources available.
         </p>
         <p>
-          Select a blog post or video from the sidebar to view it here.
+          Select a blog post or video from the sidebars to view it.
         </p>
     </div>
     <div class="sidebar" id="videoList">
