@@ -1,0 +1,53 @@
+<h2>ADL Extraction - GUI</h2>
+
+<p>From the previous general description of the application, the GUI must fulfill the following functions:</p>
+
+<ul>
+    <li>Provide the possibility to select between different data sources.</li>
+    <li>Give control over the generation of the dataset.</li>
+    <li>Provide feedback during the entire process.</li>
+</ul>
+
+<p>Based on these functionalities, a straightforward design can be drafted:</p>
+
+<div style="text-align: center;">
+    <img src="images/adl_extraction_wireframe.png" alt="ADL extraction - GUI wireframe" width="500">
+    <br>
+    <small>ADL extraction - GUI wireframe</small>
+</div>
+
+<p>The elements are as follows:</p>
+<ol>
+    <li><strong>Title bar:</strong> System title bar with common functionalities: "close", "minimize", and "maximize".</li>
+    <li><strong>Title label:</strong> A label indicating the name of the application.</li>
+    <li>
+        <strong>Source selection:</strong> Radio buttons that allow selection of one of the data sources. Planned options are:
+        <ul>
+            <li>International CKM</li>
+            <li>CKM CatSalut</li>
+            <li>Arketyper (Norwegian CKM)</li>
+            <li>CKM Highmed</li>
+            <li>GitHub of International CKM</li>
+            <li>GitHub of CKM CatSalut</li>
+            <li>GitHub of Arketyper</li>
+            <li>GitHub of the former Apperta CKM (UK)</li>
+            <li>Local ZIP file</li>
+        </ul>
+    </li>
+    <li><strong>Select file path button:</strong> If "Local ZIP file" is selected, this button is enabled. When pressed, the standard file selection window will open.</li>
+    <li><strong>File path textbox:</strong> After selecting the local ZIP file, the path is shown here. Alternatively, a file path can be pasted here.</li>
+    <li><strong>Message box:</strong> Text box that serves as output. On startup, it shows version and copyright information. When the process starts, feedback is given at every stage.</li>
+    <li><strong>Create dataset button:</strong> This button is enabled when a data source is selected. Once pressed, it executes the process of download, extraction, and transformation.</li>
+</ol>
+
+<p>Note that no selection for the output file folder is planned by now. The output file is created and saved in the same directory as the application.</p>
+<p>Also note that no custom GitHub or CKM URLs are planned. This might be added in future versions.</p>
+
+<p>The final resulting GUI was implemented in python using the <i>import tkinter</i> and <i>
+    customtkinter</i> libraries.</p>
+
+<div style="text-align: center;">
+    <img src="images/adl_extraction_finalgui.png" alt="ADL extraction - GUI final" width="400">
+    <br>
+    <small>ADL extraction - Final GUI</small>
+</div>

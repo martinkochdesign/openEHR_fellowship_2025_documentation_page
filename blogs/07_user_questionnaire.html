@@ -5,256 +5,239 @@
   
   <p>The survey also explores the tools and methods used for creating and validating openEHR templates, as well as challenges faced during the modeling process. We hope that the collected feedback will help guide the development of tools and processes that better support the needs of the openEHR community.</p>
 
-  <p>Specifically we want to use this questionnaire to confirm the necessity of the proposed project.</p>
+  <p>Specifically we want to use this questionnaire to confirm the necessity of the proposed project and to ascertain the most important points of this project for the end user.</p>
 
-  <p>The questionnaire will be published at the openEHR discourse forum.</p>
+  <p>The questionnaire will be published at the openEHR discourse forum, on linkedIn and in the openEHR newsletter.</p>
 
   <h2>The Questionnaire</h1>
 
-  <section>
-    <h3>Section I: Getting to Know the Professional</h3>
-    <ol>
-      <li>
-        <label>What is your profession? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Medical Doctor / Clinician</li>
-          <li>Nurse / Midwife / Care Assistant</li>
-          <li>Allied Health Professional</li>
-          <li>Mental Health Professional</li>
-          <li>Dentistry / Oral Health</li>
-          <li>Pharmacy</li>
-          <li>Complementary &amp; Alternative Medicine</li>
-          <li>Laboratory / Diagnostic Sciences</li>
-          <li>Health Informatics / IT</li>
-          <li>Academic / Research / Education</li>
-          <li>Administrator / Manager</li>
-          <li>Student / Trainee</li>
-          <li>Consumer / Non-professional</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>How many years of experience do you have working with openEHR models? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Less than 1 year</li>
-          <li>1–3 years</li>
-          <li>3–5 years</li>
-          <li>More than 5 years</li>
-        </ul>
-      </li>
-      <li>
-        <label>How would you describe your role in the modelling process? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Modeler</li>
-          <li>Clinician Reviewer</li>
-          <li>Terminologist</li>
-          <li>Developer</li>
-          <li>Data Analyst</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>How familiar are you with the creation of openEHR archetypes and templates? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Not at all familiar</li>
-          <li>Somewhat familiar</li>
-          <li>Comfortable</li>
-          <li>Expert level</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <h3>Section II: Drafting and Compiling a List of Data Elements for a Data Model</h3>
-    <ol start="5">
-      <li>
-        <label>Do you follow specific clinical or domain guidelines when identifying required data elements? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Yes</li>
-          <li>No</li>
-        </ul>
-      </li>
-      <li>
-        <label>Please specify the guidelines used</label><br>
-        <!-- Single line text -->
-        <input type="text" name="guidelines_used">
-      </li>
-      <li>
-        <label>How do you document the initial list of data elements or parameters? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Spreadsheet</li>
-          <li>Word document</li>
-          <li>Modeling tool</li>
-          <li>Paper/Whiteboard</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>How structured is your initial parameter list? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Free-form text</li>
-          <li>Informally grouped</li>
-          <li>Strictly structured (e.g., follows HL7, SNOMED CT, or openEHR conventions)</li>
-        </ul>
-      </li>
-      <li>
-        <label>What tools or platforms do you use to collaborate on this list? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>SharePoint</li>
-          <li>Google Docs</li>
-          <li>Email</li>
-          <li>Modeling tools (e.g., Archetype Designer)</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>How many people are typically involved in compiling the data elements? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Just me</li>
-          <li>2–3 collaborators</li>
-          <li>More than 3</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <h3>Section III: Searching, Planning, and Mapping Archetypes</h3>
-    <ol start="11">
-      <li>
-        <label>Which tools do you use to search for existing archetypes? <span style="color:red">*</span></label><br>
-        <!-- Multiple choice -->
-        <ul>
-          <li>openEHR CKM</li>
-          <li>Archetype Designer</li>
-          <li>Internal repository</li>
-          <li>Manual browsing or searching</li>
-          <li>I rarely search; I create new archetypes</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>How effective do you find the search for existing archetypes? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Very effective</li>
-          <li>Somewhat effective</li>
-          <li>Not effective</li>
-          <li>I don’t use it</li>
-        </ul>
-      </li>
-      <li>
-        <label>Do you search for archetypes collaboratively or individually? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Mostly individually</li>
-          <li>Mostly collaboratively</li>
-          <li>Depends on the project</li>
-        </ul>
-      </li>
-      <li>
-        <label>Do you find it easy to identify existing archetypes relevant to your needs? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Always</li>
-          <li>Sometimes</li>
-          <li>Rarely</li>
-          <li>Never</li>
-        </ul>
-      </li>
-      <li>
-        <label>What tools do you use for planning and mapping the data structure to archetypes? <span style="color:red">*</span></label><br>
-        <!-- Multiple choice -->
-        <ul>
-          <li>XMind</li>
-          <li>Freemind</li>
-          <li>Excel</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>Is this planning/mapping usually done individually or collaboratively? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Individually</li>
-          <li>Collaboratively</li>
-        </ul>
-      </li>
-      <li>
-        <label>How do you keep track of archetype dependencies or relationships during planning? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Manual tracking (e.g., notes/spreadsheets)</li>
-          <li>Built-in tooling (e.g., CKM relationships)</li>
-          <li>I don't track dependencies explicitly</li>
-          <li>Other</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <h3>Section IV: Creating the Final openEHR Templates</h3>
-    <ol start="18">
-      <li>
-        <label>Which tool(s) do you use to create openEHR templates? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Archetype Designer</li>
-          <li>Template Designer (Ocean)</li>
-          <li>LinkEHR</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>What challenges do you face when creating templates?</label><br>
-        <!-- Single line text -->
-        <input type="text" name="template_challenges">
-      </li>
-      <li>
-        <label>How do you validate your templates? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Peer review</li>
-          <li>Test data entry</li>
-          <li>Built-in validation tools (for example in CKM or Archetype Designer)</li>
-          <li>Other</li>
-        </ul>
-      </li>
-      <li>
-        <label>Do you reuse existing templates from repositories or start from scratch? <span style="color:red">*</span></label><br>
-        <!-- Single choice -->
-        <ul>
-          <li>Reuse whenever possible</li>
-          <li>Sometimes reuse</li>
-          <li>Usually start from scratch</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <h3>Optional Final Section: Suggestions and Feedback</h3>
-    <ol start="22">
-      <li>
-        <label>If you could change one thing about the current modeling and planning process, what would it be?</label><br>
-        <!-- Single line text -->
+  <p>Please be aware that this is only the documentation of the questionairre. This is not meant to be filled out and send. As already mentioned the "real" survey is going to be announced over official channels and will take form (pun intended) of a anonymous Microsoft form.</p>
+ 
+  <form>
+    <fieldset>
+      <legend>Section I: Getting to Know the Professional</legend>
+      <div class="question">
+        <label>1. What is your profession? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="profession" value="Medical Doctor"> Medical Doctor / Clinician<br>
+          <input type="radio" name="profession" value="Nurse"> Nurse / Midwife / Care Assistant<br>
+          <input type="radio" name="profession" value="Allied Health"> Allied Health Professional<br>
+          <input type="radio" name="profession" value="Mental Health"> Mental Health Professional<br>
+          <input type="radio" name="profession" value="Dentistry"> Dentistry / Oral Health<br>
+          <input type="radio" name="profession" value="Pharmacy"> Pharmacy<br>
+          <input type="radio" name="profession" value="CAM"> Complementary & Alternative Medicine<br>
+          <input type="radio" name="profession" value="Lab"> Laboratory / Diagnostic Sciences<br>
+          <input type="radio" name="profession" value="Informatics"> Health Informatics / IT<br>
+          <input type="radio" name="profession" value="Academic"> Academic / Research / Education<br>
+          <input type="radio" name="profession" value="Admin"> Administrator / Manager<br>
+          <input type="radio" name="profession" value="Student"> Student / Trainee<br>
+          <input type="radio" name="profession" value="Consumer"> Consumer / Non-professional<br>
+          <input type="radio" name="profession" value="Consumer"> Others: _____________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>2. How many years of experience do you have working with openEHR models? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="experience" value="Less than 1 year"> Less than 1 year<br>
+          <input type="radio" name="experience" value="1–3 years"> 1–3 years<br>
+          <input type="radio" name="experience" value="3–5 years"> 3–5 years<br>
+          <input type="radio" name="experience" value="More than 5 years"> More than 5 years<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>3. How would you describe your role in the modelling process? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="role" value="Modeller"> Modeller<br>
+          <input type="radio" name="role" value="Clinician Reviewer"> Clinician Reviewer<br>
+          <input type="radio" name="role" value="Terminologist"> Terminologist<br>
+          <input type="radio" name="role" value="Developer"> Developer<br>
+          <input type="radio" name="role" value="Data Analyst"> Data Analyst<br>
+          <input type="radio" name="role" value="Data Analyst"> Others: ______________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>4. How familiar are you with the creation of openEHR archetypes and templates? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="familiarity" value="Not at all familiar"> Not at all familiar<br>
+          <input type="radio" name="familiarity" value="Somewhat familiar"> Somewhat familiar<br>
+          <input type="radio" name="familiarity" value="Comfortable"> Comfortable<br>
+          <input type="radio" name="familiarity" value="Expert level"> Expert level<br>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Section II: Drafting and Compiling a List of Data Elements for an openEHR Template</legend>
+      <div class="question">
+        <label>5. Do you follow specific clinical or domain guidelines when identifying required data elements for a template? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="guidelines" value="Yes"> Yes<br>
+          <input type="radio" name="guidelines" value="Sometimes"> Sometimes<br>
+          <input type="radio" name="guidelines" value="No"> No<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>6. Please specify the guidelines used:</label>
+        <input type="text" name="guidelines_specify">
+      </div>
+      <div class="question">
+        <label>7. How do you document the list of data elements? (Multiple answers possible) <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="checkbox" name="documentation" value="Spreadsheet"> Spreadsheet<br>
+          <input type="checkbox" name="documentation" value="Word document"> Word document<br>
+          <input type="checkbox" name="documentation" value="Paper/Whiteboard"> Paper/Whiteboard<br>
+          <input type="checkbox" name="documentation" value="Mindmap tool"> Mindmap tool (Xmind/Freemind)<br>
+          <input type="checkbox" name="documentation" value="Requirements tool"> Dedicated requirements management tool (e.g., Jira, Trello)<br>
+          <input type="checkbox" name="documentation" value="Data modelling tool"> Data modelling tool (e.g., ER diagram)<br>
+          <input type="checkbox" name="documentation" value="openEHR modelling tool"> openEHR modelling tool (e.g., CKM, Archetype Designer)<br>
+          <input type="checkbox" name="documentation" value="openEHR modelling tool"> Others: _________________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>8. What is your process when creating the list of data elements? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="process" value="List first, then map"> I am creating a list first, search for archetypes and then map the data structure.<br>
+          <input type="radio" name="process" value="List and map simultaneously"> I am creating the list and mapping simultaneously. During the subsequent search I adjust the mapping.<br>
+          <input type="radio" name="process" value="List only, no mapping"> I am creating only a list of elements, no mapping needed. The "clustering" of elements depends on the subsequent search.<br>
+          <input type="radio" name="process" value="Mapping directly"> I am mapping directly, no need for a previous list. During the subsequent search I adjust the mapping.<br>
+          <input type="radio" name="process" value="Mapping directly"> Others: _________________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>9. How structured is your initial parameter list? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="structure" value="Free-form text"> Free-form text<br>
+          <input type="radio" name="structure" value="Informally grouped"> Informally grouped<br>
+          <input type="radio" name="structure" value="Strictly structured"> Strictly structured (e.g., follows HL7, SNOMED CT, or openEHR conventions)<br>
+          <input type="radio" name="structure" value="Strictly structured"> Others: ____________________________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>10. How many people are typically involved in compiling the data elements? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="compilers" value="Just me"> Just me<br>
+          <input type="radio" name="compilers" value="2–3 collaborators"> 2–3 collaborators<br>
+          <input type="radio" name="compilers" value="More than 3"> More than 3<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>11. What tools or platforms do you use to collaborate on this list? (Multiple answers possible) <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="checkbox" name="collab_tools" value="SharePoint"> SharePoint<br>
+          <input type="checkbox" name="collab_tools" value="Google Docs"> Google Docs<br>
+          <input type="checkbox" name="collab_tools" value="Email"> Email<br>
+          <input type="checkbox" name="collab_tools" value="Modeling tools"> Modeling tools (e.g., Archetype Designer)<br>
+          <input type="checkbox" name="collab_tools" value="Video conferencing"> Video conferencing platforms (Zoom, Teams, etc.)<br>
+          <input type="checkbox" name="collab_tools" value="Project management tools"> Project management tools (e.g., Jira, Asana)<br>
+          <input type="checkbox" name="collab_tools" value="Project management tools"> Others: ___________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>12. What is your process in the collaboration? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="collab_process" value="Everyone modifies"> Everyone modifies the design document.<br>
+          <input type="radio" name="collab_process" value="One moderates"> One person moderates and modifies the design document, while everyone gives feedback.<br>
+          <input type="radio" name="collab_process" value="One moderates"> Others: _____________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>13. What main benefits do you expect from the collaboration?</label>
+        <input type="text" name="collab_benefits">
+      </div>
+      <div class="question">
+        <label>14. What is the ONE most important problem that you have? What is the ONE change that you would like to see in the compilation of data element lists?</label>
+        <input type="text" name="compilation_problem">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Section III: Searching Archetypes</legend>
+      <div class="question">
+        <label>15. Which tool do you use mainly to search for existing archetypes? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="search_tool" value="CKM"> openEHR CKM<br>
+          <input type="radio" name="search_tool" value="Archetype Designer"> Archetype Designer<br>
+          <input type="radio" name="search_tool" value="Internal repository"> Internal repository<br>
+          <input type="radio" name="search_tool" value="Manual"> Manual browsing or searching<br>
+          <input type="radio" name="search_tool" value="Rarely search"> I rarely search; I create new archetypes<br>
+          <input type="radio" name="search_tool" value="Rarely search"> Others: ___________________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>16. How effective do you find the search for existing archetypes? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="search_effective" value="Very effective"> Very effective<br>
+          <input type="radio" name="search_effective" value="Somewhat effective"> Somewhat effective<br>
+          <input type="radio" name="search_effective" value="Not effective"> Not effective<br>
+          <input type="radio" name="search_effective" value="Don't use"> I don’t use it<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>17. What are your main problems during searching? (Multiple answers possible) <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="checkbox" name="search_problems" value="Slow search"> Slow search<br>
+          <input type="checkbox" name="search_problems" value="Not relevant"> Found archetypes not relevant<br>
+          <input type="checkbox" name="search_problems" value="Cannot search attributes"> Cannot search for specific archetype attributes<br>
+          <input type="checkbox" name="search_problems" value="Too many similar"> Too many similar archetypes, hard to choose<br>
+          <input type="checkbox" name="search_problems" value="Outdated"> Outdated or deprecated archetypes appear in search<br>
+          <input type="checkbox" name="search_problems" value="Language barriers"> Language barriers (archetypes not available in my language)<br>
+          <input type="checkbox" name="search_problems" value="Lack of documentation"> Lack of documentation or examples<br>
+          <input type="checkbox" name="search_problems" value="Lack of documentation"> Others: _______________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>18. How do you keep track of archetype dependencies or relationships, like specializations, inclusions or exclusions, during planning? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="dependencies" value="Manual tracking"> Manual tracking (e.g., notes/spreadsheets)<br>
+          <input type="radio" name="dependencies" value="Built-in tooling"> Built-in tooling (e.g., CKM relationships)<br>
+          <input type="radio" name="dependencies" value="Don't track"> I don't track dependencies explicitly<br>
+          <input type="radio" name="dependencies" value="Don't track"> Others: ________________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>19. Do you search for archetypes collaboratively or individually? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="search_collab" value="Individually"> Mostly individually<br>
+          <input type="radio" name="search_collab" value="Collaboratively"> Mostly collaboratively<br>
+          <input type="radio" name="search_collab" value="Depends"> Depends on the project<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>20. How many people are typically involved in searching for archetypes? <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="radio" name="search_people" value="Just me"> Just me<br>
+          <input type="radio" name="search_people" value="2–3 collaborators"> 2–3 collaborators<br>
+          <input type="radio" name="search_people" value="More than 3"> More than 3<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>21. What tools or platforms do you use to collaborate in the search? (Multiple answers possible) <span style="color:red">*</span></label>
+        <div class="options">
+          <input type="checkbox" name="search_collab_tools" value="SharePoint"> SharePoint<br>
+          <input type="checkbox" name="search_collab_tools" value="Google Docs"> Google Docs<br>
+          <input type="checkbox" name="search_collab_tools" value="Email"> Email<br>
+          <input type="checkbox" name="search_collab_tools" value="Modeling tools"> Modeling tools (e.g., Archetype Designer)<br>
+          <input type="checkbox" name="search_collab_tools" value="Video conferencing"> Video conferencing platforms (Zoom, Teams, etc.)<br>
+          <input type="checkbox" name="search_collab_tools" value="Project management tools"> Project management tools (e.g., Jira, Asana)<br>
+          <input type="checkbox" name="search_collab_tools" value="Project management tools"> Others: ___________________<br>
+        </div>
+      </div>
+      <div class="question">
+        <label>22. What main benefits do you expect from the collaboration?</label>
+        <input type="text" name="search_collab_benefits">
+      </div>
+      <div class="question">
+        <label>23. What is the ONE most important problem that you have? What is the ONE change that you would like to see in the searching for archetypes?</label>
+        <input type="text" name="search_problem">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Optional Final Section: Suggestions and Feedback</legend>
+      <div class="question">
+        <label>24. If you could change one thing about the current modeling and planning process, what would it be?</label>
         <input type="text" name="change_one_thing">
-      </li>
-      <li>
-        <label>Any suggestions for tools or features that would improve your workflow with openEHR models?</label><br>
-        <!-- Single line text -->
+      </div>
+      <div class="question">
+        <label>25. Any suggestions for tools or features that would improve your workflow with openEHR models?</label>
         <input type="text" name="suggestions">
-      </li>
-    </ol>
-  </section>
+      </div>
+    </fieldset>
+  </form>

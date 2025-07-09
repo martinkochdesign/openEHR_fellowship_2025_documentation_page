@@ -1,0 +1,792 @@
+<h2>ADL Extraction – Parsing ADL Files</h2>
+
+<p>
+A crucial part of the application is parsing ADL 1.4 archetype files. Essentially, the application must open an archetype file and read it in a way that allows querying for specific data elements.
+</p>
+
+<p>
+Parsing ADL 1.4 files is challenging because a single file can use multiple syntaxes. While the overall structure is <a href="https://odin-lang.org/" target="_blank">ODIN</a>-compliant, ADL files also incorporate other syntaxes: cADL, dADL, and first-order predicate logic (FOPL). For more details, see the <a href="https://specifications.openehr.org/releases/AM/latest/ADL1.4.html" target="_blank">official ADL 1.4 specification</a>.
+</p>
+
+<h3>ANTLR4</h3>
+
+<p>
+<a href="https://www.antlr.org/" target="_blank">ANTLR4</a> (ANother Tool for Language Recognition) is a parser generator used to read, process, and translate structured text or binary files. It is widely adopted for building languages, tools, and frameworks.
+</p>
+
+<p>
+The official openEHR GitHub provides two repositories related to ANTLR4 and ADL:
+<ul>
+  <li>
+    <a href="https://github.com/openEHR/openEHR-antlr4" target="_blank">openEHR-antlr4</a>
+  </li>
+  <li>
+    <a href="https://github.com/openEHR/adl-antlr" target="_blank">adl-antlr</a>
+  </li>
+</ul>
+</p>
+
+<p>
+However, it is unclear which project is best suited for ADL 1.4. Notably, the <i>adl-antlr</i> repository states: "Currently this is limited to ADL2, but can be extended to ADL 1.4 as needed."
+</p>
+
+<p>
+After several attempts, I was unable to get these tools working with Python as of July 2025. Due to limited development time, it was not feasible to troubleshoot these issues or become proficient in another programming language at this stage.
+</p>
+
+<p>
+For now, I have decided to pause efforts to use ANTLR4 for this project. However, I plan to revisit this approach in the future, as leveraging official grammar files could provide a robust solution for ADL parsing.
+</p>
+
+<h3>Using Regex</h3>
+
+After looking into ANTLR4, the decision was made to parse the ADL files with a series of Regular Expressions (or Regex for short).
+
+<p>
+  Regular expressions (regex) are sequences of characters that define search patterns, commonly used for matching, searching, and manipulating text. They are powerful tools for tasks such as data validation, extraction, and transformation. For more information, visit the <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">Wikipedia page on regular expressions</a>. Online tools lke https://regex101.com/ have been very helpful for this.
+</p>
+
+<p>One problkem of parsing of ADL files is that they consist of sections that use different syntaxes.</p>
+
+
+<div style="text-align: center;">
+  <img src="https://specifications.openehr.org/releases/AM/latest/ADL1.4/diagrams/adl_text_overview.svg" alt="ADL sections" width="400">
+  <br>
+  <small>ADL sections (from: https://specifications.openehr.org/releases/AM/latest/ADL1.4.html#_structure)</small>
+</div>
+
+<p>In a general sense, the idea here is to proceed as follows:</p>
+<ol>
+  <li>Separate the different sections</li>
+  <li>Using Regex, transform the section text into a JSON compliant text</li>
+  <li>Convert text to JSON dictionary</li>
+  <li>Parse the JSON dictionary</li>
+</ol>
+
+
+<p>The following diagram elaborates more detailled on the structures and the information gathered from them:</p>
+
+<div style="text-align: center;">
+  <img src="images/adl-extraction-regex.png" alt="ADL extraction - ADL treatment" width="800" onclick="window.open(this.src, '_blank');"">
+  <br>
+  <small>ADL extraction - ADL treatment (Click to open in new tab).</small>
+</div>
+
+
+<ol>
+  <li>Extract ADL files from zip file</li>
+  <li>Separate every ADL file into sections</li>
+  <li>Transform every secton into a parseable JSON format</li>
+  <li>Lookup at codes in the ontology section</li>
+  <li>Parse the original ADL file for archetype_id, class and parent information</li>
+  <li>Create a dictionary of all ADL file information gathered</li>
+  <li>Using keywords and item information, create a list of similar archetypes</li>
+  <li>Using parent information, create a list of children for all parent archetypes</li>
+  <li>Create the final data set</li>
+</ol>
+
+
+<!-- ***************************************************************************************************************************************  -->
+
+    <p>
+    The developed parser uses regular expressions (regex) to detect semantic patterns in ADL files, extract information, and convert them into JSON-compatible semantics.
+  </p>
+
+  <h4>Archetype Section</h4>
+  <p>The archetype data is extracted from the first section of the source ADL file.</p>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr><th>Function</th><th>Regex Pattern</th></tr>
+    <tr>
+      <td>Extract archetype ID</td>
+      <td><code>.*(openEHR-.+-.+\..*\.v[0-9]+)</code></td>
+    </tr>
+    <tr>
+      <td>Extract archetype class from archetype ID</td>
+      <td><code>openEHR-.+-(.+)\..*\.v[0-9]+</code></td>
+    </tr>
+  </table>
+
+  <h4>Specialise Section</h4>
+  <p>The archetype parent id is extracted from the specialise section of the source ADL file.</p>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr><th>Function</th><th>Regex Pattern</th></tr>
+    <tr>
+      <td>Extract parent archetype ID</td>
+      <td><code>specialise[\t\n]+(openEHR-.+-.+\.v[0-9]+)</code></td>
+    </tr>
+  </table>
+
+  <h4>Pre-Processing for JSON sections</h4>
+  
+  <p>Before converting the definition, description, ontology and language section to a JSON structure, some changes have to be made.</p>
+
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Get rid of comments per line</td>
+      <td><code>(.*([\s\t]+--\s.*))</code></td>
+      <td><code>-- I am a comment</code></td>
+      <td><code></code></td>
+    </tr>
+  </table>
+
+  <h4>Ontology, Description, and Language Sections</h4>
+  <p>Below are the regex patterns used to transform the ontology, description and language sections into JSON-compliant format, with examples.</p>
+
+  <h5>Single Line Expressions</h5>
+  <p>Single line patterns are used to search for and replace single line key-value pairs.</p>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>List</td>
+      <td><code>(([A-Za-z_]+)\s=\s&lt;("[^"]+".*,?".*?")&gt;\n)</code></td>
+      <td class="example"><code>keywords = &lt;"certificate", "death", "MCCD"&gt;</code></td>
+      <td class="example"><code>"keywords": ["certificate", "death", "MCCD"]</code></td>
+    </tr>
+    <tr>
+      <td>Single item</td>
+      <td><code>(([\t]+)([A-Za-z_0-9]+)\s=\s&lt;"(.*)"&gt;\n)</code></td>
+      <td class="example"><code>copyright = &lt;"© openEHR Foundation"&gt;</code></td>
+      <td class="example"><code>"copyright": "© openEHR Foundation"</code></td>
+    </tr>
+    <tr>
+      <td>Single item (key in brackets)</td>
+      <td><code>(\["([A-Za-z_0-9.,@-]+)"\]\s=\s&lt;"(.*)"&gt;\n)</code></td>
+      <td class="example"><code>["organisation"] = &lt;"Forvaltningssenter EPJ, Helse-Nord RHF"&gt;</code></td>
+      <td class="example"><code>"organisation":"Forvaltningssenter EPJ, Helse-Nord RHF"</code></td>
+    </tr>
+    <tr>
+      <td>List (“…” at the end)</td>
+      <td><code>(([A-Za-z_0-9]+)\s=\s&lt;"(.*)",\s\.\.\.&gt;\n)</code></td>
+      <td class="example"><code>other_contributors = &lt;"Heather Leslie, Atomica Informatics, Australia", ...&gt;</code></td>
+      <td class="example"><code>"other_contributors": ["Heather Leslie, Atomica Informatics, Australia"]</code></td>
+    </tr>
+    <tr>
+      <td>Single item (item in brackets)</td>
+      <td><code>(([A-Za-z_0-9]+)\s=\s&lt;\[(.*)\]&gt;\n)</code></td>
+      <td class="example"><code>language = &lt;[ISO_639-1::de]&gt;</code></td>
+      <td class="example"><code>"language": "ISO_639-1::de"</code></td>
+    </tr>
+    <tr>
+      <td>Single item (key may be in brackets, item in brackets)</td>
+      <td><code>(\["([A-Za-z_0-9.\/\[\]-]+)"\]\s=\s&lt;\[(.*)\]&gt;\n)</code></td>
+      <td class="example"><code>["/items[at0001]"] = &lt;[SNOMED-CT::59276001]&gt;</code></td>
+      <td class="example"><code>"/items[at0001]": "SNOMED-CT::59276001"</code></td>
+    </tr>
+    <tr>
+      <td>Single item (specific for terminology)</td>
+      <td><code>(\["([A-Za-z_0-9.-]+)"\]\s=\s&lt;[^"](.*)&gt;\n)</code></td>
+      <td class="example"><code>["ac0002"] = &lt;terminology:SNOMED-CT/408733002?subset=Diabetic%20Retinopathy%20Study%20field&gt;</code></td>
+      <td class="example"><code>"ac0002": "terminology:SNOMED-CT/408733002?subset=Diabetic%20Retinopathy%20Study%20field"</code></td>
+    </tr>
+    <tr>
+      <td>Single item (empty item)</td>
+      <td><code>(([A-Za-z_0-9]+)\s=\s&lt;&gt;\n)</code></td>
+      <td class="example"><code>other_contributors = &lt;&gt;</code></td>
+      <td class="example"><code>"other_contributors": ""</code></td>
+    </tr>
+  </table>
+
+  <h5>Multiple Lines</h5>
+  <p>These patterns are used to search for and replace multiple line key-value pairs, where texts or lsit are separated by line breaks.</p>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Empty</td>
+      <td><code>(([A-Za-z_0-9]+)\s=\s&lt;[\t\s\n]+&gt;\n)</code></td>
+      <td class="example"><code>author = &lt;<br>&gt;</code></td>
+      <td class="example"><code>"author": ""</code></td>
+    </tr>
+    <tr>
+      <td>Single item</td>
+      <td><code>(([A-Za-z_]+)\s=\s&lt;("[\s\S]*?")&gt;\n)</code></td>
+      <td class="example"><code>description = &lt;"Kennzeichen das angibt, ob es<br>notwendig ist das Geburtsdatum<br>nachzuverfolgen, um ein genaueres<br>Datum zu erhalten."&gt;</code></td>
+      <td class="example"><code>"description": "Kennzeichen das angibt, ob es notwendig ist das Geburtsdatum nachzuverfolgen, um ein genaueres Datum zu erhalten."</code></td>
+    </tr>
+    <tr>
+      <td>Single item (key in brackets)</td>
+      <td><code>(\["([A-Za-z_0-9.-]+)"\]\s=\s&lt;"([\s\S]*?)"&gt;\n)</code></td>
+      <td class="example"><code>["references"] = &lt;"https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1 cited 30-Jul-2018.<br>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Practitioner-1 cited 30-Jul-2018."&gt;</code></td>
+      <td class="example"><code>"references": "https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Patient-1 cited 30-Jul-2018. https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Practitioner-1 cited 30-Jul-2018."</code></td>
+    </tr>
+  </table>
+
+  <h5>Nested Structure</h5>
+  <p>For nested structure, the approach is to convert "from outside to inside", starting from big indent to small indent using <i>str(level)</i>.</p>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Structure</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code (partially changed)</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Structure (key in brackets, <code>str(level)</code> = indent level)</td>
+      <td><code>(\t{'+str(level)+'}\["([A-zÀ-ú0-9-._\s]+)"\]\s=\s&lt;(\n[\S\s]+?[^"])\t{'+str(level)+'}&gt;)\n</code></td>
+      <td class="example"><code>["ko"] = &lt;<br>"language": "ISO_639-1::ko"<br>"author": {<br>&nbsp;&nbsp;"name": "Seung-Jong Yu"<br>&nbsp;&nbsp;"organisation": "NOUSCO Co., Ltd."<br>}<br>"accreditation": "Certified Board of Family Medicine in South Korea"<br>&gt;</code></td>
+      <td class="example"><code>"ko": {<br>"language": "ISO_639-1::ko"<br>"author": {<br>&nbsp;&nbsp;"name": "Seung-Jong Yu"<br>&nbsp;&nbsp;"organisation": "NOUSCO Co., Ltd."<br>}<br>"accreditation": "Certified Board of Family Medicine in South Korea"<br>}</code></td>
+    </tr>
+    <tr>
+      <td>Structure (<code>str(level)</code> = indent level)</td>
+      <td><code>(\t{'+str(level)+'}([a-zA-Z0-9-._]+)\s=\s&lt;(\n[\S\s]+?[^"])\t{'+str(level)+'}&gt;)\n</code></td>
+      <td class="example"><code>author = &lt;<br>&nbsp;&nbsp;"name": "Seung-Jong Yu"<br>&nbsp;&nbsp;"organisation": "NOUSCO Co., Ltd."<br>&gt;</code></td>
+      <td class="example"><code>"author":  {<br>&nbsp;&nbsp;"name": "Seung-Jong Yu"<br>&nbsp;&nbsp;"organisation": "NOUSCO Co., Ltd."<br>}</code></td>
+    </tr>
+  </table>
+
+
+  <h4>Definition Section</h4>
+  <p>Below are the regex patterns used to transform the definition section into JSON-compliant format, with examples.</p>
+  
+  <p>In the definition section, a problem arises from the incorporation of different syntaxes. You can see clearly that the C_DV_QUANTITY section here is different from the rest: </p>
+
+  <div style="text-align: center;">
+    <img src="images/definition_mixed_syntax.png" alt="" width="700">
+    <br>
+    <small>In the definition section we can find a mix of syntaxes. Example from <i>openEHR-EHR-OBSERVATION.visual_acuity.v0</i>.</small>
+</div>
+
+
+  <!--<h4>Definition Section</h4>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr><th>Function</th><th>Regex Pattern</th></tr>
+    <tr>
+      <td>Get all “TYPE[atNNNN]” elements</td>
+      <td><code>([A-Z_]+)\[(at[0-9]+)\]</code></td>
+    </tr>
+    <tr>
+      <td>Delete all comments</td>
+      <td><code>(.*(--\s.*)\n)</code></td>
+    </tr>
+    <tr>
+      <td>Isolate inclusion/exclusion sections (indent level = <code>str(level)</code>)</td>
+      <td><code>\t{'+str(level)+'}allow_archetype\s(.*)\soccurrences\smatches\s{(.*)}\smatches\s{([\s\S]+?\t+)}\n</code></td>
+    </tr>
+    <tr>
+      <td>Inclusions</td>
+      <td><code>[\t]+include\n([\t\s]+[\s\S]*?)(?=exclude\n|\Z)</code></td>
+    </tr>
+    <tr>
+      <td>Exclusions</td>
+      <td><code>[\n\t\s]+archetype_id\/value\smatches\s{\/(.*)\/}</code></td>
+    </tr>
+    <tr>
+      <td>Extract patterns from inclusions and exclusions</td>
+      <td><code>[\n\t\s]+archetype_id\/value\smatches\s{\/(.*)\/}</code></td>
+    </tr>
+  </table>-->
+
+
+  <h5>Pre-processing - Ordinal Values</h5>
+  
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Find and handle ordinal value lists, example: <br>
+       							0.0|[local::at0030],<br>
+       							1.0|[local::at0031],<br>
+       							2.0|[local::at0032],<br>
+       							3.0|[local::at0033]</td>
+      <td><code>(([-]*[0-9.]*?)\|(\[.*\])[,;]*)</code></td>
+      <td><code>0|[local::at0004],</code></td>
+      <td><code>"0": "[local::at0004]</code></td>
+    </tr>
+    <tr>
+      <td>Find and eliminate default ordinal value (single number in line)</td>
+      <td><code>([0-9.]+?$)</code></td>
+      <td><code>0</code></td>
+      <td><code></code></td>
+    </tr>
+  </table>
+
+  <h5>Pre-processing - C_DV_QUANTITY sections</h5>
+  <h6>Single Line</h6>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>key = <"value"></td>
+      <td><code>(([A-Z_a-z]+)\s=\s<"(.*)">)</code></td>
+      <td><code>units = <"cm[H2O]"></code></td>
+      <td><code>"units": "cm[H2O]"</code></td>
+    </tr>
+    <tr>
+      <td>key = <|value|></td>
+      <td><code>(([A-Z_a-z]+)\s=\s<\|(.*)\|>)\n</code></td>
+      <td><code>precision = <|0|></code></td>
+      <td><code>"precision": "|0|"</code></td>
+    </tr>
+    <tr>
+      <td>key = [value]</td>
+      <td><code>(([A-Z_a-z]+)\s=\s<\[(.*)\]>)</code></td>
+      <td><code>property = <[openehr::122]></code></td>
+      <td><code>"property": "openehr::122"</code></td>
+    </tr>
+    <tr>
+      <td>key = &lt;value&gt;</td>
+      <td><code>(([A-Z_a-z]+)\s=\s<(.*)>)</code></td>
+      <td><code>precision = &lt;1&gt;</code></td>
+      <td><code>"precision": "1" <code></td>
+    </tr>
+  </table>
+
+  <h6>Multiple Lines</h6>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>List elements</td>
+      <td><code>(([\t]*)(.*)\s=\s<([\s\S]+?)>)\n</code></td>
+      <td><code>["1"] = <<br>
+        "units": "cm[H2O]"<br>
+        "magnitude": "|>=0.0|"<br>
+        "precision": "|1|"<br>
+      ></code></td>
+      <td><code>"1": {<br>
+        "units": "cm[H2O]"<br>
+        "magnitude": "|>=0.0|"<br>
+        "precision": "|1|"<br>
+      }</code></td>
+    </tr>
+    <tr>
+      <td>Lists</td>
+      <td><code>(([\t]*)(.*)\s=\s<([\s\S]+?)>)\n</code></td>
+      <td><code>
+        list = <<br>
+        "1": {<br>
+          "units": "cm[H2O]"<br>
+          "magnitude": "|>=0.0|"<br>
+          "precision": "|1|"<br>
+        }<br>
+        "2": {<br>
+          "units": "mm[Hg]"<br>
+          "magnitude": "|>=0.0|"<br>
+          "precision": "|0|"<br>
+        }<br>
+      >
+      </code></td>
+      <td><code>
+        "list": {<br>
+          "1": {<br>
+            "units": "cm[H2O]"<br>
+            "magnitude": "|>=0.0|"<br>
+            "precision": "|1|"<br>
+          }<br>
+          "2": {<br>
+            "units": "mm[Hg]"<br>
+            "magnitude": "|>=0.0|"<br>
+            "precision": "|0|"<br>
+          }<br>
+        }
+      </code></td>
+    </tr>
+    <tr>
+      <td>Multiple line envelopes</td>
+      <td><code>(([\t]*)(.*)\s<([\s\S]+?)>)\n</code></td>
+      <td><code>C_DV_QUANTITY < <br>
+        "property": "openehr::125"<br>
+        "list": {<br>
+          "1": {<br>
+            "units": "cm[H2O]"<br>
+            "magnitude": "|>=0.0|"<br>
+            "precision": "|1|"<br>
+          }<br>
+          "2": {<br>
+            "units": "mm[Hg]"<br>
+            "magnitude": "|>=0.0|"<br>
+            "precision": "|0|"<br>
+          }<br>
+        }<br>
+      ></code></td>
+      <td><code>"C_DV_QUANTITY": {<br>
+        "property": "openehr::125"<br>
+        "list": {<br>
+          "1": {<br>
+            "units": "cm[H2O]"<br>
+            "magnitude": "|>=0.0|"<br>
+            "precision": "|1|"<br>
+          }<br>
+          "2": {<br>
+            "units": "mm[Hg]"<br>
+            "magnitude": "|>=0.0|"<br>
+            "precision": "|0|"<br>
+          }<br>
+        }<br>
+      }<br>
+</code></td>
+    </tr>
+
+  </table>
+
+
+  <!--end of c_dv_quantity pre-processing-->
+
+  <h5>Pre-processing - definition section</h5>
+
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Get rid of space between ELEMENT and [atNNNN]</td>
+      <td><code>(([A-Z_]+)\s(\[at.*\]))</code></td>
+      <td><code>CAPABILITY [at0000]</code></td>
+      <td><code>CAPABILITY[at0000]</code></td>
+    </tr>
+    <tr>
+      <td>Delete cardinalities</td>
+      <td><code>(cardinality\smatches\s\{.*?\})</code></td>
+      <td><code>cardinality matches {1..*; ordered}</code></td>
+      <td><code></code></td>
+    </tr>
+    <tr>
+      <td>Delete occurrences</td>
+      <td><code>(occurrences\smatches\s\{.*?\})</code></td>
+      <td><code>occurrences matches {0..*}</code></td>
+      <td><code></code></td>
+    </tr>
+    <tr>
+      <td>Delete existences</td>
+      <td><code>(existence\smatches\s\{.*?\})</code></td>
+      <td><code>existence matches {0..1}</code></td>
+      <td><code></code></td>
+    </tr>
+    <tr>
+      <td>Delete use_node lines</td>
+      <td><code>(([\t]*)use_node.*)</code></td>
+      <td><code>use_node ELEMENT /data[at0001]/items[at0098]/items[at0099]</code></td>
+      <td><code></code></td>
+    </tr>
+  </table>
+
+  <!--
+  <h5>Single Line Patterns</h5>
+  
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>ABC</td>
+      <td><code></code></td>
+      <td><code></code></td>
+      <td><code></code></td>
+    </tr>
+    <tr>
+      <td>ABC</td>
+      <td><code></code></td>
+      <td><code></code></td>
+      <td><code></code></td>
+    </tr>
+    <tr>
+      <td>ABC</td>
+      <td><code></code></td>
+      <td><code></code></td>
+      <td><code></code></td>
+    </tr>
+  </table>
+
+  <h5>Multiple Lines</h5>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Item/List</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code Example</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>ABC</td>
+      <td><code></code></td>
+      <td><code></code></td>
+      <td><code></code></td>
+    </tr>
+  </table>
+  -->
+
+  <h5>Nested Structure</h5>
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Structure</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code (partially changed)</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Adjust include lines</td>
+      <td><code>((\t{'+str(level)+'})include\sarchetype_id/value\smatches\n)</code></td>
+      <td><code>include archetype_id/value matches</code></td>
+      <td><code>include<br>
+        archetype_id/value matches</code></td>
+    </tr>
+    <tr>
+      <td>Adjust exclude lines</td>
+      <td><code>((\t{'+str(level)+'})exclude\sarchetype_id/value\smatches\n)</code></td>
+      <td><code>exclude archetype_id/value matches</code></td>
+      <td><code>exclude<br>
+        archetype_id/value matches</code></td>
+    </tr>
+    <tr>
+      <td>Add * to empty values</td>
+      <td><code>(([\t]+){'+str(level)+'}\{\n\t{'+str(level)+'}\})</code></td>
+      <td><code>
+        {<br>
+        }
+      </code></td>
+      <td><code>
+        {<br>
+					"dummy_value": ""<br>
+					}
+      </code></td>
+    </tr>
+    <tr>
+      <td>Contract structures with only one value</td>
+      <td><code>(([\t]*)([A-Za-z_0-9.-<>\[\]]+)\smatches\n\t{'+str(level)+'}\{\n\t{'+str(level)+'}(.*?)\n\t{'+str(level)+'}\})</code></td>
+      <td><code>
+        defining_code matches<br>
+        {<br>
+        [ac0000]<br>
+        }
+      </code></td>
+      <td><code>
+        "defining_code": "[ac0000]"
+      </code></td>
+    </tr>
+    <tr>
+      <td>Convert structures</td>
+      <td><code>(([\t]*)([A-Za-z_0-9.-<>\[\]]+)\smatches\n\t{'+str(level)+'}\{\n([\s\S]+?)\n\t{'+str(level)+'}\})</code></td>
+      <td><code>
+        DV_CODED_TEXT matches<br>
+									{<br>
+											"defining_code": "[ac0002]"<br>
+									}
+      </code></td>
+      <td><code>
+        "DV_CODED_TEXT":<br>
+        {<br>
+          "defining_code": "[ac0002]"<br>
+        }
+      </code></td>
+    </tr>
+    <tr>
+      <td>Replace inlcude statements</td>
+      <td><code>(([\t]+)include\n\t{'+str(level)+'}[\s\S]+?)(\}|exclude)</code></td>
+      <td><code>include<br>
+        "archetype_id/value": "/openEHR-EHR-ITEM_TREE\\.om_tvangsmiddelvedtak(-[a-zA-Z0-9_]+)*\\.v1/"</code></td>
+      <td><code>"include": {<br>
+        "archetype_id/value": "/openEHR-EHR-ITEM_TREE\\.om_tvangsmiddelvedtak(-[a-zA-Z0-9_]+)*\\.v1/"<br>
+      }</code></td>
+    </tr>
+    <tr>
+      <td>Replace exlcude statements</td>
+      <td><code>(([\t]+exclude\n\t{'+str(level)+'}[\s\S]+?))(\}|include)</code></td>
+      <td><code>
+        exclude
+        "archetype_id/value": "/.*/"
+      </code></td>
+      <td><code>
+        "exclude": {
+					"archetype_id/value": "/.*/"
+				}
+      </code></td>
+    </tr>    
+  </table>
+ 
+
+  <h4>Post-processing for JSON sections</h4>
+
+  <p>For post processing the JSON structures of definition, description, ontology and language section, mainly commas have to be added to the resulting text created.</p>
+
+  <table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <tr>
+      <th>Function</th>
+      <th>Regex Pattern</th>
+      <th>Original ADL Code (mostly changed)</th>
+      <th>Converted JSON Code Example</th>
+    </tr>
+    <tr>
+      <td>Add commas between items</td>
+      <td><code>((".*?")([\n\t\s]+)(".*?"))</code></td>
+      <td class="example"><code>"original_language": "ISO_639-1::en"<br>"translations"<br>"language": "ISO_639-1::ko"<br>"author"</code></td>
+      <td class="example"><code>"original_language": "ISO_639-1::en",<br>"translations",<br>"language": "ISO_639-1::ko"<br>"author"</code></td>
+    </tr>
+    <tr>
+      <td>Add commas between structures</td>
+      <td><code>((})([\n\t\s]+)(".*?"))</code></td>
+      <td class="example"><code>}<br>"details"</code></td>
+      <td class="example"><code>},<br>"details"</code></td>
+    </tr>
+    <tr>
+      <td>Add commas between lists and others</td>
+      <td><code>((\])([\n\t\s]+)(".*?"))</code></td>
+      <td class="example"><code>]<br>"misuse"</code></td>
+      <td class="example"><code>],<br>"misuse"</code></td>
+    </tr>
+  </table>
+
+
+<!-- ***************************************************************************************************************************************  -->
+
+
+
+<h4>Does it work?</h4>
+
+<p>The parsing has been tested with a total of <strong>1895</strong> archetypes that have been downloaded from all available CKMs (International, HighMed, CatSalut, Arketyper, Alberta) and the Apperta GitHub (as of July, 2nd 2025).
+
+The parser had no problem with the archetypes.</p>
+
+<p>Periodically a full testing will be conducted to assure the function.</p>
+
+
+<h3>Incoherent archetype quality encountered during parsing</h3>
+
+<p>
+    For parsing code, especially nested structures, it is very important that indentations (the spaces at the start of each line) are consistent. Normally, code will use either tabs or spaces for indentation. When spaces are used, they typically replace tabs, with 4 spaces being equivalent to one tab.
+  </p>
+  <p>
+    During the parsing process, it was found that not all archetypes adhere to this convention, which can create problems during parsing.
+  </p>
+  <p>
+    Specifically, some archetypes mix spaces and tabs in their indentations, while others use spaces, but not in a number divisible by 4. Both issues can lead to errors or unexpected behavior when processing these files.
+  </p>
+
+  <div style="text-align: center;">
+    <img src="images/indents.png" alt="" width="400">
+    <br>
+    <small>Indent formating. Coherent tabs or spaces are standard. Mixing tabs and space number not divisible by 4 should be avoided.</small>
+</div>
+
+  <p>
+    In the following table, all archetypes with problematic indentation are listed for reference:
+  </p>
+ 
+
+<table border="1" cellpadding="4" cellspacing="0" style="min-width:800px;">
+    <thead>
+          <tr>
+            <th>Archetype</th>
+            <th>Mixed tabs and spaces</th>
+            <th>Spaces not divisible by 4</th>
+          </tr>
+        </thead>
+         <tbody><tr><td>openEHR-DEMOGRAPHIC-ADDRESS.address-provider.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-ADDRESS.address.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-ADDRESS.electronic_communication.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CAPABILITY.individual_credentials.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.biometric_identifier_iso.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.individual_credentials_iso.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.individual_provider_credentials_iso.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.person_additional_data_br.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.person_additional_data_iso.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.person_birth_data_iso.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.person_death_data_iso.v0</td>	<td>✔</td>	<td>❌</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.person_identifier-provider.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.person_other_birth_data_br.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-CLUSTER.provider_identifier.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-ITEM_TREE.person_details.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-ORGANISATION.organisation.v0</td>	<td>✔</td>	<td>❌</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-PARTY_IDENTITY.organisation_name.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-PARTY_IDENTITY.person_name.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-PERSON.person-patient.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-PERSON.person.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-ROLE.healthcare_consumer.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-DEMOGRAPHIC-ROLE.individual_provider.v0</td>	<td>✔</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-ACTION.medication.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-ADMIN_ENTRY.triage.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.address.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.auscultation_bowel.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.device.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.dwelling.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.exam-anterior_chamber_eye.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.exam-optic_disc.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.imaging_exam-hip_joint.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.imaging_exam-spine.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.inspired_oxygen.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.laboratory_test_analyte.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.language.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.medication.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.microscopy_breast_carcinoma.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.microscopy_renal_biopsy_non_neoplastic.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.problem_qualifier.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-COMPOSITION.encounter.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.advance_care_directive.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.clinical_synopsis.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.communication_capability.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.medication_summary.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.occupation_summary.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.reason_for_encounter.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.social_network-JM.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.social_network.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.vaccination_summary.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.vaping_summary.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-INSTRUCTION.medication_order.v3</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-INSTRUCTION.request-report.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.atria_stroke_risk.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.blood_pressure.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.body_composition.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.body_mass_index.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.body_temperature.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.body_weight.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.braden_scale.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.braden_scale_q.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.eq_5d_5l.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.experiment.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.has_bled.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.height.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.honos.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.howru.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.iciq_ui_short.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.imaging_exam_result.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.laboratory_test_result.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.medication_statement-JM.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.medication_statement.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.nihss.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.pregnancy_finding.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.progress_note.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.pulse.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.pulse_oximetry.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.respiration.v2</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.sara_scale.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.substance_use.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.symptom_sign_screening.v1</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.travel_screening.v0</td>	<td>❌</td>	<td>✔</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.tympanogram_226hz.v0</td>	<td>❌</td>	<td>✔</td></tr>
+        </tbody>
+      </table>
+      <small>Table data result from archetype extraction of the international CKM, 2nd of July 2025</small>
+    
+
+    

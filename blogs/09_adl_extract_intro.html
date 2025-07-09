@@ -1,0 +1,41 @@
+<h2>ADL extraction - Introduction</h2>
+
+<p>
+    For the final search, visualization, and planning tool, data from an archetype must be extracted.
+    Hence, there is a need for an application that can execute this extraction periodically.
+  </p>
+  
+  <p>
+    For this purpose, the <strong>ADL extraction application</strong> must fulfill the following functions.
+    In general, the application receives a collection of archetype files. The application extracts the files and parses them for the required information.
+    Once all archetypes have been parsed, more information can be added—for example, by a recommendation algorithm that relates different archetypes to each other.
+  </p>
+  
+  <p>
+    Once all information is accumulated, the application generates an archetype dataset file that can then be used by the visualization tool.
+  </p>
+
+<div style="text-align: center;">
+    <img src="images/adl_extraction_general.png" alt="ADL extraction - General view" width="500">
+    <br>
+    <small>ADL extraction - General view</small>
+</div>
+
+<p>The functionalities can be specified further:</p>
+<ul>
+    <li>
+        <strong>Data source:</strong> The data source for extraction must be vendor-neutral and should not depend on a particular platform. The most sensible approach is to allow extraction from any collection of archetype files in a ZIP file. This typically includes:
+        <ul>
+            <li><b>CKM:</b> CKM allows exporting archetypes in bulk as a ZIP file.</li>
+            <li><b>GitHub:</b> Archetype collections can be downloaded from a GitHub repository as a ZIP file. Most CKMs have an associated GitHub repository.</li>
+            <li><b>Local:</b> A custom collection of archetypes that a user can select from a local terminal.</li>
+        </ul>
+    </li>
+    <li><strong>ADL parsing:</strong> The application must be capable of parsing ADL 1.4-compliant archetype files in bulk.</li>
+    <li><strong>Data extraction:</strong> Data extraction from the parsed archetype files must be limited to elements defined further on. In this case, only information from the English version of the archetype will be extracted. If the archetype is not available in English, the original language will be used.</li>
+    <li><strong>Recommendation:</strong> A basic recommendation should be provided to link similar or related archetypes. Linking will be based on semantics (for example, using the keywords of each archetype). The recommendation will be hard-coded into the resulting dataset. In the future, a more dynamic recommendation might be implemented, where the visualization tool adds recommendations based on user input.</li>
+    <li><strong>GUI:</strong> The application needs a GUI so a user can create the dataset manually whenever needed.</li>
+    <li><strong>Automation:</strong> In addition to manual execution, the application should have a headless mode that does not require user input. In this mode, the application should be executed automatically to update the dataset periodically. The execution does not have to be triggered by the application itself, but can be managed by external services.</li>
+</ul>
+
+<p>The planned developement will take place predominantly in <b>Python code</b>. As a result, the python code will be provided as well as a compiled <b>Windows compatible executable</b> file.</p>

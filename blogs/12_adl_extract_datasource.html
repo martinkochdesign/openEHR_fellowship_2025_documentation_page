@@ -1,0 +1,71 @@
+<h2>ADL extraction - Data Source</h2>
+
+
+<p>One of the main functionalities of the application is the possibility to download archetype collection in a ZIP file format from the CKMs or from GitHub repositories.</p>
+
+<p>To get direct access to these zip files, the corresponding URLs have to be used.</p>
+
+
+<h3>GitHub repositories</h3>
+<p>Direct URLs to the GitHub repositories:</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+    <thead>
+        <tr><th>Source</th><th>URL</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>GitHub International</td><td><code>https://github.com/openEHR/CKM-mirror/archive/refs/heads/master.zip</code></td></tr>
+        <tr><td>GitHub CatSalut</td><td><code>https://github.com/CKMCatSalut/CKM-mirror/archive/refs/heads/master.zip</code></td></tr>
+        <tr><td>GitHub Arketyper</td><td><code>https://github.com/Arketyper-no/ckm/archive/refs/heads/master.zip</code></td></tr>
+        <tr><td>GitHub Apperta</td><td><code>https://github.com/AppertaFoundation/apperta-uk-ckm-mirror/archive/refs/heads/master.zip</code></td></tr>
+    </tbody>
+</table>
+
+<h3>CKM repositories</h3>
+
+<p>The direct URLs were obtained from the CKM’s bulk export feature. They will perform a bulk download using the following settings:</p>
+
+<div style="text-align: center;">
+    <img src="images/ckm_bulk_export.png" alt="CKM bulk export settings" width="300">
+    <br>
+    <small>Equivalent CKM bulk export settings</small>
+</div>
+
+<p>For this project, it is preferrable to have all publically available archetypes, including those coming from incubators.</p>
+
+
+<p>Direct URLs to the CKM repositories:</p>
+
+<div style="max-width: 1000px; overflow-x: auto;">
+    <table border="1" cellpadding="4" cellspacing="0" style="width:100%; table-layout: fixed;">
+        <thead>
+            <tr>
+                <th style="width: 150px;">Source</th>
+                <th style="width: 450px; word-break: break-all;">URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CKM International</td>
+                <td><code style="word-break: break-all;">https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED</code></td>
+            </tr>
+            <tr>
+                <td>CKM CatSalut</td>
+                <td><code style="word-break: break-all;">https://ckm.salut.gencat.cat/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED</code></td>
+            </tr>
+            <tr>
+                <td>CKM Highmed</td>
+                <td><code style="word-break: break-all;">https://ckm.highmed.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED</code></td>
+            </tr>
+            <tr>
+                <td>CKM Arketyper</td>
+                <td><code style="word-break: break-all;">https://arketyper.no/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED</code></td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+<p><b>Please note that the GitHub mirrors exclusively contain archetypes from projects, excluding those from incubators. Conversely, the URLs for the CKM lead to zip files that encompass all archetypes from both incubators and projects.</b></p>
+
+<p>If there is a need to download CKM data without incubators, the URLs should follow this format:</p>
+<code>https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&projectType=project&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED</code>

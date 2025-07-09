@@ -1,0 +1,111 @@
+<h2>ADL extraction - Data Elements</h2>
+<h3>Definition of Data to be extracted</h3>
+
+
+<p>For the following definition of treatment of the ADL1.4 archetype files it is important to determine the data elements that should be extracted
+The following key elements have been selected:</p>
+
+<ul>
+    <li><strong>ID: </strong>The archetype ID, such as “openEHR-EHR-ACTION.screening.v0“.</li>
+    <li><strong>Class: </strong>Identified in the archetype ID. For instance, “openEHR-EHR-ACTION.screening.v0“ belongs to the class “ACTION”.</li>
+    <li><strong>Publication state: </strong>Represented in the ADL “description“ section as: lifecycle_state = <"in_development">.</li>
+    <li><strong>Original language: </strong>The original language is specified in the “language” section: original_language = <[ISO_639-1::en]>.</li>
+    <li><strong>Language translations: </strong>List of All Available Languages in the Archetype. Translation languages are listed in the “language“ section under “translations”.
+    </li>
+    <li><strong>Date: </strong></li>
+    <li><strong>Purpose: </strong>Located in the “description” section under “details/{lang}/purpose”.*</li>
+    <li><strong>Inclusion and Exclusion statements: </strong></li>
+    <ul>
+    <li><strong>Inclusion statements: </strong>Inclusion of other archetypes, primarily Clusters. Inclusions are specified in the “definition” section of the model.</li>
+    <ul>
+        <li>Example: <br><code>
+            include<br>
+            archetype_id/value matches {/openEHR-EHR-CLUSTER\.anatomical_location(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.anatomical_location_circle(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.anatomical_location_relative(-[a-zA-Z0-9_]+)*\.v2/}</code></li>
+            <li>If the inclusion criteria encompass all archetypes (archetype_id/value matches {/.*/}), rather than listing each archetype, a single item should indicate that “any archetype” is linked.</li>
+    </ul>
+    <li><strong>Exclusion statements: </strong>Exclusion of other archetypes, primarily Clusters. Exclusions are specified in the “definition” section.</li>
+    <ul>
+        <li>Example: <br><code>
+            exclude<br>
+                                                archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}</code></li>
+        <li>If the exclusion criteria encompass all archetypes (archetype_id/value matches {/.*/}), rather than listing each archetype, a single item should indicate that “any archetype” is linked.</li>
+    </ul>
+    <li>Exclusion and inclusion statements have an object for each occurrence in the ADL. Each object has the following attributes:</li>
+    <ul>
+        <li><b>code: </b>atnnnn code of the element that has the inclusion/exclusion statement.</li>
+        <li><b>label: </b>The label of the element.</li>
+        <li><b>type: </b> The type of the element.</li>
+        <li><b>archetypes: </b> A list with all archetypes that fit the regex pattern provided in the inclusion/exclusion statement.</li>
+    </ul>
+    </ul>
+    <li><strong>Concept name: </strong>Found in the “ontology” section under “term_definitions/{lang}/items/at0000”.* In some cases might be "at0000.1" </li>
+    <li><strong>Concept description: </strong>Found in the “ontology” section under “term_definitions/{lang}/items/at0000”.* In some cases might be "at0000.1" </li>
+    <li><strong>Items:</strong> List of all data elements with atcode. Every item has attributes:</li>
+    <ul>
+        <li><b>code: </b>atnnnn code of the element.</li>
+        <li><b>label: </b>The label of the element.</li>
+        <li><b>type: </b> The type of the element.</li>
+    </ul>
+    <li><strong>Keywords: </strong>Keywords located in the “description” section under “details/{lang}/keywords”.*</li>
+
+    <li><strong>Parent: </strong>If the current archetype is a specialization, the parent archetype is found in the "specialise" section.</li>
+    <li><strong>Children: </strong>List of archetypes that have the current archetype as parent.</li>
+</ul>
+
+<small>*The language ({lang}) should be English (“en“). If the archetype is not available in English, the keywords from the original language will be used.</small>
+
+<h3>Example data structure</h3>
+
+<p>Example of an archetype in the data set:</p>
+
+  <div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 700px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;"><code>{
+      "id": "openEHR-EHR-SECTION.vital_signs.v0",
+      "archetype_id": "openEHR-EHR-SECTION.vital_signs.v0",
+      "class": "SECTION",
+      "lifecycle_state": "in_development",
+      "original_language": "en",
+      "date": "2020-10-28",
+      "translation_languages": ["de", "sv", "ko", "es"],
+      "purpose": "To provide a framework for consistent modelling of Vital signs within a template.",
+      "keywords": ["blood pressure", "temperature", "pulse", "oxygen saturation", "respirations", "observations", "vital", "signs"],
+      "include": [{
+        "code": "at0001",
+        "label": "Vital signs",
+        "type": "OBSERVATION",
+        "archetypes": [
+          "openEHR-EHR-OBSERVATION.pulse_oximetry.v1",
+          "openEHR-EHR-OBSERVATION.respiration.v2",
+          "openEHR-EHR-OBSERVATION.pulse.v2",
+          "openEHR-EHR-OBSERVATION.blood_pressure.v2",
+          "openEHR-EHR-OBSERVATION.body_temperature.v2"
+        ]
+      }],
+      "exclude": [],
+      "concept_name": "Vital signs",
+      "concept_description": "Framework for consistent modelling of observations and measurements about essential physiological functions.",
+      "items": [{
+        "code": "at0000",
+        "label": "Vital signs",
+        "type": "SECTION"
+      }, {
+        "code": "at0001",
+        "label": "Vital signs",
+        "type": "OBSERVATION"
+      }],
+      "parent": "",
+      "children": [],
+      "keyword_synonyms": [
+        "pulse rate", "beat", "heartbeat", "life-sustaining", "pulsate", "heart rate", "pulsation"
+      ],
+      "similar": [
+        "openEHR-EHR-CLUSTER.waveform.v0",
+        "openEHR-EHR-OBSERVATION.heartbeat-pulse.v0",
+        "openEHR-EHR-OBSERVATION.heartbeat.v0",
+        "openEHR-EHR-OBSERVATION.vital_status.v0"
+      ]
+    }</code></pre>
+  </div>
+
+
+<p>Note that attributes <i>keyword_synonyms</i> and <i>similar</i> do not come from the archetype, but are added later by the recommendation engine.</p>

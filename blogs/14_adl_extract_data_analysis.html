@@ -1,0 +1,351 @@
+<h2>ADL Extraction - Data Analysis</h2>
+
+<small>Data porvidewd here has been gathered from archetypes extracted <b>02/07/2025</b> from the <b>international CKM</b>. </small>
+
+<p>For this analysis, data from <strong>917</strong> publicly available archetypes in the international CKM were utilized. This includes all public accesible archetypes in incubators and projects. </p>
+
+<h3>Relationships: Parent-child, Inclusion and Exclusion</h3>
+
+<p>
+  Understanding the relationships between archetypes is important  for effective modeling and reuse within the openEHR ecosystem. Archetypes can be related through specialization (parent-child relationships), as well as through explicit inclusion or exclusion of other archetypes.
+</p>
+
+<h4>Parent-Child (Specialization) Relationships</h4>
+<p>
+  The specialization of archetype provide a possible inheritance and extension of clinical models with the drawback of creating complex dependencies.
+</p>
+
+<ul>
+  <li>
+    Archetypes that act as <strong>parents</strong> (specialized): <span style="color: #2a7ae2;">32</span> (<strong>3.5%</strong>)
+  </li>
+  <li>
+    Archetypes that are <strong>children</strong> (specializations): <span style="color: #2a7ae2;">128</span> (<strong>14.0%</strong>)
+  </li>
+</ul>
+
+<h4>Inclusion and Exclusion Relationships</h4>
+
+<p>
+  <em>Inclusion</em> relationships indicate which archetypes are explicitly referenced or incorporated within another archetype. <em>Exclusion</em> relationships, though less common, specify archetypes that should be explicitly omitted, helping to clarify boundaries and avoid ambiguity.
+</p>
+
+<ul>
+  <li>
+    Archetypes with <strong>INCLUSION</strong> specified: <span style="color: #2a7ae2;">669</span> (<strong>73.0%</strong>)
+  </li>
+  <li>
+    Archetypes with <strong>EXCLUSION</strong> specified: <span style="color: #2a7ae2;">29</span> (<strong>3.2%</strong>)
+  </li>
+</ul>
+
+<p>
+  Of the exclusion statements, all but one are excluding “all archetypes”, which is always paired with an inclusion statement, so the combination of both is “include these specified archetype, but exclude all others”.</p>
+
+<p>
+  There is only one case where a <b>specific</b> exclusion is defined:</p><p>
+  In the archetype <em>openEHR-EHR-OBSERVATION.howru.v1</em>, specifically in the CLUSTER “Device” (at0038), there is a specific ecxlusion of 'openEHR-EHR-CLUSTER.device.v1' and its specialisations.   
+</p>
+
+<h3>Archetype Classes</h3>
+
+<p>
+  Archetype classes are fundamental for designing archetypes with their intended use in the clinical pathway in mind. 
+  In theory, all classes that inherit from the <a href="https://specifications.openehr.org/releases/RM/latest/common.html#_locatable_class" target="_blank">LOCATABLE</a> class can be archetyped according to the openEHR Reference Model.
+</p>
+
+<p>
+  The classes of archetypes found in the analyzed dataset are as follows:
+</p>
+<ul>
+  <li><strong>EHR</strong></li>
+  <ul>
+      <li>ACTION</li>
+      <li>ADMIN_ENTRY</li>
+      <li>CLUSTER</li>
+      <li>COMPOSITION</li>
+      <li>EVALUATION</li>
+      <li>INSTRUCTION</li>
+      <li>OBSERVATION</li>
+      <li>SECTION</li>
+  </ul>
+  <li><strong>DEMOGRAPHIC</strong></li>
+  <ul>
+      <li>ADDRESS</li>
+      <li>CAPABILITY</li>
+      <li>CLUSTER</li>
+      <li>ITEM_TREE</li>
+      <li>ORGANISATION</li>
+      <li>PARTY_IDENTITY</li>
+      <li>PERSON</li>
+      <li>ROLE</li>
+  </ul>
+</ul>
+
+<p>The number of different archetype classes found is shown in this Sankey diagram:</p> 
+
+<div style="text-align: center;">
+    <img src="images/graph_classes_sankey.png" alt="" width="800" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>
+
+
+
+<h3>Lifecycle States</h3>
+
+<p>
+  Lifecycle states are a critical aspect of openEHR archetype management, as they indicate the maturity, stability, and intended use of each archetype. Properly assigned lifecycle states help ensure clarity for developers, reviewers, and implementers and support the overall quality and interoperability of clinical models.
+</p>
+
+<p>
+  In the current analysis, <strong>6</strong> different lifecycle states were found among the archetypes:
+</p>
+<ul>
+    <li>0</li>
+    <li>organisationdraft</li>
+    <li>published</li>
+    <li>authordraft</li>
+    <li>initial</li>
+    <li>in_development</li>
+</ul>
+
+<p>In the following graph, the number of archetypes are shown for each lifecycle state:</p>
+
+<div style="text-align: center;">
+    <img src="images/graph_lifecycle_state.png" alt="Distribution of lifecycle states" width="300" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>
+
+<p>
+  According to the <a href="https://specifications.openehr.org/releases/BASE/development/resource.html#_resource_description_class" target="_blank">openEHR Resource Model specification</a>, the official lifecycle states are:
+  <b>unmanaged</b>, <b>in_development</b>, <b>release_candidate</b>, <b>published</b>, <b>rejected</b> and <b>deprecated</b>.
+</p>
+
+<p>
+  This is also reflected in tools such as the Archetype Designer, where developers can select from these official states:
+</p>
+
+<div style="text-align: center;">
+  <img src="images/archetype_designe_states.png" alt="Lifecycle state selection in Archetype Designer" width="600" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>(Click to open in new tab.)</small>
+</div>
+
+<h4>Outlier States Identified</h4>
+<p>
+  The following states were found in the analyzed archetypes but do not align with the official list:
+</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+  <thead>
+    <tr>
+      <th>lifecycle_state</th>
+      <th>archetype</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>openEHR-EHR-CLUSTER.person_name_isa.v1</td></tr>
+    <tr><td>0</td><td>openEHR-EHR-OBSERVATION.heart_failure_symptom_questionnaire.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-ACTION.procedure-Hip_arthroplasty_previous_procedure_res.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-ACTION.procedure-hip_arthroplasty_revision_previous_procedure_res.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-ACTION.procedure-primary_hip_arthroplasty_res.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-ACTION.procedure-revision_hip_arthroplasty_res.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.address_isa.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.death_details_parent.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.dermatology_therapy_summary_detail.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.diabetic_retinopathy_screening_result.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.exam_anterior_chamber.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.exam_lens.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.healthcare_professional_parent.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.healthcare_provider_parent.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.hip_procedure_valdoltra.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.person_identifiable_parent.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.photocoagulation_details.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-CLUSTER.therapeutic_decision_dr.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-EVALUATION.medication_safety_event.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-EVALUATION.recommendation-DR_treatment.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-INSTRUCTION.request-report.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-OBSERVATION.dermatology_therapy_summary.v1</td></tr>
+    <tr><td>authordraft</td><td>openEHR-EHR-OBSERVATION.howru.v1</td></tr>
+    <tr><td>organisationdraft</td><td>openEHR-EHR-CLUSTER.exam_posterior_chamber.v1</td></tr>
+    <tr><td>initial</td><td>openEHR-EHR-CLUSTER.microscopy_breast_carcinoma.v1</td></tr>
+  </tbody>
+</table>
+
+<p>
+It is highly recommended to review and address the identified outlier states. Aligning all archetypes with the official lifecycle states will enhance the reliability, maintainability, and interoperability of the archetype repository, and ensure compliance with openEHR best practices.
+</p>
+
+<h3>Date of Authorship</h3>
+
+<p> All but <strong>12</strong> archetypes have a date of authoring. The following archetypes are the ones without date: </p>
+
+<ul>
+  <li>openEHR-EHR-CLUSTER.anatomical_location_gingivae.v0</li>
+  <li>openEHR-EHR-CLUSTER.anatomical_location_tooth.v0</li>
+  <li>openEHR-EHR-CLUSTER.exam_dentition.v0</li>
+  <li>openEHR-EHR-CLUSTER.exam_giginvae.v0</li>
+  <li>openEHR-EHR-CLUSTER.exam_occlusal.v0</li>
+  <li>openEHR-EHR-CLUSTER.exam_oral_membrane.v0</li>
+  <li>openEHR-EHR-CLUSTER.exam_teeth.v0</li>
+  <li>openEHR-EHR-CLUSTER.image_acquisition_details.v0</li>
+  <li>openEHR-EHR-OBSERVATION.charlson_comorbidity_index.v2</li>
+  <li>openEHR-EHR-OBSERVATION.exam_oral.v0</li>
+  <li>openEHR-EHR-OBSERVATION.infant_feeding.v0</li>
+  <li>openEHR-EHR-SECTION.result_details.v0</li>
+</ul>
+
+<h4>Date Format Consistency</h4>
+
+
+
+<p>
+  The majority of archetypes use the standard date format <i>YYYY-MM-DD</i>. However, <strong>19 archetypes</strong> were found to use non-standard or inconsistent date formats, which may cause issues when parsing or processing archetype data.
+</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Archetype</th>
+      <th>Date Format Used</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>openEHR-EHR-ACTION.informed_consent.v0</td><td>09-10-2012</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.case_identification.v0</td><td>08/12/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.macroscopy_colorectal_carcinoma.v0</td><td>17/06/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.microscopy_colorectal_carcinoma.v0</td><td>17/06/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.microscopy_lymphoma.v0</td><td>26/04/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.microscopy_melanoma.v0</td><td>17/05/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.microscopy_prostate_carcinoma.v0</td><td>17/06/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.notifiable_condition.v0</td><td>08/12/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.outbreak_identification.v0</td><td>08/12/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.tumour_invasion.v0</td><td>27/07/2009</td></tr>
+    <tr><td>openEHR-EHR-CLUSTER.ventilator_settings2.v0</td><td>25/10/2010</td></tr>
+    <tr><td>openEHR-EHR-COMPOSITION.obstetric_history.v0</td><td>02-01-2012</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.contraindication-intravitreal_antiVEGF.v0</td><td>14-11-2012</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.contraindication.v1</td><td>14-11-2012</td></tr>
+    <tr><td>openEHR-EHR-EVALUATION.medication_safety_event.v1</td><td>25/06/2012</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.howru.v1</td><td>03/03/2010</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.speech.v0</td><td>10/11/2007</td></tr>
+    <tr><td>openEHR-EHR-OBSERVATION.tobacco_use.v0</td><td>6/5/2009</td></tr>
+    <tr><td>openEHR-EHR-SECTION.lab_test_report.v0</td><td>25/03/2010</td></tr>
+  </tbody>
+</table>
+
+<p>
+  The use of date and a consistent use of the <i>YYYY-MM-DD</i> format is recommended to ensure reliable parsing and interoperability of archetype metadata.
+</p>
+
+<h4>Archetypes Over Time</h4>
+<p>
+  Using the date information from the archetypes, the evolution of the number of archetypes over time can be visualized:
+</p>
+<div style="text-align: center;">
+    <img src="images/graph_evolution.png" alt="Evolution of archetype number over time" width="700" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click the image to open in a new tab.)</small>
+</div>
+
+<strong>Fun Facts:</strong>
+<ul>
+  <li>
+    <strong>The oldest archetype:</strong> <i>openEHR-EHR-OBSERVATION.apgar.v2</i> authored on <strong>2004-05-18</strong>.
+  </li>
+  <li>
+    <strong>The oldest archetype that is (still) not published:</strong> <i>openEHR-EHR-OBSERVATION.modified_barthel_index.v0</i> authored on <strong>2006-03-22</strong>.
+  </li>
+</ul>
+
+
+<h3>Keywords</h3>
+
+<p>
+  Keywords play a crucial role in the organization, discoverability, and semantic linking of openEHR archetypes. They help modellers and users quickly identify relevant archetypes and facilitate advanced features such as recommendation engines and semantic search. The following analysis provides insights into the usage and distribution of keywords across the archetype repository.
+</p>
+
+<h4>Keyword Usage Statistics</h4>
+<p>Note that all keywords were converted to lower case.</p>
+<ul>
+  <li>
+    <strong>Total unique keywords used:</strong> <span style="color: #2a7ae2;">2071</span>
+  </li>
+  <li>
+    <strong>Archetypes without keywords:</strong> <span style="color: #2a7ae2">290</span> (<strong>31.6%</strong>)
+  </li>
+</ul>
+
+<p>
+  The absence of keywords in nearly a third of archetypes can complicate semantic linking and reduce the effectiveness of search and recommendation algorithms. Ensuring that each archetype is assigned a reasonable set of keywords is therefore highly recommended.
+</p>
+
+<div style="text-align: center;">
+    <img src="images/graph_keyword_frequency.png" alt="Keyword frequency distribution" width="800" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>
+
+
+<p>The average and median number of keywords per archetype can calculate:</p>
+
+<ul>
+  <li>
+    <strong>Mean</strong> number of keywords per archetype: <span style="color: #2a7ae2;">4.6</span> 
+  </li>
+  <li>
+    <strong>Median</strong>: <span style="color: #2a7ae2;">3</span> 
+  </li>
+</ul>
+
+<p>
+  There is no strict rule for the number of keywords per archetype, but a range of <strong>5 to 10 keywords</strong> is generally considered reasonable. Assigning too few keywords may limit discoverability, while excessive use can reduce their effectiveness and introduce noise.
+</p>
+
+<p>
+ For example, the archetype with the most keywords is <i>openEHR-EHR-EVALUATION.smokeless_tobacco_summary.v1</i>, which has <strong>45 keywords</strong>.
+</p>
+
+<p>To give an impression of the most used keywords, here is the ranking of the top 25 keywords:</p>
+
+<div style="text-align: center;">
+    <img src="images/graph_keyword_top_twentyfive.png" alt="Top 25 keywords" width="400" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>
+
+
+<h3>Data Elements</h3>
+
+<p>Because about a third of archetype do not have any keywords and the semantic linking might be difficult if limited to the ones that have keywords, it might be interesting to also include the labels of data elements used.</p>
+
+<div style="text-align: center;">
+    <img src="images/graph_item_frequency.png" alt="" width="800" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>
+
+<p>The average and median number of data elements per archetype can calculate:</p>
+<ul>
+  <li>
+    <strong>Mean</strong> number of data elements per archetype: <span style="color: #2a7ae2;">14.4</span> 
+  </li>
+  <li>
+    <strong>Median</strong>: <span style="color: #2a7ae2;">11</span> 
+  </li>
+</ul>
+
+<strong>Fun fact:</strong>
+<ul><li>
+  The archetype with most items is openEHR-EHR-OBSERVATION.ygtss_revised.v1 with <strong>139 data elements</strong>.
+</li></ul>
+
+<p>To make the semantic linking effective, it will be important not to use labels that are used in the majority of archetypes. For example <i>tree</i> or <i>item tree</i> are standard labels in openEHR that do not add to the significance of the archetype itself.Here the most common labels are shown that might be avoided for the recommendation engine.</p>
+
+<div style="text-align: center;">
+    <img src="images/graph_items_top_twentyfive.png" alt="" width="400" onclick="window.open(this.src, '_blank');">
+    <br>
+    <small>(Click to open in new tab.)</small>
+</div>
+

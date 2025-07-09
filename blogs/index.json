@@ -40,4 +40,34 @@
       "title": "Initial User Questionnaire",
       "file": "07_user_questionnaire.html"
     }
+    ,
+    {
+      "title": "ADL extraction - Introduction",
+      "file": "09_adl_extract_intro.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - GUI",
+      "file": "10_adl_extract_guiwire.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - Data Source",
+      "file": "12_adl_extract_datasource.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - Data Elements",
+      "file": "13_adl_extract_elements.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - Parsing",
+      "file": "11_adl_extract_parsing.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - Data Analysis",
+      "file": "14_adl_extract_data_analysis.html"
+    }
 ]
