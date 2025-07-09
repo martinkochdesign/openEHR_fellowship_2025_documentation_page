@@ -2,7 +2,7 @@
 <h3>Definition of Data to be extracted</h3>
 
 
-<p>For the following definition of treatment of the ADL1.4 archetype files it is important to determine the data elements that should be extracted
+<p>For the following definition of treatment of the ADL1.4 archetype files it is important to determine the data elements that should be extracted from the files.
 The following key elements have been selected:</p>
 
 <ul>
@@ -30,7 +30,7 @@ The following key elements have been selected:</p>
                                                 archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}</code></li>
         <li>If the exclusion criteria encompass all archetypes (archetype_id/value matches {/.*/}), rather than listing each archetype, a single item should indicate that “any archetype” is linked.</li>
     </ul>
-    <li>Exclusion and inclusion statements have an object for each occurrence in the ADL. Each object has the following attributes:</li>
+    <li>Exclusion and inclusion statements have an object for each occurrence in the resulting data set. Each object has the following attributes:</li>
     <ul>
         <li><b>code: </b>atnnnn code of the element that has the inclusion/exclusion statement.</li>
         <li><b>label: </b>The label of the element.</li>
@@ -41,6 +41,7 @@ The following key elements have been selected:</p>
     <li><strong>Concept name: </strong>Found in the “ontology” section under “term_definitions/{lang}/items/at0000”.* In some cases might be "at0000.1" </li>
     <li><strong>Concept description: </strong>Found in the “ontology” section under “term_definitions/{lang}/items/at0000”.* In some cases might be "at0000.1" </li>
     <li><strong>Items:</strong> List of all data elements with atcode. Every item has attributes:</li>
+    <li>Every list item has attributes in the resulting data set.</li>
     <ul>
         <li><b>code: </b>atnnnn code of the element.</li>
         <li><b>label: </b>The label of the element.</li>
@@ -56,7 +57,7 @@ The following key elements have been selected:</p>
 
 <h3>Example data structure</h3>
 
-<p>Example of an archetype in the data set:</p>
+<p>Example of an archetype in the resulting data set:</p>
 
   <div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 700px; overflow-x: auto;">
     <pre style="white-space: pre-wrap; word-break: break-word;"><code>{
