@@ -8,9 +8,15 @@
       "file": "02_about_me.html"
     },
     {
+      "title": "Project Proforma Document",
+      "file": "16_project_proforma.html"
+    }
+    ,
+    {
       "title": "Project Context",
       "file": "03_project_context.html"
-    },
+    }
+    ,
     {
       "title": "Value Proposition",
       "file": "04_value_proposition.html"
@@ -69,5 +75,10 @@
     {
       "title": "ADL extraction - Data Analysis",
       "file": "14_adl_extract_data_analysis.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - Recommendation",
+      "file": "15_adl_extract_recommendation.html"
     }
 ]

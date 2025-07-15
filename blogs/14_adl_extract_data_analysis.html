@@ -277,6 +277,12 @@ It is highly recommended to review and address the identified outlier states. Al
   </li>
 </ul>
 
+<div style="text-align: center;">
+  <img src="images/a_is_keyless.png" alt="Keyword frequency distribution" width="200">
+  <br>
+  <small>A key(word)less archetype.</small>
+</div>
+
 <p>
   The absence of keywords in nearly a third of archetypes can complicate semantic linking and reduce the effectiveness of search and recommendation algorithms. Ensuring that each archetype is assigned a reasonable set of keywords is therefore highly recommended.
 </p>
@@ -288,7 +294,7 @@ It is highly recommended to review and address the identified outlier states. Al
 </div>
 
 
-<p>The average and median number of keywords per archetype can calculate:</p>
+<p>The average and median number of keywords per archetype can be calculated:</p>
 
 <ul>
   <li>
@@ -315,6 +321,31 @@ It is highly recommended to review and address the identified outlier states. Al
     <small>(Click to open in new tab.)</small>
 </div>
 
+<h3>The "Auto-keyword" approach</h3>
+
+<p>As shown previously, the lack of keywords in about on third of archetypes can be a problem for the later generation of recommendations based on keywords.</p>
+
+<p>To circumvent this, an additional attribut has been generated. With the list of >2000 keywords on hand, an algorithm was used to search for any of those keywords in the "purpose" and "concept description" for every archetype without keywords. If found, they were added tot he "auto-keyword" attribute of the archetype. For acrchetypes with keywords, the keyword list was copied to the "auto-keyword" of the archetype.</p>
+
+<p>This reduces the number of keyword-less archetypes to <strong>41</strong>. The distribution of number of archetypes with a certain number of "auto-keywords" is depicted in the following graph: </p>
+
+<div style="text-align: center;">
+  <img src="images/graph_auto_keyword_frequency.png" alt="Auto-Keyword frequency distribution" width="800" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>(Click to open in new tab.)</small>
+</div>
+
+<p>The average and median number of auto-keywords per archetype can be calculated:</p>
+
+<ul>
+  <li>
+    <strong>Mean</strong> number of auto-keywords per archetype: <span style="color: #2a7ae2;">7.0</span> 
+  </li>
+  <li>
+    <strong>Median</strong>: <span style="color: #2a7ae2;">6</span> 
+  </li>
+</ul>
+
 
 <h3>Data Elements</h3>
 
@@ -326,7 +357,7 @@ It is highly recommended to review and address the identified outlier states. Al
     <small>(Click to open in new tab.)</small>
 </div>
 
-<p>The average and median number of data elements per archetype can calculate:</p>
+<p>The average and median number of data elements per archetype can be calculated:</p>
 <ul>
   <li>
     <strong>Mean</strong> number of data elements per archetype: <span style="color: #2a7ae2;">14.4</span> 
@@ -336,8 +367,10 @@ It is highly recommended to review and address the identified outlier states. Al
   </li>
 </ul>
 
-<strong>Fun fact:</strong>
-<ul><li>
+<strong>Fun fact(s):</strong>
+<ul>
+  <li>There are <strong>6701</strong> different element labels between all archetypes.</li>
+  <li>
   The archetype with most items is openEHR-EHR-OBSERVATION.ygtss_revised.v1 with <strong>139 data elements</strong>.
 </li></ul>
 

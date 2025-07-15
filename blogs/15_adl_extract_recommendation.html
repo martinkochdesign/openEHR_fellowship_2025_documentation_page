@@ -1,0 +1,541 @@
+<h2>ADL Extraction – Recommendation</h2>
+
+<p>
+  This project aims to provide a tool that empowers users to search for archetypes that fit a list of data element labels, improving the discoverability and relevance of archetype suggestions.
+</p>
+
+<p>
+  <strong>Key terminology:</strong> Throughout this document, we distinguish between two groups of archetypes based on their similarity associations:
+  <ul>
+    <li><strong>"0 similar"</strong>: Archetypes that do <em>not</em> have any similar archetypes associated (i.e., no recommendations can be made for them).</li>
+    <li><strong>"10 similar"</strong>: Archetypes that have <em>10 or more</em> similar archetypes associated (i.e., they are highly connected in the recommendation system).</li>
+  </ul>
+  These terms will be used to describe the distribution and goals of the recommendation algorithm.
+</p>
+
+<p>
+  Searches can be conducted by archetype ID, keywords, items, and description texts. In practice, this often yields a list of archetypes containing the search term, which may result in too few or too many results. Archetypes with similar keywords or text items are not considered in this search.
+  As a result, some archetypes are difficult to find. They might not contain the search term but may be related or similar in topic to the searched item.
+</p>
+
+<p>
+  To make these "obscure" archetypes accessible via search, this project intends to create a recommendation algorithm capable of suggesting similar or related archetypes.
+</p>
+
+<div style="text-align: center;">
+  <img src="images/recommendation-assistant.png" alt="Illustration of a recommendation assistant, reminiscent of Clippy" width="280">
+  <br>
+  <small>Flashbacks to <a href="https://en.wikipedia.org/wiki/Office_Assistant" target="_blank" rel="noopener">Clippy</a>, anyone?</small>
+</div>
+
+<p>
+  The implementation of recommendations in this project should follow two general guidelines: recommendations should be <strong>helpful</strong> and <strong>unintrusive</strong>. The Microsoft Assistant is a good example of an intrusive recommendation system that was generally not liked by users (see Swartz, L. 2003).
+</p>
+
+<h3>When to Recommend</h3>
+
+<p>
+  This project has been divided into two parts:
+</p>
+<ol>
+  <li>ADL data extraction</li>
+  <li>Archetype search, visualization, and planning</li>
+</ol>
+
+<p>
+  Logically, a recommendation for similar or related archetypes can be created in either part. The advantages and disadvantages are as follows:
+</p>
+
+
+<table border="1" cellpadding="4" cellspacing="0" style="min-width:800px; table-layout: fixed;">
+  <!--<caption><strong>Comparison of Recommendation Timing</strong></caption>-->
+  <thead>
+    <tr>
+      <th style="width: 150px;">Where?</th>
+      <th style="width: 450px; word-break: break-all;">Advantages</th>
+      <th style="width: 450px; word-break: break-all;">Disadvantages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ADL data extraction</td>
+      <td>
+        <ul>
+          <li>Control over the recommendation algorithm, based on a fixed data set.</li>
+          <li>Less computational effort in the visualization tool.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Does not take user input into account.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Archetype search, visualization, and planning</td>
+      <td>
+        <ul>
+          <li>Adaptable to the current state of the user's project.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>More computational effort in the visualization tool.</li>
+          <li>Results are not foreseeable.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>
+  In this project, as a first step, recommendations will be created during the ADL extraction phase. Implementing patterns abstracted from modellers' previous experience and user input into the visualization tool would exceed the timeframe and resources of this project.
+</p>
+
+<p>
+  In the future, a hybrid approach might be considered, where a fixed set of recommendations is created in the ADL extraction phase, and in the subsequent visualization, the algorithm learns from the user's selection of data elements and archetypes to create more tailored recommendations.
+</p>
+
+<h3>How to Recommend</h3>
+
+<p>
+  Recommender systems or recommendation engines ("the algorithm") help users discover new items of interest. Whether suggesting a movie, product, or song, these systems analyze available information to offer relevant and personalized options.
+</p>
+<p>
+  The most common types of recommendation systems are <strong>content-based filtering</strong>, <strong>collaborative filtering</strong>, and <strong>hybrid approaches</strong> (<a href="https://en.wikipedia.org/wiki/Recommender_system" target="_blank" rel="noopener">Wikipedia</a>).
+</p>
+<ul>
+  <li><strong>Content-based filtering</strong> recommends items based on the attributes of items a user has previously interacted with, such as genre, actors, or keywords, without considering other users' preferences.</li>
+  <li><strong>Collaborative filtering</strong> makes recommendations by analyzing the behavior and preferences of many users, suggesting items that similar users have liked.</li>
+  <li><strong>Hybrid recommendation systems</strong> combine both content-based and collaborative methods to leverage the strengths of each and provide more accurate suggestions.</li>
+</ul>
+<p>
+  For this project, <strong>content-based filtering</strong> is considered most suitable, as it focuses on the attributes of items and does not rely on data from other users. Any other approach would need a whole infrastructure for managing user accounts, relating users with each other and create a rating system for archetypes. This would be out of the scope of this project.
+</p>
+
+<div style="text-align: center;">
+  <img src="images/a_is_for_algorithm.png" alt="Illustration representing an algorithm" width="500">
+  <br>
+  <small>Let's trust "The algorithm".</small>
+</div>
+
+<h3>Content-Based Filtering by Semantic Linking of Archetypes</h3>
+
+<h4>Level 1 – Keywords</h4>
+
+<p>
+  The first level of semantic linking applied here is the number of keywords that two archetypes have in common. To quantify the similarity between archetypes and create a "high score" list, a simple formula can be applied:
+</p>
+
+<div style="text-align: center;">
+  <img src="images/recommendation_algo_equation_1.png" alt="Similarity score formula based on keywords" height="25">
+</div>
+<p>Where:</p>
+<ul>
+  <li><em>score</em>: Total score for the similarity of the archetypes.</li>
+  <li><em>N<sub>kw</sub></em>: Number of identical keywords.</li>
+</ul>
+
+<p>
+  Here, the similarity score is equal to the number of common keywords.
+</p>
+
+<p>
+  As shown in the data analysis of extracted ADL data from the international CKM, about <strong>a third of archetypes do not have keywords</strong> ("0 similar" archetypes). This limits the application of this scoring system considerably and contributes to the group of "0 similar" archetypes.
+</p>
+
+<h4>Level 2 – Auto-keywords</h4>
+
+<p>
+  To reduce the number of "0 similar" archetypes, we can apply keywords automatically by analyzing the purpose and concept description ("auto-keywords"). We add the number of identical "auto-keywords" with a specific weight <em>w<sub>2</sub></em> to the scoring. The keywords are weighted too, by the <em>w<sub>1</sub></em> constant.
+</p>
+
+<p>
+  Note that only one of both should be used. In many cases, an archetype's keywords are the same as the "auto-keywords", which can double the similarity score. So only two cases are foreseen: (<em>w<sub>1</sub></em>=1 and <em>w<sub>2</sub></em>=0) or (<em>w<sub>1</sub></em>=0 and <em>w<sub>2</sub></em>=1).
+</p>
+
+<div style="text-align: center;">
+  <img src="images/recommendation_algo_equation_2.png" alt="Similarity score formula with auto-keywords" height="25">
+</div>
+<p>Where:</p>
+<ul>
+  <li><em>score</em>: Total score for the similarity of the archetypes.</li>
+  <li><em>N<sub>kw</sub></em>: Number of identical keywords.</li>
+  <li><em>w<sub>1</sub></em>: Weight for the keywords.</li>
+  <li><em>N<sub>akw</sub></em>: Number of identical "auto-keywords".</li>
+  <li><em>w<sub>2</sub></em>: Weight for the auto-keywords.</li>
+</ul>
+
+<h4>Level 3 – Item Labels</h4>
+
+<p>
+  Similar to the keyword approach, it may also be useful to use the labels of data elements. Data elements have names that are mostly specific to their use and can create a link between related archetypes. If the number of same labels is added to the equation, the weighted sum of keywords and labels results in the similarity score:
+</p>
+
+<div style="text-align: center;">
+  <img src="images/recommendation_algo_equation_3.png" alt="Similarity score formula with item labels" height="25">
+</div>
+
+<p>Where:</p>
+<ul>
+  <li><em>score</em>: Total score for the similarity of the archetypes.</li>
+  <li><em>N<sub>kw</sub></em>: Number of identical keywords.</li>
+  <li><em>w<sub>1</sub></em>: Weight for the keywords.</li>
+  <li><em>N<sub>akw</sub></em>: Number of identical "auto-keywords".</li>
+  <li><em>w<sub>2</sub></em>: Weight for the auto-keywords.</li>
+  <li><em>N<sub>il</sub></em>: Number of identical item labels.</li>
+  <li><em>w<sub>3</sub></em>: Weight for the item labels.</li>
+</ul>
+
+<p>
+  For this approach, it is important to exclude labels that are too common. For this project, the following labels have been identified as common and unspecific:
+</p>
+
+<ul>
+  <li>tree</li>
+  <li>comment</li>
+  <li>extension</li>
+  <li>item tree</li>
+  <li>any event</li>
+  <li>description</li>
+  <li>event series</li>
+  <li>additional details</li>
+</ul>
+
+<p>
+  When performing this scoring, these item labels should be ignored.
+</p>
+
+<h4>Results of the Recommendation Approach</h4>
+
+<p>
+  The scoring of similarity between archetypes was realized as described above, including three parameters to create a content-related link. After finding the similar archetypes, all children, parent, excluded, and included archetypes were removed, as these are already identified as related in the corresponding attribute of the data set objects. To avoid overwhelming users with too many suggestions, only the "Top 10" similar archetypes were added to the "similar" list item of the archetype in the data set.
+</p>
+
+<p>
+  To set a baseline for the links between archetypes, a list was made of the number of similar archetypes found for one archetype and the number of archetypes that have exactly this number of similar archetypes. The following graph shows the distribution for the case where archetypes are only linked by their keywords:
+</p>
+
+<div style="text-align: center;">
+  <img src="images/graph_1_0_0_1.png" alt="Distribution: Number of similar archetypes vs number of archetypes, linked by keywords" width="750" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Number of similar archetypes vs number of archetypes, linked by keywords. (Click to open in new tab.)</small>
+</div>
+
+<p>
+  As shown in the graph, there are 328 archetypes in the "0 similar" group, while there are 370 archetypes in the "10 similar" group. The similarity scoring aims to achieve two things:
+</p>
+<ol>
+  <li>Reduce the number of archetypes in the "0 similar" group.</li>
+  <li>Avoid opening the definition of similarity so much that saturation occurs (i.e., all archetypes fall into the "10 similar" group).</li>
+</ol>
+
+<p>
+  It should be remembered that semantic linking will never be completely homogeneous. There will always be some archetypes in the "0 similar" group and some in the "10 similar" group.
+</p>
+
+<p>
+  When using "auto-keywords" for linking archetypes, in addition to the ~290 archetypes without keywords, a shift in the similar archetypes can be seen:
+</p>
+
+<div style="text-align: center;">
+  <img src="images/graph_0_1_0_1.png" alt="Distribution: Number of similar archetypes vs number of archetypes, linked by auto-keywords" width="750" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Number of similar archetypes vs number of archetypes, linked by auto-keywords. (Click to open in new tab.)</small>
+</div>
+
+<p>
+  Now only <strong>74</strong> archetypes remain in the "0 similar" group. On the other hand, the number of archetypes in the "10 similar" group has increased dramatically. The next step is to see if this change can be controlled by adding other similarities, such as the item labels used.
+</p>
+
+<p>
+  With the goal of reducing the number of archetypes in the "0 similar" group and reducing or maintaining the number in the "10 similar" group, a comparison can be made to understand the influence of the weight parameters. For the comparison, the number of archetypes in the "0 similar" group was subtracted from the 328 of the default case (<strong>N<sub>diff0</sub></strong>). It would be beneficial to have a negative <strong>N<sub>diff0</sub></strong>, as this means there are fewer "0 similar" archetypes.
+</p>
+
+<p>
+  Similarly, the number of archetypes in the "10 similar" group was subtracted from the 370 of the default case (<strong>N<sub>diff10</sub></strong>). Here, it would be beneficial to maintain the default value (y=0) or have a negative <strong>N<sub>diff10</sub></strong>. A negative value would show the redistribution of similarities to other archetypes.
+</p>
+
+<p>
+  In the following graph, the combination between "auto-keywords" and item labels was explored:
+</p>
+
+<div style="text-align: center;">
+  <img src="images/graph_comparison_akw_il_detail.png" alt="Comparison of combinations between auto-keywords and item labels" width="800" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Comparison of combinations between auto-keywords and item labels. (Click to open in new tab.)</small>
+</div>
+
+<p>
+  In this graph, the "only keywords" approach is in the middle (0,0). As can be seen, all combinations diminish the number of archetypes in the "0 similar" group but tend to saturate the "10 similar" group.
+</p>
+
+<p>
+  Starting with the proposition that the ideal combination of these variables would provide a lower "0 similar" and "10 similar" archetype count, the ideal combination would be situated in the lower left quadrant of the graph (depicted as a star in the following graph). If equal importance is given to lowering both categories, a limit can be drafted with a slope of -1. By moving this limit upwards, the "ideal" combination is the first touched by the limit. In our case, this is the combination of <em>w<sub>2</sub></em>=0.9 and <em>w<sub>3</sub></em>=0.1.
+</p>
+
+<div style="text-align: center;">
+  <img src="images/graph_comparison_akw_il_detail_selection.png" alt="Selection of the best combinations between auto-keywords and item labels" width="800" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Selection of the best combinations between auto-keywords and item labels. (Click to open in new tab.)</small>
+</div>
+
+<p>
+  In the previous comparison, the threshold was set to "1", to require a minimum of identical keywords and item labels. To ascertain the influence of the threshold, the following combinations were graphed:
+</p>
+
+<!--
+<div style="text-align: center;">
+  <img src="images/graph_comparison_threshold.png" alt="Influence of threshold on combinations between auto-keywords and item labels" width="800" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Influence of threshold on combinations between auto-keywords and item labels. (Click to open in new tab.)</small>
+</div> 
+-->
+
+
+<div style="text-align: center;">
+  <img src="images/graph_comparison_threshold_annotations.png" alt="Influence of threshold on combinations between auto-keywords and item labels" width="800" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Influence of threshold on combinations between auto-keywords and item labels. Most <i>threshold=1</i> cases are situated as indicated. (Click to open in new tab.)</small>
+</div>
+
+
+
+<p>
+  From this graph, it can be seen that a high threshold tends to create more archetypes in both the "0 similar" and "10 similar" groups, while a low threshold saturates the "10 similar" group and diminishes the "0 similar" group. A threshold of "1" seems appropriate for this combination of keywords and item labels.
+</p>
+
+<p>
+  <strong>Conclusion:</strong> We will apply the formula <em>score = 0.9 × N<sub>akw</sub> + 0.1 × N<sub>il</sub></em> for scoring. Only scores with <strong>&ge; 1</strong> will be considered as recommendations. 
+</p>
+
+<p>The distribution of similar archetype amount for this equation is depicted in the next graph:</p>
+
+<div style="text-align: center;">
+  <img src="images/graph_0_0.9_0.1_1.png" alt="Distribution: Number of similar archetypes vs number of archetypes, linked by auto-keywords" width="750" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Number of similar archetypes vs number of archetypes, linked using the resulting equation. (Click to open in new tab.)</small>
+</div>
+
+<p>The size of the "0 similar" group has been reduced from the baseline <strong>328 to 152</strong>.</p>
+
+
+<p>Note that the similar archetypes found are saved in the data set with every archetype under the <em><i>similar</i></em> key.</p>
+
+<h3>Examples of recommendations</h3>
+
+<p>To give a preview of the results of the rtecommendation algorithm, a few random examples are shown in the next table:</p>
+
+
+<table border="1" cellpadding="4" cellspacing="0" style="min-width:800px; table-layout: fixed;">
+  <thead>
+    <tr>
+      <th style="width: 150px;">Archetype</th>
+      <th style="width: 450px; word-break: break-all;">Recommended archetypes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>openEHR-DEMOGRAPHIC-CLUSTER.person_additional_data_iso.v0</td>
+      <td>
+        <ul>
+          <li>openEHR-DEMOGRAPHIC-ITEM_TREE.person_details.v0</li>
+          <li>openEHR-DEMOGRAPHIC-CLUSTER.person_additional_data_br.v0</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>openEHR-EHR-ACTION.medication.v1</td>
+      <td>
+        <ul>
+          <li>openEHR-EHR-INSTRUCTION.medication_order.v3</li>
+          <li>openEHR-EHR-EVALUATION.medication_summary.v1</li>
+          <li>openEHR-EHR-CLUSTER.therapeutic_direction.v1</li>
+          <li>openEHR-EHR-COMPOSITION.medication_list.v1</li>
+          <li>openEHR-EHR-ACTION.vaccination_management.v0</li>
+          <li>openEHR-EHR-ACTION.review.v0</li>
+          <li>openEHR-EHR-EVALUATION.adverse_reaction_risk.v2</li>
+          <li>openEHR-EHR-CLUSTER.cessation_attempts.v0</li>
+          <li>openEHR-EHR-CLUSTER.conditional_medication_rules.v0</li>
+          <li>openEHR-EHR-CLUSTER.drug_resistance_profile.v0</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>openEHR-EHR-CLUSTER.device.v1</td>
+      <td>
+        <ul>
+          <li>openEHR-EHR-EVALUATION.implanted_device_summary.v0</li>
+          <li>openEHR-EHR-OBSERVATION.device_screening.v0</li>
+          <li>openEHR-EHR-ACTION.medical_equipment_supply.v0</li>
+          <li>openEHR-EHR-EVALUATION.device_summary.v0</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>openEHR-EHR-CLUSTER.auscultation_bowel.v0</td>
+      <td>
+        <ul>
+          <li>openEHR-EHR-CLUSTER.auscultation_breath.v0</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>openEHR-EHR-CLUSTER.ctcae.v1</td>
+      <td>
+        <ul>
+          <li>openEHR-EHR-EVALUATION.adverse_reaction_risk.v2</li>
+          <li>openEHR-EHR-CLUSTER.adverse_reaction_event.v1</li>
+          <li>openEHR-EHR-CLUSTER.symptom_sign-cvid.v0</li>
+          <li>openEHR-EHR-CLUSTER.symptom_sign.v2</li>
+          <li>openEHR-EHR-EVALUATION.event_investigation_classification.v0</li>
+          <li>openEHR-EHR-OBSERVATION.exposure_screening.v1</li>
+          <li>openEHR-EHR-OBSERVATION.physical_environment_screening.v0"</li>
+          <li>openEHR-EHR-OBSERVATION.symptom_sign.v0</li>
+          <li>openEHR-EHR-OBSERVATION.symptom_sign_screening.v1</li>
+          <li>openEHR-EHR-OBSERVATION.transmission_screening.v0</li>
+        </ul>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+
+
+
+<h3>Considerations for the Future</h3>
+<p>
+As we look ahead, several enhancements could further improve the recommendation algorithm and overall system effectiveness:
+</p>
+<ul>
+  <li>Incorporate more pattern knowledge from modellers into the recommendation algorithm to enable a dynamic suggestion system.</li>
+  <li>Add the archetype class as an additional weighted variable in the similarity score calculation.</li>
+  <li>Identify and group "categories" based on keywords to enhance semantic organization.</li>
+  <li>Explore the use of AI techniques to automatically group archetypes.</li>
+</ul>
+
+<h3>References</h3>
+<ul>
+    <li>Swartz, Luke. (2003). Why People Hate the Paperclip: Labels, Appearance, Behavior, and Social Responses to User Interface Agents. 10.13140/RG.2.1.2508.1047. </li>
+    <!--<li>Princeton Wordnet. https://wordnet.princeton.edu/. Accessed: 10/07/2025</li>
+    <li>Zaibacu's thesaurus GitHub page. https://github.com/zaibacu/thesaurus/tree/master. Accessed: 10/07/2025</li>-->
+</ul>
+
+
+<!--
+<p>As can be seen in the graph, there is a good performance in diminishing the number of "0 similar" archetypes. The problem is that the number of archetypes with many similars is augmenting much when relying only on item labels.</p>
+
+ <p>To limit the archetypes found only similar archetypes are going to be admitted which have  "at least 1 keyword in common" OR "at least 2 item labels in common" OR "at least 1 keyword synonyms in common". The comparison with this limitation is  the following:</p>
+
+
+<div style="text-align: center;">
+  <img src="images/comparison_singles.png" alt="Number of similar archetypes vs number of archetypse" width="800" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Comparison of single parameters. (Click to open in new tab.)</small>
+</div>
+
+<p>What can be seen in this graph is that the "item labels only" approach seems to beneficial, as it dimishes the number of "0 similar" archetypes and maintains the "10 similar" archetypes. The "keyword synonyms only" approach results in a worse performance, elevating the number of archetypes with no similar counterparts. This comes from the use of indirect keyword instead of the original keywords creates less links due to using more words, but less common words.</p>
+
+<p>To evaluate the pairs of parameters, the following comparison graph was created:</p>
+
+<div style="text-align: center;">
+  <img src="images/comparison_combinations.png" alt="Number of similar archetypes vs number of archetypse" width="900" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Comparison of paired parameters. (Click to open in new tab.)</small>
+</div>
+
+<p>As can be seen from the graph, </p>
+
+
+<div style="text-align: center;">
+  <img src="images/comparison_triplets.png" alt="Number of similar archetypes vs number of archetypse" width="900" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Comparison of three paired parameters. (Click to open in new tab.)</small>
+</div>
+
+
+
+<div style="text-align: center;">
+  <img src="images/comparison_all_threshold.png" alt="Number of similar archetypes vs number of archetypse" width="900" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>All comparisons with different thresholds. (Click to open in new tab.)</small>
+</div>
+
+<div style="text-align: center;">
+  <img src="images/comparison_best_fits.png" alt="Number of similar archetypes vs number of archetypse" width="900" onclick="window.open(this.src, '_blank');">
+  <br>
+  <small>Best comparison fits. (Click to open in new tab.)</small>
+</div>-->
+
+
+
+
+<!--
+<h3>The approach not taken - linking by keyword synonyms</h3>
+
+<p>The following describes an approach which was not used, but might be interesting to have documented here.</p>
+
+<p>Similar archetypes might not share the same exact keywords. To have a better chance at linking archetypes, it should be considered to add synonyms of keywords to the equation. Adding another weighted variable to the scoring equation results in the following:</p>
+
+<p>To create a list of synonyms for this project, an opensource thesaurus was used. The original file is based on Princeton's <a href="https://wordnet.princeton.edu/" target="_blank">Wordnet</a> and can be found here: <a href="https://github.com/zaibacu/thesaurus/blob/master/en_thesaurus.jsonl" target="_blank">https://github.com/zaibacu/thesaurus/blob/master/en_thesaurus.jsonl</a></p>
+<p>The original thesaurus was very complete, but had too much information for this project. Here is am example extract from the thesaurus:</p>
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 700px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;">
+<code>[...]
+{
+    "pos": "noun",
+    "wordnet_id": "08676100",
+    "word": "A-horizon",
+    "key": "A-horizon_1",
+    "synonyms": ["a-horizon", "a_horizon"],
+    "desc": ["the top layer of a soil profile", "usually contains humus"]
+}{
+    "pos": "noun",
+    "wordnet_id": "02700080",
+    "word": "A-line",
+    "key": "A-line_1",
+    "synonyms": ["a-line"],
+    "desc": ["women's clothing that has a fitted top and a flared skirt that is widest at the hemline", "\"it is called the A-line because the effect resembles the capital letter A\""]
+}{
+    "pos": "noun",
+    "wordnet_id": "06497120",
+    "word": "A-list",
+    "key": "A-list_1",
+    "synonyms": ["a-list"],
+    "desc": ["a list of names of specially favored people", "\"the boss gave me his A-list of people we should try to recruit\""]
+}{
+    "pos": "noun",
+    "wordnet_id": "00903806",
+    "word": "A-scan_ultrasonography",
+    "key": "A-scan_ultrasonography_1",
+    "synonyms": ["a-scan_ultrasonography"],
+    "desc": ["the use of ultrasonography to measure the length of the eyeball"]
+}
+[...]</code>
+</pre>
+</div>
+
+<p>Because this depth of information was not needed for this project, this original thesaurus file was parsed and only the synonyms were extacted to a custom dictionary. Here is an example exerpt from the obtained dictionary:</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 700px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;">
+<code>{
+    [...]
+    "a-horizon": ["a horizon"],
+    "abo blood group system": ["abo group", "abo system"],
+    "ab": ["av"],
+    "ace inhibitor": ["angiotensin-converting enzyme inhibitor"],
+    "ad": ["advertizement", "advertizing", "anno domini", "advert", "a.d.", "advertisement", "advertising"],
+    "aids": ["acquired immune deficiency syndrome"],
+    "and circuit": ["and gate"],
+    "asl": ["american sign language"],
+    [...]
+}</code>
+</pre>
+</div>
+-->

@@ -51,3 +51,20 @@
     <br>
     <small>ADL extraction - Final GUI</small>
 </div>
+
+<p>For <b>headless execution</b> of the program, set the <i>headless</i> variable to <i>True</i> and define in the variables <i>URL, CKMorGitHub, provenance</i> the data source:</p>
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 700px; overflow-x: auto;">
+<pre>
+    <code>
+    [...]
+    # Set headless to True if you do not need the GUI (or False if you want to use the GUI
+    headless = True
+    # Variables for running script headless (without GUI)
+    URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
+    zipFileName = 'TempZipFile.zip'
+    CKMorGitHub = 'CKM'  # "GITHUB" or "CKM", depending on source
+    provenance = 'CKM International'
+    [...]
+</code>
+</pre>
+</div>
