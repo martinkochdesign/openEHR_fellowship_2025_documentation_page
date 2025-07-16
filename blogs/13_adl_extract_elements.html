@@ -12,8 +12,9 @@ The following key elements have been selected:</p>
     <li><strong>Original language: </strong>The original language is specified in the “language” section: original_language = <[ISO_639-1::en]>.</li>
     <li><strong>Language translations: </strong>List of All Available Languages in the Archetype. Translation languages are listed in the “language“ section under “translations”.
     </li>
-    <li><strong>Date: </strong></li>
+    <li><strong>Date: </strong> Authoring date, located in the "description" section under "original_author/date".</li>
     <li><strong>Purpose: </strong>Located in the “description” section under “details/{lang}/purpose”.*</li>
+    <li><strong>Use: </strong>Located in the “description” section under “details/{lang}/use”.*</li>
     <li><strong>Inclusion and Exclusion statements: </strong></li>
     <ul>
     <li><strong>Inclusion statements: </strong>Inclusion of other archetypes, primarily Clusters. Inclusions are specified in the “definition” section of the model.</li>
@@ -61,51 +62,234 @@ The following key elements have been selected:</p>
 
   <div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 700px; overflow-x: auto;">
     <pre style="white-space: pre-wrap; word-break: break-word;"><code>{
-      "id": "openEHR-EHR-SECTION.vital_signs.v0",
-      "archetype_id": "openEHR-EHR-SECTION.vital_signs.v0",
-      "class": "SECTION",
-      "lifecycle_state": "in_development",
+      "id": "openEHR-EHR-CLUSTER.symptom_sign.v2",
+      "archetype_id": "openEHR-EHR-CLUSTER.symptom_sign.v2",
+      "class": "EHR-CLUSTER",
+      "lifecycle_state": "published",
       "original_language": "en",
-      "date": "2020-10-28",
-      "translation_languages": ["de", "sv", "ko", "es"],
-      "purpose": "To provide a framework for consistent modelling of Vital signs within a template.",
-      "keywords": ["blood pressure", "temperature", "pulse", "oxygen saturation", "respirations", "observations", "vital", "signs"],
+      "date": "2007-02-20",
+      "translation_languages": ["de", "fi", "sv", "nb", "pt-br", "ar-sy", "nl"],
+      "purpose": "To record details about a single episode of a reported symptom or sign including context, but not details, of previous episodes if appropriate.",
+      "use": "Use to record details about a single episode of a symptom or reported sign in an individual, as reported by the individual, parent, care-giver or other party. It may be recorded by a clinician as part of a clinical history record as reported to them, observed by the clinician or self-recorded as part of a clinical questionnaire or personal health record. A complete clinical history or patient story may include varying level of details about multiple episodes of an identified symptom or reported sign, as well as multiple symptoms/signs.  This archetype has been designed to record the positive presence of the symptom or sign as part of history taking using OBSERVATION.story, or in conjunction with a positive response to OBSERVATION.symptom_sign_screening.  In the purest sense, symptoms are subjective observations of a physical or mental disturbance and signs are objective observations of the same, as experienced by an individual and reported to the history taker by the same individual or another party. From this logic it follows that we will need two archetypes to record clinical history - one for reported symptoms and another for reported signs. In reality this is impractical as it will require clinical data entry into either one of these models which adds signficant overheads to modellers and those entering data. In addition, there is often overlap in clinical concepts - for example, is previous vomiting or bleeding to be categorised as a symptom or reported sign? In response, this archetype has been specifically designed to provide a single information model that allows for recording of the entire continuum between clearly identifiable symptoms and reported signs.  This archetype has been intended to be used as a generic pattern for all symptoms and reported signs. The 'Specific details' SLOT can be used to extend the archetype to include additional, specific data elements for more complex symptoms or signs.   This archetype has been specifically designed to be used in the 'Structured detail' SLOT within the OBSERVATION.story archetype, but can also be used within other OBSERVATION or CLUSTER archetypes and in the 'Associated symptom/sign' or 'Previous episode' SLOT within other instances of this CLUSTER.symptom_sign archetype.",
+      "keywords": ["complaint", "symptom", "disturbance", "problem", "discomfort", "presenting complaint", "presenting symptom", "sign"],
       "include": [{
-        "code": "at0001",
-        "label": "Vital signs",
-        "type": "OBSERVATION",
-        "archetypes": [
-          "openEHR-EHR-OBSERVATION.pulse_oximetry.v1",
-          "openEHR-EHR-OBSERVATION.respiration.v2",
-          "openEHR-EHR-OBSERVATION.pulse.v2",
-          "openEHR-EHR-OBSERVATION.blood_pressure.v2",
-          "openEHR-EHR-OBSERVATION.body_temperature.v2"
-        ]
-      }],
-      "exclude": [],
-      "concept_name": "Vital signs",
-      "concept_description": "Framework for consistent modelling of observations and measurements about essential physiological functions.",
+              "code": "at0147",
+              "label": "Structured body site",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.anatomical_location.v1", "openEHR-EHR-CLUSTER.anatomical_location_circle.v1", "openEHR-EHR-CLUSTER.anatomical_location_relative.v2"]
+          }, {
+              "code": "at0198",
+              "label": "Severity rating",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.severity_rating_scale.v0"]
+          }, {
+              "code": "at0197",
+              "label": "Factor detail",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.health_event.v0", "openEHR-EHR-CLUSTER.symptom_sign.v2"]
+          }, {
+              "code": "at0154",
+              "label": "Factor detail",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.health_event.v0", "openEHR-EHR-CLUSTER.symptom_sign.v2"]
+          }, {
+              "code": "at0194",
+              "label": "Factor detail",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.health_event.v0", "openEHR-EHR-CLUSTER.symptom_sign.v2"]
+          }, {
+              "code": "at0153",
+              "label": "Specific details",
+              "type": "CLUSTER",
+              "archetypes": ["any_archetype"]
+          }, {
+              "code": "at0146",
+              "label": "Previous episodes",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.symptom_sign.v2"]
+          }, {
+              "code": "at0063",
+              "label": "Associated symptom/sign",
+              "type": "CLUSTER",
+              "archetypes": ["openEHR-EHR-CLUSTER.symptom_sign.v2"]
+          }
+      ],
+      "exclude": [{
+              "code": "at0147",
+              "label": "Structured body site",
+              "type": "CLUSTER",
+              "archetypes": ["any_archetype"]
+          }
+      ],
+      "concept_name": "Symptom/Sign",
+      "concept_description": "Reported observation of a physical or mental disturbance in an individual.",
       "items": [{
-        "code": "at0000",
-        "label": "Vital signs",
-        "type": "SECTION"
-      }, {
-        "code": "at0001",
-        "label": "Vital signs",
-        "type": "OBSERVATION"
-      }],
+              "code": "at0000",
+              "label": "Symptom/Sign",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0001",
+              "label": "Symptom/Sign name",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0151",
+              "label": "Body site",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0147",
+              "label": "Structured body site",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0002",
+              "label": "Description",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0175",
+              "label": "Episodicity",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0186",
+              "label": "Occurrence",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0152",
+              "label": "Episode onset",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0164",
+              "label": "Onset timing",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0200",
+              "label": "Nadir",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0028",
+              "label": "Episode duration",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0021",
+              "label": "Severity category",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0198",
+              "label": "Severity rating",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0189",
+              "label": "Character",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0180",
+              "label": "Progression",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0003",
+              "label": "Pattern",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0018",
+              "label": "Modifying factor",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0019",
+              "label": "Factor",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0197",
+              "label": "Factor detail",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0017",
+              "label": "Effect",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0056",
+              "label": "Description",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0165",
+              "label": "Precipitating factor",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0170",
+              "label": "Factor",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0154",
+              "label": "Factor detail",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0171",
+              "label": "Time interval",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0185",
+              "label": "Description",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0190",
+              "label": "Resolving factor",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0193",
+              "label": "Factor",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0194",
+              "label": "Factor detail",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0195",
+              "label": "Time interval",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0196",
+              "label": "Description",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0155",
+              "label": "Impact",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0037",
+              "label": "Episode description",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0153",
+              "label": "Specific details",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0161",
+              "label": "Resolution date/time",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0057",
+              "label": "Description of previous episodes",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0031",
+              "label": "Number of previous episodes",
+              "type": "['DV_ORDINAL']"
+          }, {
+              "code": "at0146",
+              "label": "Previous episodes",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0063",
+              "label": "Associated symptom/sign",
+              "type": "CLUSTER"
+          }, {
+              "code": "at0163",
+              "label": "Comment",
+              "type": "['DV_ORDINAL']"
+          }
+      ],
       "parent": "",
       "children": [],
-      "keyword_synonyms": [
-        "pulse rate", "beat", "heartbeat", "life-sustaining", "pulsate", "heart rate", "pulsation"
-      ],
-      "similar": [
-        "openEHR-EHR-CLUSTER.waveform.v0",
-        "openEHR-EHR-OBSERVATION.heartbeat-pulse.v0",
-        "openEHR-EHR-OBSERVATION.heartbeat.v0",
-        "openEHR-EHR-OBSERVATION.vital_status.v0"
-      ]
-    }</code></pre>
+      "auto-keywords": ["complaint", "symptom", "disturbance", "problem", "discomfort", "presenting complaint", "presenting symptom", "sign"],
+      "similar": ["openEHR-EHR-OBSERVATION.symptom_sign.v0", "openEHR-EHR-CLUSTER.symptom_sign-cvid.v0", "openEHR-EHR-OBSERVATION.symptom_sign_screening.v1", "openEHR-EHR-OBSERVATION.story.v1", "openEHR-EHR-CLUSTER.ctcae.v1", "openEHR-EHR-CLUSTER.problem_qualifier.v2", "openEHR-EHR-EVALUATION.problem_diagnosis.v1", "openEHR-EHR-OBSERVATION.pulse.v2", "openEHR-EHR-OBSERVATION.heartbeat-pulse.v0"]
+  }</code></pre>
   </div>
 
 

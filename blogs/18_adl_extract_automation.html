@@ -1,0 +1,258 @@
+<h2>ADL Extraction – Automation</h2>
+
+<p>
+  As this project is hosted on GitHub, we can take advantage of <strong>GitHub Actions</strong> to run the ADL extraction script automatically and periodically. For this purpose, <em>headless mode</em> was enabled, and the download direction was set to the international CKM:
+</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+  <pre style="white-space: pre-wrap; word-break: break-word;"><code>
+# Set headless to True if you do not need the GUI (or False if you want to use the GUI)
+headless = True
+# Variables for running script headless (without GUI)
+URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
+zipFileName = 'TempZipFile.zip'
+CKMorGitHub = 'CKM'  # "GITHUB" or "CKM", depending on source
+provenance = 'CKM International'
+[...]
+</code></pre>
+</div>
+
+<p>
+  This version of the script, with headless mode enabled, is saved as <b>adl_extraction_tool.py</b> in the root of the project. The change of name is done to avoid confusing the source code with the live script.
+</p>
+
+<h3>Requirements</h3>
+
+<p>
+  The <strong>import</strong> section of the Python code lists all libraries required by the script:
+</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+  <pre style="white-space: pre-wrap; word-break: break-word;"><code>
+import datetime
+import requests
+import os
+import zipfile
+import re
+import json
+import pandas as pd
+import tkinter
+import customtkinter
+from customtkinter import filedialog
+import shutil
+import time
+</code></pre>
+</div>
+
+<p>
+  <b>requirements.txt</b>
+</p>
+
+<p>
+  For execution of the script in GitHub Actions, a list of librariesis needed for their installation. Not all libraries from the import section are listed here, because Python’s standard library already includes several of them. The <b>requirements.txt</b> file, located in the root of the repository, contains the following:
+</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+  <pre style="white-space: pre-wrap; word-break: break-word;"><code>
+requests
+datetime
+pandas
+customtkinter
+</code></pre>
+</div>
+
+<h3>Automation YAML File</h3>
+
+<p>
+  For automation, GitHub Actions requires a YAML file with instructions. In this project, the YAML file is called <b>update-dataset.yml</b> and is located in <code>.github/workflows</code> in the repository. This is the YAML file used:
+</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+  <pre style="white-space: pre-wrap; word-break: break-word;"><code>
+name: Weekly Archetype Dataset Update
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # Runs every Monday at 03:00 UTC (see https://crontab.guru/ for configuration)
+  workflow_dispatch:      # Allow manual trigger from GitHub UI
+jobs:
+  update-dataset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install Python dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run extractor script
+        run: |
+          python automation_test.py
+      - name: Commit and push updated dataset
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add dataset.js
+          git commit -m "Automated weekly dataset update" || echo "No changes to commit"
+          git push
+</code></pre>
+</div>
+
+<p>
+  This automation is executed periodically according to the schedule. The schedule can be changed as needed; see <a href="https://crontab.guru/" target="_blank" rel="noopener">crontab.guru</a> for more information on cron syntax.
+</p>
+
+<h3>Additional Setup in GitHub</h3>
+
+<p>
+  Because the automated script writes files to the GitHub repository, the repository settings must be adjusted to allow this. This setting can be found in the repository’s <b>Settings</b> tab under <b>Actions &gt; General</b>.
+</p>
+
+<div style="text-align: center;">
+  <img src="images/github_settings_1.png" alt="Action settings in GitHub" width="600">
+  <br>
+  <small>Action settings in GitHub.</small>
+</div>
+
+<p>
+  Here, the <b>Read and write permissions</b> option should be selected.
+</p>
+
+<div style="text-align: center;">
+  <img src="images/github_settings_2.png" alt="Read and write permissions in GitHub" width="600">
+  <br>
+  <small>Read and write permissions.</small>
+</div>
+
+<p>
+  Do not forget to save after changing the permissions.
+</p>
+
+
+
+<!--
+<h2>ADL extraction - Automation</h2>
+
+<p>As this project is hosted on GitHub, we can take advantage of the GitHub Actions to run the ADL extraction script periodically. For this, headless mode was enabled and the download direction was set to the internation CKM:</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;">    <code>
+[...]
+# Set headless to True if you do not need the GUI (or False if you want to use the GUI
+headless = True
+# Variables for running script headless (without GUI)
+URL = 'https://ckm.openehr.org/ckm/retrieveResources?resourceType=archetype&format=ADL&state1=INITIAL&state2=DRAFT&state3=TEAMREVIEW&state4=REVIEWSUSPENDED&state5=PUBLISHED&state6=REASSESS_DRAFT&state7=REASSESS_TEAMREVIEW&state8=REASSESS_REVIEWSUSPENDED'
+zipFileName = 'TempZipFile.zip'
+CKMorGitHub = 'CKM'  # "GITHUB" or "CKM", depending on source
+provenance = 'CKM International'
+[...]
+</code>
+</pre>
+</div>
+
+<p>This version of the script, with headless mode enabled, is saved as <b>adl_extraction_tool.py</b> in the root of the project. The cahnge of name is done to not confound the source code with the life script.</p>
+
+<h3>Requirements</h3>
+
+<p>In the Import section of the python code, shows all libraries that were imported for the script.</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;">    <code>
+        import datetime
+        import requests
+        import os
+        import zipfile
+        import re
+        import json
+        import pandas as pd
+        import tkinter
+        import customtkinter
+        from customtkinter import filedialog
+        import shutil
+        import time
+    </code>
+</pre>
+</div>
+
+<p> <b>requirements.txt</b></p>
+
+<p>For the execution of the script in GitHub actions a list of libraries is needed that have to be installed. Not all libraries of the import section are not represented here, becasue python itself allready contains a few of the libraries needed. The <b>requirement.txt</b> file, located in the root of the repo contains tghe following:</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;">    <code>
+        requests
+        datetime
+        pandas
+        customtkinter
+</code>
+</pre>
+</div>
+
+
+
+<h3>Automation YAML file</h3>
+
+<p>For the autoamtion, github actions need a YAML file with instructions. 
+This YAML file  is called <b>update-dataset.yml</b> in this instance and is located in https://github.com/martinkochdesign/openEHR_fellowship_2025_project/tree/main/.github/workflows</p>
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+    <pre style="white-space: pre-wrap; word-break: break-word;">    <code>
+name: Weekly Archetype Dataset Update
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # Runs every Monday at 03:00 UTC (see https://crontab.guru/ for configuration)
+  workflow_dispatch:      # Allow manual trigger from GitHub UI
+jobs:
+  update-dataset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install Python dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run extractor script
+        run: |
+          python automation_test.py
+      - name: Commit and push updated dataset
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add dataset.js
+          git commit -m "Automated weekly dataset update" || echo "No changes to commit"
+          git push
+    </code>
+</pre>
+</div>
+
+<p>This automation is executed periodically. The schedule can be changed. Please see https://crontab.guru/ for more information on the syntax. </p>
+
+
+<h3>Additional setup in GitHub</h3>
+
+<p>Because the automated script is going to write a file to the github repository, the settings of the repo have to be adjusted to allow for this. This setting can be foiund in the settings tab of the repo under "Actions/General".</p>
+
+<div style="text-align: center;">
+  <img src="images/github_settings_1.png" alt="Action settings in github" width="600">
+  <br>
+  <small>Action settings in github.</small>
+</div>
+
+<p>Here the read and write permission should be selected.</p>
+
+<div style="text-align: center;">
+  <img src="images/github_settings_2.png" alt="Action settings in github" width="600">
+  <br>
+  <small>Read and write permissions.</small>
+</div>
+
+<p>Do not forget to save after changing the permissions.</p>
+
+
+-->

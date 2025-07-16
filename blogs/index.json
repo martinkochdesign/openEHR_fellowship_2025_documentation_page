@@ -81,4 +81,14 @@
       "title": "ADL extraction - Recommendation",
       "file": "15_adl_extract_recommendation.html"
     }
+    ,
+    {
+      "title": "ADL extraction - Publication",
+      "file": "17_adl_extract_publication.html"
+    }
+    ,
+    {
+      "title": "ADL extraction - Automation",
+      "file": "18_adl_extract_automation.html"
+    }
 ]
