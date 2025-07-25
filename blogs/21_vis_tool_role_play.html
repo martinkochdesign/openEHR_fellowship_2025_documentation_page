@@ -1,0 +1,510 @@
+
+<h2>Visualization Tool - User Journey Mapping</h2>
+
+<p>To enhance our understanding of usability requirements, we conducted a user journey mapping exercise. This involved documenting a first-person user journey to illustrate how the application is intended to be used and to identify potential usability bottlenecks.</p>
+
+<h3>User Persona: Clinical Data Modeler</h3>
+
+<p>The target user for this application is a clinical data modeler experienced in the openEHR framework. While not requiring extensive programming knowledge, the user should be familiar with data structuring and template planning principles.</p>
+
+<p>The user has compiled a list of data elements, likely already organized, and needs to plan the structuring of templates using appropriate archetypes. Their goal is to adhere to the openEHR philosophy of reuse, sharing, and collaboration on archetypes to achieve advanced interoperability on an international scale.</p>
+
+<p>This user journey mapping aims to understand the user's journey, identify any challenges they might face, and ensure the tool meets their needs effectively.</p>
+
+<div style="text-align: center;">
+    <img src="images/who_is_the_modeller.png" alt="User Journey Mapping." width="350">
+    <br>
+    <small>Who is the clinical modeler?</small>
+</div>
+
+<h3>User Journey</h3>
+
+<p>The following steps outline a typical user journey from the beginning to the end of the planning process:</p>
+
+<ol>
+    <li>
+        <strong>Open the Application</strong>
+        <p>The user opens the application for the first time. The <b>main view</b> opens. The user does not know how to use the application, so they open a link to a user manual.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>The application should be easy to open.</li>
+                <li>If opened for the first time, prompt the user to create a new project (or create a new project automatically).</li>
+                <li>Show the project name in the <b>main view</b>.</li>
+                <li>Show a <b>splash screen</b> if this is a new project, with a link to the user manual.</li>
+                <li>Add a link to a manual on the <b>About page</b> of the application.</li>
+                <li>Evaluate if there is a need for a tutorial in the application.</li>
+                <li>Main view should show:</li>
+                <ul>
+                    <li>Overview of collection</li>
+                    <li>Checklist overview</li>
+                    <li>search view</li>
+                    <li>Visualization</li>
+                    <li>Archetype info</li>
+                </ul>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>About the Application</strong>
+        <p>The user wants to know more about the application. They open the <b>about page</b> of the <b>main view</b> for information about data security, authorship, and more.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Create an independent <b>about page</b>. For easy access, add a button to the <b>main view</b>.</li>
+                <li>Include in the <b>about page</b>:</li>
+                <ul>
+                    <li>Legal information (copyright, license, authorship).</li>
+                    <li>Link to more information about openEHR, this project, and Catsalut.</li>
+                    <li>Link to a user manual.</li>
+                    <li>Declaration about data usage and privacy.</li>
+                </ul>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Edit/Rename Project</strong>
+        <p>The user opens the settings of the project and changes the name and adds metadata in the <b>project options view</b>.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Allow easy editing of project metadata.</li>
+                <li>Provide a dedicated window for editing project metadata.</li>
+                <li>For easy access, add a button to the <b>main view</b>.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Add Data Elements to/Edit the Checklist</strong>
+        <p>The user adds elements to the checklist in the <b>checklist editor view</b>. The user can save and load this checklist from an Excel file.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Provide clear instructions on the format for XLSX checklists.</li>
+                <li>Allow manual addition and editing of checklist items at both element and section levels.</li>
+                <li>Enable loading and saving of the checklist in XLSX format.</li>
+                <li>Consider a dedicated window for checklist editing.</li>
+                <li>Provide direct access to the editor via the <b>checklist sidebar</b>.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Search for Archetypes</strong>
+        <p>The user can scroll through a list of "existing" archetypes in the <b>archetype list sidebar</b>. If the user wants to filter or search this list for applicable archetypes, they access a <b>search view</b>. The search is conducted with a search term that should be searched in different attributes of all "existing" archetypes. While searching, the user references the element checklist. If an archetype is selected, the relationship of this archetype and other archetypes should be shown in the <b>visualization view</b>. This gives the user the possibility to explore related archetypes. The user, having gone to an archetype that is not of interest, can open a search <b>history</b> of visited archetypes to navigate back to previously seen archetypes.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Let the user select attributes to be searched (class, ID, purpose, items, keywords).</li>
+                <li>Add button to open history window.</li>
+                <li>Display the <b>checklist sidebar</b> for easy reference.</li>
+                <li>Display the archetype relationships in the <b>visualization view</b>.</li>
+                <li>Change selected archetype by clicking on a node in the <b>visualization view</b>.</li>
+                <li>Show the information of the selected archetype in the <b>info view</b>.</li>
+                <li>Show the number of found archetypes in the search results.</li>
+                <li>Have a "back button" to revisit earlier finds. Maybe have a detailed list of the last archetypes visited.</li>
+                <li>The <b>search view</b> should include:</li>
+                <ul>
+                    <li>Text field for search term.</li>
+                    <li>Selectors for attributes to be searched.</li>
+                    <li>List of filtered "existing archetypes".</li>
+                </ul>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Navigate Similar Archetypes</strong>
+        <p>The user wants to navigate from the selected archetype to recommended or similar archetypes. For this, the user changes the <b>visualization view</b> to show the related archetypes. The network can be navigated by clicking on the archetype nodes.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Have an option/selector in the <b>visualization view</b> to show the recommended archetypes as a network.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Add Archetype to Collection</strong>
+        <p>When the user has found an appropriate archetype, they add the selected archetype to their <b>collection view</b>.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Show a list of collection items. Make the list selectable, so archetypes can be selected and visualized in the <b>info view</b> and <b>visualization view</b>.</li>
+                <li>The archetype is selected from the "existing archetype" list, therefore the element for adding it should be near or in the <b>search view</b>.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Create/Edit New Archetype</strong>
+        <p>The user detects that there are data elements in their checklist that cannot be covered by existing archetypes. To create a placeholder "new archetype", the user adds a "new archetype" to the <b>collection view</b> via a <b>new archetype editor view</b>.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Create the new archetype in a specific <b>new archetype editor view</b>.</li>
+                <li>As the "new archetypes" only exist in the collection, the creation should be initiated from the <b>collection view</b>.</li>
+                <li>While creating/editing the new archetype, the <b>checklist sidebar</b> should be visible.</li>
+                <li>Once created, show the info of the new archetype in the <b>info view</b>.</li>
+                <li>The <b>new archetype editor view</b> should be opened to edit the archetype from the <b>info view</b>.</li>
+                <li>The attributes for a "new archetype" should include:</li>
+                <ul>
+                    <li>ID.</li>
+                    <li>Keywords.</li>
+                    <li>Purpose.</li>
+                    <li>Inclusion statements for other archetypes of the collection.</li>
+                    <li>Data elements from the checklist assigned to this archetype.</li>
+                </ul>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Remove "New" or "Existing" Archetype from Collection</strong>
+        <p>The user has added an archetype to the collection but realizes that the archetype does not belong in the <b>collection view</b>. When the archetype is selected, the user presses a button to delete the archetype from the collection.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>A user input element (i.e., button) should be added to the <b>collection view</b> to delete archetypes from the collection.</li>    
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Visualize Collection</strong>
+        <p>The user wants to see the relationship between archetypes in the collection.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Have an option/selector in the <b>visualization view</b> to show the collection as a network.</li>
+                <li>While seeing the network, the <b>collection view</b> and <b>info view</b> should be visible.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Mark Data Element as Resolved/Assign Archetype to Checklist Element</strong>
+        <p>To edit the checklist items, the user enters the <b>checklist editor view</b>. Here the user marks a data element as resolved (so it does not have to be searched for anymore) and can assign an archetype from the collection. If the user thinks that the assigned archetype needs a change request, this can be marked here as well. The user needs to see the <b>info view</b> for reference.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Have the archetype <b>info view</b> visible.</li>
+                <li>For every element, there should be the following information:</li>
+                <ul>
+                    <li>Resolved (Yes/No)</li>
+                    <li>Data element name</li>
+                    <li>Assigned archetype</li>
+                    <li>Needs change request (Yes/No)</li>
+                </ul>
+                <li>Data elements and sections should be movable.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Save Project</strong>
+        <p>The user saves the project to not lose progress. Saving should be done frequently, so the user needs instant access.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>The save button should be located in the <b>main view</b> for fast access.</li>
+                <li>Additionally, a save button with the same functionality could be provided in the <b>project options view</b>.</li>
+                <li>The project should be saved to a JSON file and should contain:</li>
+                <ul>
+                    <li>Project metadata</li>
+                    <li>Collection</li>
+                    <li>"New archetypes"</li>
+                </ul>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Load Project</strong>
+        <p>The user wants to resume a previous session by loading a project JSON file. This action will potentially delete current project data.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Ask the user if they are sure before deleting existing data.</li>
+                <li>This is not a frequently used function, so it can be added in the <b>project options view</b>.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Delete Project / Create a New Project</strong>
+        <p>The user wants to start a new project, deleting all data from the current project.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Ask the user if they are sure before deleting existing data.</li>
+                <li>This is not a frequently used function, so it can be added in the <b>project options view</b>.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Visualize Project</strong>
+        <p>The user wants to see the connection between data elements and the assigned archetypes.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>Have an option/selector in the <b>visualization view</b> to show the project as a network.</li>
+                <li>While seeing the network, the <b>collection view</b> and <b>info view</b> should be visible.</li>
+            </ul>
+        </ul>
+    </li>
+
+    <li>
+        <strong>Export Project Report</strong>
+        <p>The user wants to create a report that serves as documentation for the ongoing development. The report should include all information, and apart from the checklist Excel, should provide comprehensive project details.</p>
+        <ul>
+            <li>Comments for UX design:</li>
+            <ul>
+                <li>This is not a frequently used function, so it can be added in the <b>project options view</b>.</li>
+                <li>The format of the report should be compatible (HTML, PDF, etc.).</li>
+            </ul>
+        </ul>
+    </li>
+</ol>
+
+<p>Through this structured user journey mapping, we aim to enhance the tool's usability and ensure it aligns with user expectations and needs.</p>
+
+<h3>Summary of Design Requirements for Different Views/Pages/Windows</h3>
+
+<p>Using this user story, a list of necessary pages/windows/views can be summarized:</p>
+
+<ul>
+    <li><b>Main View</b>
+        <ul>
+            <li>Opens on start</li>
+            <li>Display project name</li>
+            <li>Direct access to
+                <ul>
+                    <li>About Page</li>
+                    <li>Project Options View</li>
+                    <li>Save Project</li>
+                </ul>
+            </li>
+            <li>Includes at start
+                <ul>
+                    <li>Checklist Sidebar</li>
+                    <li>search view</li>
+                    <li>Visualization View</li>
+                    <li>Info View</li>
+                    <li>Collection View</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><b>Splash Screen</b>
+        <ul>
+            <li>Opened automatically from Main View</li>
+        </ul>
+    </li>
+    <li><b>About Page</b>
+        <ul>
+            <li>Called from Main View</li>
+            <li>Contains
+                <ul>
+                    <li>Legal information (copyright, license, authorship).</li>
+                    <li>Link to more information about openEHR, this project, and Catsalut.</li>
+                    <li>Link to a user manual.</li>
+                    <li>Declaration about data usage and privacy.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><b>Project Options View</b>
+        <ul>
+            <li>Called from Main View</li>
+            <li>Edit project metadata</li>
+            <li>Function to
+                <ul>
+                    <li>Save Project</li>
+                    <li>Load Project</li>
+                    <li>New Project</li>
+                    <li>Create Project Report</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><b>Checklist Editor View</b>
+        <ul>
+            <li>Called from Checklist Sidebar</li>
+            <li>Provides for every element the following information:
+                <ul>
+                    <li>Resolved (Yes/No)</li>
+                    <li>Data element name</li>
+                    <li>Assigned archetype</li>
+                    <li>Needs change request (Yes/No)</li>
+                </ul>
+            </li>
+            <li>User needs to see the Info View for reference</li>
+        </ul>
+    </li>
+    <li><b>Checklist Sidebar</b>
+        <ul>
+            <li>Shown in Main View</li>
+            <li>Provides access to Checklist Editor View</li>
+        </ul>
+    </li>
+
+    <li><b>Archetype List Sidebar</b>
+        <ul>
+            <li>Shown in Main View</li>
+            <li>Should include:
+                <ul>
+                    <li>List of filtered "existing archetypes"</li>
+                    <li>Button to open the search view</li>
+                    <li>Button to clear filter</li>
+                </ul>
+            </li>
+            <li>User needs to see the Checklist Sidebar for reference</li>
+        </ul>
+    </li>
+
+    <li><b>Search View</b>
+        <ul>
+            <li>Called from archetype list sidebar</li>
+            <li>Should include:
+                <ul>
+                    <li>Text field for search term</li>
+                    <li>Selectors for attributes to be searched</li>
+                    <li>List of filtered "existing archetypes"</li>
+                    <li>Function to open search history window</li>
+                    <li>Button to clear filter</li>
+                    <li>"Add to collection" button</li>
+                </ul>
+            </li>
+            <li>User needs to see the Checklist Sidebar for reference</li>
+        </ul>
+    </li>
+
+
+    <li><b>Visualization View</b>
+        <ul>
+            <li>Shown in Main View</li>
+            <li>Selector for:
+                <ul>
+                    <li>Display the archetype relationships</li>
+                    <li>Show the recommended archetypes</li>
+                    <li>Show the collection</li>
+                    <li>Show the project</li>
+                </ul>
+            </li>
+            <li>Change selected archetype by clicking on a node in the view</li>
+        </ul>
+    </li>
+    <li><b>History</b>
+        <ul>
+            <li>Opened from search view</li>
+            <li>Shows the search history</li>
+            <li>History items can be clicked to select archetype</li>
+        </ul>
+    </li>
+    <li><b>Info View</b>
+        <ul>
+            <li>Shown in Main View</li>
+            <li>Show the information of the selected archetype</li>
+            <li>Function to open New Archetype Editor View if the selected archetype is "new"</li>
+        </ul>
+    </li>
+    <li><b>Collection View</b>
+        <ul>
+            <li>Shown in Main View</li>
+            <li>Shows collection of "existing" and "new" archetypes</li>
+            <li>Should have a function to delete an archetype from the collection</li>
+            <li>Should have a function to create a "new" archetype</li>
+        </ul>
+    </li>
+    <li><b>New Archetype Editor View</b>
+        <ul>
+            <li>Called from Collection View for new archetype</li>
+            <li>Called from Info View for editing archetype</li>
+            <li>Opened in floating window</li>
+            <li>Attributes for a "new archetype" should include:
+                <ul>
+                    <li>ID</li>
+                    <li>Keywords</li>
+                    <li>Purpose</li>
+                    <li>Inclusion statements for other archetypes of the collection</li>
+                    <li>Data elements from the checklist assigned to this archetype</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+
+<p>In summary the access between the different views can be roughly sketched out as in the following figure:</p>
+
+
+<div style="text-align: center;">
+    <img src="images/vis_tool_windows.png" alt="Visualization tool views." width="900">
+    <br>
+    <small>Access between different views/pages/windows and additional files.</small>
+</div>
+
+<!--
+
+title Sequence Diagram for Visualization Tool
+
+
+// https://sequencediagram.org/?
+
+bottomparticipants
+
+materialdesignicons F0004 User
+
+participantgroup #hotpink **Main View**
+materialdesignicons F05AF main view 
+materialdesignicons F05AF checklist sidebar
+materialdesignicons F05AF archetype list sidebar
+materialdesignicons F05AF visualization view
+materialdesignicons F05AF info view
+materialdesignicons F05AF collection view
+end
+
+
+materialdesignicons F05AF project options view
+materialdesignicons F05AF splash screen
+materialdesignicons F05AF about page
+//materialdesignicons F05AF project options view
+materialdesignicons F05AF checklist editor view
+materialdesignicons F05AF checklist sidebar
+materialdesignicons F05AF archetype list sidebar
+materialdesignicons F05AF search view
+
+materialdesignicons F05AF history
+
+materialdesignicons F05AF new archetype editor view
+materialdesignicons F102B Excel checklist file
+materialdesignicons F1A96 JSON project file
+materialdesignicons F1029 Report
+
+participantgroup #lightgreen **Main View**
+materialdesignicons F05AF project options view
+participant B
+end
+
+
+User->main view: open
+activate main view
+
+main view->splash screen: open if new project
+activate splash screen
+User->splash screen:close
+deactivate splash screen
+
+User->about page:open
+
+activate about page
+User->about page:close
+deactivate about page
+User->main view:close
+deactivate main view
+-->

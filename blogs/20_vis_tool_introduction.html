@@ -1,0 +1,221 @@
+<h2>Visualization Tool - Introduction</h2>
+<p>Once the archetype information has been extracted in the <i>dataset.js</i> file, the second part of the project begins.</p>
+<p>The general idea is to design a tool that enhances the way to search, plan, and visualize openEHR archetypes, providing a comprehensive platform for clinical knowledge modellers to efficiently manage archetype data.</p>
+<h3>General Description</h3>
+<p>The Archetype Visualization and Planning Tool aims to provide detailed information on existing archetypes and facilitate the addition of future archetypes to the ecosystem.</p>
+<p>The main <strong>development goals</strong> are:</p> 
+<ul>
+    <li>Provide comprehensive information on existing archetypes from an archetype source.</li>
+    <li>Facilitate the fast search of existing archetypes.</li>
+    <li>Help to understand the archetype ecosystem by network visualization.</li>
+    <li>Enable the planning of addition of new archetypes to the ecosystem.</li>
+</ul>
+<p>The <strong>key features</strong> can be broken down into:</p>
+<ul>
+    <li>Archetype Search</li>
+    <li>Archetype Project Management</li>
+    <li>Network Visualization</li>
+</ul>
+<p>The following sections provide detailed descriptions of the key features as currently envisioned. The proposal is made with the best intentions but should be taken "as is." Some points may change due to new opportunities or technical limitations found during development.</p>
+<h3>Key Features</h3>
+<h4>Archetype Search</h4>
+<p>The archetype search should be a simple search algorithm that takes the data from the dataset and filters out all of the archetypes that do not contain the search text.</p>
+<p>The following features for the search should be considered:</p>
+<ul>
+    <li>Search input over a text field.</li>
+    <li>Search result update at every keystroke in the text field (Does not need a separate "Search" button).</li>
+    <li>Search should be fast.</li>
+    <li>Search archetypes. The search should be done by filtering one or more of the following:</li>
+    <ul>
+        <li>keywords</li>
+        <li>class</li>
+        <li>purpose</li>
+        <li>concept name</li>
+        <li>archetype ID</li>
+    </ul>
+    <li>Search is only executed over the existing archetypes from the "dataset.js" file.</li>
+</ul>
+<p>Additional functionalities that might be considered are:</p>
+<ul>
+    <li>Adding regex or regex-like expressions to the search algorithm, so wildcards ("*") can be used.</li>
+    <li>Sort search results alphabetically (A-Z, Z-A).</li>
+    <li>Show number of found results.</li>
+    <li>Show preview of the text, where the search text was found.</li>
+</ul>
+<div style="text-align: center;">
+    <img src="images/a_search.png" alt="A is for visualization" width="150">
+    <br>
+    <small>Searching for the right archetype.</small>
+</div>
+
+<h4>Archetype Project Management</h4>
+
+<p>The project management component of the tool should enable users to manage collections of archetypes and track development progress.</p>
+
+<p>The following features for the project management should be considered:</p>
+
+<ul>
+    <li>Archetype Management</li>
+    <ul>
+        <li>Existing Archetypes: Archetypes from the dataset.js file.</li>
+        <ul>
+            <li>Display information on archetype after clicking on it. The information of an archetype should include:</li>
+            <ul>
+                <li>Archetype ID</li>
+                <li>Concept name</li>
+                <li>Purpose</li>
+                <li>Items</li>
+                <li>Inclusions</li>
+                <li>Exclusions</li>
+                <li>Parent</li>
+                <li>Children</li>
+                <li>Description</li>
+                <li>State</li>
+                <li>Date</li>
+                <li>Keywords</li>
+                <li>Recommended archetypes</li>
+            </ul>
+            <li>Alerts for archetype predrafts or drafts usage.</li>
+            <li>Suggestion of similar and relevant archetypes.</li>
+        </ul>
+        <li>New Archetypes: Planned archetypes added by the user.</li>
+        <ul>
+            <li>Only outlines of archetypes, not fully functional ADL1.4 archetypes.</li>
+            <li>Are added to the collection. They only exist in the collection context.</li>
+
+                <li>Display editable information on archetype after clicking on it:</li>
+                <ul>
+                    <li>Archetype name</li>
+                    <li>Class</li>
+                    <li>Purpose</li>
+                    <li>Keywords</li>
+                    <li>Assigned elements</li>
+                    <li>Included archetypes. Only archetypes from the collection can be included.</li>
+                </ul>
+
+        </ul>
+            <li>Collection of Archetypes</li>
+        <ul>
+            <li>New and existing archetypes should be bundled into a collection by the user.</li>
+            <li>Existing archetypes can be added or removed from the collection.</li>
+            <li>New archetypes are created in the collection and get deleted when removed from the collection.</li>
+        </ul>
+    </ul>
+
+    <li>Checklist Management</li>
+    <ul>
+        <li>Structured Checklist</li>
+        <ul>
+            <li>Structured in sections and elements. One level deep (no section within a section).</li>
+            <li>Sections and elements are movable.</li>
+            <li>Sections and elements can be added/deleted.</li>
+            <li>Assigned archetype per element.</li>
+            <li>"Completed" marker per element.</li>
+            <li>"Change request" marker per element.</li>
+        </ul>
+        <li>Load/save capabilities in format XLSX.</li>
+    </ul>
+
+    <li>Project Management</li>
+    <ul>
+        <li>Save/load capabilities in JSON format.</li>
+        <li>Saves project metadata, checklist data, new archetypes, and archetype collection.</li>
+        <li>Delete project data.</li>
+    </ul>        
+</ul>
+
+<p>Additional functionalities that might be considered are:</p>
+<ul>
+    <li>Project metadata might include:</li>
+    <ul>
+        <li>Author name</li>
+        <li>Author affiliation</li>
+        <li>Copyright</li>
+        <li>Description</li>
+        <li>Date of generation</li>
+    </ul>
+    <li>New Archetype</li>
+    <ul>
+        <li>Auto-suggest from keyword pool when typing in keywords.</li>
+    </ul>
+</ul>
+
+<div style="text-align: center;">
+    <img src="images/a_planning.png" alt="A is for visualization" width="220">
+    <br>
+    <small>Let's plan towards a goal.</small>
+</div>
+
+<h4>Network Visualization</h4>
+
+<p>The following features for the network visualization should be considered:</p>
+
+<ul>
+    <li>A network visualization using nodes (circles) and edges (connecting lines).</li>
+    <li>Clicking on a node should select it and display its information for convenience.</li>
+    <li>Basic navigation around the network should be implemented: Move and zoom.</li>
+
+    <li>Visualization Modes:</li>
+    <ul>
+        <li>Network visualization of archetypes and their connections.</li>
+        <ul>
+            <li>Visualize parent-child relationship (specialized archetypes).</li>
+            <li>Visualize inclusion/exclusion relationships.</li>
+        </ul>
+        
+        <li>Network visualization of archetype collection.</li>
+            <li>Visualize new and existing archetypes.</li>
+            <li>Visualize inclusion if exists between members of collection.</li>
+            <li>Visualize specialization if exists between members of collection.</li>
+
+        <li>Visualization of recommended or similar archetypes.</li>
+
+        <li>Visualization of project/checklist.</li>    
+        <ul>
+            <li>Show sections.</li>
+            <li>Show elements of sections and connect to corresponding section.</li>
+            <li>Show archetypes from collection, if they have been assigned to an element. Show the connection between archetype and element.</li>
+        </ul>
+    </ul>        
+</ul>
+
+<div style="text-align: center;">
+    <img src="images/a_visualization.png" alt="A is for visualization" width="150">
+    <br>
+    <small>Archetypes with visions.</small>
+</div>
+
+<h3>Other Requirements</h3>
+
+<p>Apart from the key functionalities, a few additional requirements can be already determined.</p>
+
+<ul>
+    <li>About Page</li>
+    <ul>
+        <li>The About page will provide an overview of the tool, its purpose, and the team behind its development.</li>
+    </ul>
+    <li>Accessibility:</li>
+    <ul>
+        <li>Cross-platform use (via web browser): Ensuring cross-platform compatibility will allow users to access the tool from various devices and browsers, enhancing usability and reach.</li>
+        <li>No user account management: By not requiring user account management, the tool simplifies access and reduces potential security concerns related to user data storage.</li>
+    </ul>
+    <li>User Interface and Experience:</li>
+    <ul>
+        <li>Intuitive navigation and responsive design to enhance user experience.</li>
+        <li>Incorporate user feedback mechanisms for continuous improvement.</li>
+    </ul>
+    <li>Performance:</li>
+    <ul>
+        <li>Optimize load times and responsiveness, especially when handling large datasets.</li>
+    </ul>
+    <li>Integration:</li>
+    <ul>
+        <li>Support integration with other systems or tools as needed.</li>
+    </ul>
+    <li>Documentation and Support:</li>
+    <ul>
+        <li>Provide comprehensive documentation and support resources to assist users.</li>
+    </ul>
+</ul>
+
+<p>These requirements might change over time, but special care is going to be given to fulfill these development goals.</p>

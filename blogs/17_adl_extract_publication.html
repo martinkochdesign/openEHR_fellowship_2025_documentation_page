@@ -1,4 +1,4 @@
-<section>
+
     <h2>Project Publication and Source Code</h2>
     <p>
       This fellowship project is publicly available on GitHub:<br>
@@ -24,6 +24,26 @@
       </a>.
       This executable is designed to work on any modern Windows computer, making it easy to get started without additional setup.
     </p>
+
+    <h4>Handling large files in GitHub</h4>
+
+    <p>Because the executable file is bigger than 100MB, the file cannot be oushed directly to the GitHub repository. For larger files, Git Large File Storage (or Git LFS) has to be employed.</p>
+
+    <p>For this, the current version at the time (v3.7.0) from <a href="https://git-lfs.com/">Git LFS</a> was installed on the computer with the GitHub Desktop installation.</p>
+
+    <p>In the <i>.gitattributes</i> file of the repository a line was added to manage the large .exe files</p>
+
+
+<div style="background-color: rgb(255, 235, 227); padding: 16px; border-radius: 8px; max-width: 800px; overflow-x: auto;">
+  <pre style="white-space: pre-wrap; word-break: break-word;"><code>
+        # Auto detect text files and perform LF normalization
+        * text=auto
+        # Manage large exe files eith Git LFS
+        *.exe filter=lfs diff=lfs merge=lfs -text
+      </code>
+    </pre>
+</div>
+
+
   
     
-  </section>

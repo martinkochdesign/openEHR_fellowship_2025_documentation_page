@@ -91,4 +91,17 @@
       "title": "ADL extraction - Automation",
       "file": "18_adl_extract_automation.html"
     }
+    ,
+    {
+      "title": "ADL extraction - User Manual",
+      "file": "19_adl_extract_manual.html"
+    }
+    ,
+    {
+      "title": "Visualization tool - Introduction",
+      "file": "20_vis_tool_introduction.html"
+    }
+
 ]
+
+    

@@ -4,15 +4,16 @@
 A crucial part of the application is parsing ADL 1.4 archetype files. Essentially, the application must open an archetype file and read it in a way that allows querying for specific data elements.
 </p>
 
+<div style="text-align: center;">
+  <img src="images/a_is_for_archetype.png" alt="A is for archetypet" width="450">
+  <br>
+  <small>A is for archetype!</small>
+</div>
+
 <p>
 Parsing ADL 1.4 files is challenging because a single file can use multiple syntaxes. While the overall structure is <a href="https://odin-lang.org/" target="_blank">ODIN</a>-compliant, ADL files also incorporate other syntaxes: cADL, dADL, and first-order predicate logic (FOPL). For more details, see the <a href="https://specifications.openehr.org/releases/AM/latest/ADL1.4.html" target="_blank">official ADL 1.4 specification</a>.
 </p>
 
-<div style="text-align: center;">
-  <img src="images/a_is_for_archetype.png" alt="A is for archetypet" width="450">
-  <br>
-  <small>Let's get to know our archetypes.</small>
-</div>
 
 
 
@@ -54,7 +55,7 @@ After looking into ANTLR4, the decision was made to parse the ADL files with a s
   Regular expressions (regex) are sequences of characters that define search patterns, commonly used for matching, searching, and manipulating text. They are powerful tools for tasks such as data validation, extraction, and transformation. For more information, visit the <a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank">Wikipedia page on regular expressions</a>. Online tools lke https://regex101.com/ have been very helpful for this.
 </p>
 
-<p>One problkem of parsing of ADL files is that they consist of sections that use different syntaxes.</p>
+<p>One problem of parsing of ADL files is that they consist of sections that use different syntaxes.</p>
 
 
 <div style="text-align: center;">
@@ -70,6 +71,12 @@ After looking into ANTLR4, the decision was made to parse the ADL files with a s
   <li>Convert text to JSON dictionary</li>
   <li>Parse the JSON dictionary</li>
 </ol>
+
+<div style="text-align: center;">
+  <img src="images/a_interior.png" alt="A is for archetypet" width="100">
+  <br>
+  <small>Let's get to know our archetypes.</small>
+</div>
 
 
 <p>The following diagram elaborates more detailled on the structures and the information gathered from them:</p>
