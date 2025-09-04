@@ -1,0 +1,585 @@
+<h2>Results of the Initial User Questionnaire</h2>
+
+<p>
+    For this fellowship project, a questionnaire was published to gather feedback from potential users.
+    The aim was to gain an overview of user needs and identify possible innovations for the process of planning and discovering archetypes for an openEHR data model with clinical applications.
+  </p>
+
+<p>
+  The raw results from the questionnaire can be found <a href="docs/Initial questionnaire openEHR fellowship 2025 project(1-22).xlsx" target="_blank">here!</a>
+</p>
+
+  <p>
+    The initial questionnaire was distributed via LinkedIn, the openEHR newsletter, and the openEHR Discourse forum.
+  </p>
+  <ul>
+    <li><strong>Number of responses:</strong> 22</li>
+    <li><strong>Response period:</strong> 14/07/2025 - 28/08/2025</li>
+  </ul>
+
+
+<h3>Section I: Getting to Know the Professional</h3>
+
+
+  <h4>1. Professional Background</h4>
+  <p>
+    Of the 22 participants, the majority (16 or 72.7%) work in Health Informatics or IT. The remaining respondents identified as clinicians, students or trainees, or worked in pharmacy or dentistry.
+  </p>
+  <div style="text-align: center;">
+    <img src="images/5_What is your profession.png" alt="Profession" width="500">
+    <br>
+    <small>Distribution of professions among participants.</small>
+  </div>
+  <p>
+    <strong>Conclusion:</strong> Although the sample size is small, the high proportion of participants from Health Informatics and IT suggests that the openEHR modelling community is currently driven primarily by technical and informatics professionals. However, the inclusion of clinicians and other healthcare professionals points to the interdisciplinary interest, which is essential for developing clinically relevant models.
+  </p>
+
+  <h4>2. Experience with openEHR Models</h4>
+  <p>
+    Most participants reported having 1-2 years of experience with openEHR models (9 respondents), closely followed by those with more than 5 years of experience (8 respondents). The rest had either less than 1 year or between 3 to 5 years of experience.
+  </p>
+  <div style="text-align: center;">
+    <img src="images/6_How many years of experience do.png" alt="Years of experience" width="500">
+    <br>
+    <small>Years of experience with openEHR.</small>
+  </div>
+  <p>
+    <strong>Conclusion:</strong> The distribution shows a mix of newcomers and highly experienced users, with fewer participants in the intermediate range. This may reflect a recent increase in interest and adoption, as well as a core group of long-term contributors. To address the experience gap and support community development, it would be beneficial to provide tailored resources for both predominant groups.
+  </p>
+
+  <h4>3. Roles in the openEHR Modelling Process</h4>
+  <p>
+    Most participants are involved as Modellers (13) or Developers (5) in the modelling process.
+  </p>
+  <div style="text-align: center;">
+    <img src="images/7_How would you describe your role.png" alt="Role" width="500">
+    <br>
+    <small>Roles in the openEHR modelling process.</small>
+  </div>
+  <p>
+    <strong>Conclusion:</strong> The predominance of modellers and developers among participants aligns with previously reported professional backgrounds and underscores the technical orientation of current openEHR projects.
+  </p>
+
+    <h4>4. Familiarity with openEHR Artefact Creation</h4>
+    <p>
+      The majority of participants (14 out of 22) reported feeling very comfortable with the creation of openEHR artefacts, and 6 participants self-identified as experts in this area.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/8_How familiar are you with the cr.png" alt="Familiarity" width="500">
+      <br>
+      <small>Familiarity with the openEHR modelling process.</small>
+    </div>
+    <p>
+      <strong>Conclusion:</strong> The high level of comfort and expertise among participants corresponds with the previously reported experience levels (1–2 years or more than 5 years) of professionals, indicating a strong technical foundation within the community. To maintain inclusivity and encourage growth, it will be important to provide ongoing support and training opportunities for less experienced users.
+    </p>
+  
+    <h3>Section II: Drafting and Compiling a List of Data Elements for an openEHR Template</h3>
+
+    <h4>5. Use of Clinical Guidelines in Template Creation</h4>
+    <p>
+      When asked about the use of clinical guidelines for template creation, 5 participants stated they definitely use such guidelines, while 9 reported using them only sometimes. Notably, 8 participants indicated that they do not use specific clinical or domain guidelines.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/9_Do you follow specific clinical.png" alt="Clinical Guidelines" width="600">
+      <br>
+      <small>Use of clinical guidelines.</small>
+    </div>
+    <p>
+      <strong>Conclusion:</strong> There is significant variability in the use of clinical guidelines during template creation. While some participants consistently apply guidelines, a substantial portion do not, which may impact the standardization and clinical relevance of developed templates. Promoting best practices and providing accessible guideline resources could help improve consistency and quality across the international community.
+    </p>
+
+    <h5>Guidelines and Resources Used for openEHR Template Creation</h5>
+    <p>Of the 14 participants that reportedly use guidelines, 10 indicated the type of guidelines. The guidelines are grouped and listed here.</p>
+     
+    <ul>
+      <li>Clinical and Domain-Specific Guidelines: Guidelines applicable to the specific domain or project at hand.</li>
+        <ul>
+        <li>
+          <strong>Specific Clinical Guidelines:</strong> Guidelines tailored to a concept or diagnosis, such as:
+          <ul>
+            <li>Patient-Reported Outcome Measures (PROMs) / PROM Styleguide: For the design and implementation of patient-reported outcome measures.</li>
+            <li>Assessment tools in psychiatry</li>
+            <li>Norwegian national guidelines for initial treatment of Non-muscle-invasive Bladder Cancer (NMIBC): 
+              <a href="https://www.helsedirektoratet.no/retningslinjer/blaerekreft-handlingsprogram/initial-behandling-og-behandling-av-nmibc" target="_blank">
+                View guideline
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Registry Specifications:</strong> Requirements from clinical registries, often combined with clinician needs.
+        </li>
+        <li>
+          <strong>Digitized Paper Forms:</strong> Data elements are sometimes derived from existing paper forms, which may include coding systems like SNOMED-CT.
+        </li>
+        <li>
+          <strong>Expert Domain Guidelines:</strong> Guidance from domain experts, regional or national models.
+        </li>
+        <li>
+          <strong>Customer-Provided Guidelines:</strong> Templates based directly on whatever documentation or requirements the customer (e.g., hospital, laboratory) provides.
+        </li>
+       </ul>
+    
+      <li>International and National Standards</li>
+        <ul>
+          <li>
+            <strong>FHIR Implementation Guides:</strong> Used for interoperability and mapping between openEHR and FHIR resources.
+          </li>
+          <li>
+            <strong>PRSB Guidance:</strong> Professional Record Standards Body guidance for structuring clinical records.
+          </li>
+          <li>
+            <strong>Clinical Guidelines (e.g., NICE):</strong> Mentioned but considered rarely helpful by some.
+          </li>
+          <li>
+            <strong>Standardized Specifications:</strong> Such as ICHOM (International Consortium for Health Outcomes Measurement).
+          </li>
+          <li>
+            <strong>SNOMED-CT and Other Coding Systems:</strong> Used for coding data elements, sometimes requiring collaboration with clinical experts to identify appropriate codes.
+          </li>
+        </ul>
+    
+    
+      <li>Technical specification</li>
+        <ul>
+          <li>
+            <strong>UML Class Diagrams:</strong> UML diagrams (used to visualize and structure data models and their relationships) of existing data models.
+          </li>
+        </ul>
+    </ul>
+
+    <p>
+        The creation of openEHR templates is highly dependent on a mix of clinical, technical, and project-specific guidelines. While technical and coding standards (like FHIR and SNOMED-CT) are widely used, the actual clinical content is often shaped by domain-specific guidelines, registry requirements, and sometimes even digitized paper forms.
+    </p>
+
+      <h4>6. Platforms Used for Documenting Template Elements</h4>
+      <p>
+        When asked about the platforms used to document the list of elements for a template, 12 participants indicated they use two or more platforms. The three most commonly used platforms are:
+      </p>
+      <ul>
+        <li><strong>Mind map tools</strong> (14 participants)</li>
+        <li><strong>openEHR-specific modelling tools</strong> (such as CKM or Archetype Designer) (14 participants)</li>
+        <li><strong>Spreadsheets (including Microsoft Excel)</strong> (13 participants)</li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="images/11_How do you document the list of.png" alt="Element documentation" width="600">
+        <br>
+        <small>Platforms used to document the elements for the template.</small>
+      </div>
+      <p>
+        <strong>Conclusion:</strong> The use of multiple platforms highlights a complex, but pragmatic approach to documentation. Mind maps and modelling tools are as popular as spreadsheets, suggesting that both visual and structured methods are valued for capturing and organizing template elements.
+      </p>
+    
+      <h4>7. Process for Creating Lists of Data Elements</h4>
+      <p>
+        For the compilation of data elements necessary for the developed template, most participants (14) reported using a sequential process: first creating a list, then searching for archetypes, and finally mapping the data structure. Five participants prefer a more parallel approach, creating the list and mapping simultaneously.
+      </p>
+      <div style="text-align: center;">
+        <img src="images/12_What is your process when creati.png" alt="Process element collection" width="500">
+        <br>
+        <small>Process when creating list of data elements.</small>
+      </div>
+      <p>
+        <strong>Conclusion:</strong> The sequential approach is dominant, likely because it provides a clear process. However, parallel workflows are used by teams that value flexibility and iterative refinement during template development.
+      </p>
+    
+      <h4>8. Structure of Data Element Grouping</h4>
+      <p>
+        When documenting, most participants (16) group their data elements informally, while only 4 adhere to a strict structure.
+      </p>
+      <div style="text-align: center;">
+        <img src="images/13_How structured is your initial p.png" alt="Data element structure" width="500">
+        <br>
+        <small>Level of data element structure.</small>
+      </div>
+      <p>
+        <strong>Conclusion:</strong> Informal grouping is the norm, which provides adaptability but could also lead to inconsistencies. Introducing structuring guidelines might help balance flexibility with standardization.
+      </p>
+    
+      <h4>9. Team Involvement in Data Element Compilation</h4>
+      <p>
+        The group of people involved in collecting and structuring data elements is typically small, with 2-3 collaborators reported by 14 participants.
+      </p>
+      <div style="text-align: center;">
+        <img src="images/14_How many people are typically in.png" alt="Involvement in element structure" width="500">
+        <br>
+        <small>Involvement in the compilation of data elements.</small>
+      </div>
+      <p>
+        <strong>Conclusion:</strong> Small teams are the standard, which streamlines communication and decision-making but may limit diversity of input. Encouraging broader collaboration could enhance the completeness of templates.
+      </p>
+    
+      <h4>10. Tools Used for Collaboration</h4>
+      <p>
+        As reported by the participants, the main tools used for collaboration are:
+      </p>
+      <ul>
+        <li><strong>Modelling tools</strong> (e.g., Archetype Designer) (13)</li>
+        <li><strong>Video conferencing</strong> (12)</li>
+        <li><strong>SharePoint</strong> (11)</li>
+        <li><strong>Email</strong> (10)</li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="images/15_What tools or platforms do you u.png" alt="Tools used for collaboration" width="500">
+        <br>
+        <small>Tools used for collaboration in compilation of data elements.</small>
+      </div>
+      <p>
+        <strong>Conclusion:</strong> Collaboration depends on a combination of specialized and general-purpose tools, reflecting the diverse range of platforms that data modellers need to be familiar with.
+      </p>
+    
+      <h4>11. Moderation of Collaboration</h4>
+      <p>
+        Collaboration is typically moderated by one person who manages and modifies the design document, while all team members provide feedback.
+      </p>
+      <div style="text-align: center;">
+        <img src="images/16_What is your process in the coll.png" alt="Collaboration process" width="500">
+        <br>
+        <small>Moderation process in the compilation of data elements.</small>
+      </div>
+      <p>
+        <strong>Conclusion:</strong> Centralized moderation helps maintain consistency and direction, but it is important to ensure that all voices are heard and that feedback is effectively integrated into the developed data model.
+      </p>
+
+  
+      <h4>12. Expected Benefits of Collaboration in openEHR Template Modelling</h4>
+      <p>14 of the 22 participants answered to the question about expected benefits from collaboration. The responses are grouped and summarized in the following list:      
+      </p>
+      <ul>      
+        <li><strong>Diverse Perspectives and Knowledge Sharing</strong></li>
+        <ul>
+          <li>Collaboration includes different viewpoints, increasing the depth of knowledge in both clinical and technical fields.</li>
+          <li>Involving clinicians and informaticians uncovers "silent knowledge" and ensures that information requirements not previously considered are identified early.</li>
+          <li>Participants learn about new tools and modelling approaches from each other.</li>
+        </ul>
+
+        <li><strong>Improved Data Quality and Error Reduction</strong></li>
+        <ul>
+          <li>Working together helps catch mistakes early and enables comprehensive review, resulting in fewer errors.</li>
+          <li>Collaboration ensures higher data quality and improves the definition of information elements.</li>
+          <li>Multiple reviewers and perspectives help check for errors and optimize the final product.</li>
+        </ul>
+
+      
+        <li><strong>Alignment with Real Clinical Needs</strong></li>
+        <ul>
+          <li>Collaboration promotes shared understanding and aligns templates with actual clinical requirements.</li>
+          <li>Input from clinicians ensures that the logical data schema reflects real-world practice and needs.</li>
+          <li>Discussion of concepts, design, and coding systems with domain experts ensures correct use of codes and standards.</li>
+        </ul>
+
+      
+        <li><strong>Increased Engagement and Investment</strong></li>
+        <ul>
+          <li>Collaborative work makes participants feel more invested in the outcome and fosters a sense of ownership.</li>
+          <li>Streamlined modelling processes benefit both EHRs and case report forms, making the work more efficient and effective.</li>
+        </ul>
+      
+        <li><strong>Process Optimization</strong></li>
+        <ul>
+          <li>Collaboration helps streamline the modelling process, making it more efficient and effective.</li>
+          <li>Comprehensive input and review lead to the best possible modelling process and final product.</li>
+        </ul>
+    </ul>
+    
+    <strong>Conclusion:</strong> Participants expect collaborations to positively impact knowledge sharing, data quality, alignment with clinical needs, engagement, and process optimization.
+
+    <h4>13. Main Problems and Desired Changes in Compiling Data Element Lists</h4>
+      <p>
+        Of the 22 participants, 13 responded to the question: "What is the ONE most important problem that you have? What is the ONE change that you would like to see in the compilation of data element lists?" Their responses are grouped and summarized below.
+      </p>
+    <ul>
+      <li><strong>Collaboration and Communication Challenges</strong></li>
+      <ul>
+        <li>Difficulty staying on the same page, leading to messy or duplicated work.</li>
+        <li>Lack of a clear, shared system or tool for tracking contributions and changes.</li>
+        <li>Limited collaboration: clinical teams may see template design as too technical and distant, resulting in insufficient involvement.</li>
+        <li>Consensus is hard to achieve, especially when stakeholders have different backgrounds or priorities.</li>
+        <li>Desire for better collaboration tools and easier sharing of template views for client feedback.</li>
+        <li>Technical limitations, such as SharePoint not supporting Xmind documents and restricted access/versioning in Archetype Designer.</li>
+      </ul>
+
+    
+      <li><strong>Knowledge and Understanding Gaps</strong></li>
+      <ul>
+        <li>Lack of understanding of the meaning and structuring of information elements among collaborators, especially clinicians.</li>
+        <li>Clinicians often do not know how to structure or cluster data, making it difficult to create robust templates.</li>
+        <li>Need for greater awareness that templates should be consensus-driven, not tailored to individual needs only.</li>
+        <li>Desire for more education on how openEHR works to increase meaningful involvement.</li>
+      </ul>
+
+    
+      <li><strong>Process and Content Issues</strong></li>
+      <ul>
+        <li>RM (Reference Model) fields are often missed during element compilation.</li>
+        <li>Many required data elements do not have a clear mapping to existing archetype elements, especially when they infer knowledge (e.g., "Oncological history: yes/no").</li>
+        <li>Lack of guidelines, implementation guides, or best practices from openEHR.</li>
+        <li>Desire for an AI-generated draft to suggest fitting archetypes and elements at the start of the process.</li>
+      </ul>
+
+    
+      <li><strong>Tooling and Technical Limitations</strong></li>
+      <ul>
+        <li>Difficulty with versioning and access in modelling tools (e.g., Archetype Designer requires sharing usernames/passwords, lacks easy multi-user access and versioning).</li>
+        <li>Desire for improved collaboration tools and easier ways to share and comment on templates.</li>
+      </ul>
+
+    </ul>
+
+    <p><strong>Conclusion:</strong>
+    Participants reported that effective collaboration in compiling data element lists is hindered by both social and technical barriers. Key problems include a lack of user-friendly, centralized platforms for collaboration, insufficient interdisciplinary understanding, and a significant knowledge gap, especially for clinicians, regarding template creation. Additionally, participants noted inadequate guidance, limited automated support for mapping and element selection, and insufficient documentation of best practices. Outdated or inadequate technical infrastructure and tools were also identified as obstacles to seamless and secure collaborative workflows.
+    </p>
+    <p>
+      To address these issues, it is suggested introducing user-friendly, centralized collaboration platforms, fostering interdisciplinary understanding, providing targeted training and clear guidance for clinicians, improving guidance and documentation, automating mapping and element selection, and upgrading technical infrastructure and tools.
+    </p>
+
+
+    <h3>Section III: Searching Archetypes</h3>
+
+
+    <h4>14. Archetype search tools</h4>
+    <p>
+      The vast majority of participants (81.8%) rely on the openEHR Clinical Knowledge Manager (CKM) as their primary tool for searching appropriate archetypes for templates.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/19_Which tool do you use mainly to.png" alt="Tools used for search" width="500">
+      <br>
+      <small>Figure 1: Tools used for archetype search.</small>
+    </div>
+    <div><strong>Conclusion:</strong> Most users depend on CKM as their main archetype search tool.</div>
+    
+    <h4>15. Effectiveness of search tools</h4>
+    <p>
+      Most participants (81.8%) rate the search process as only somewhat effective, indicating room for improvement in the current tools and methods.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/20_How effective do you find the se.png" alt="Effectiveness of search tool" width="500">
+      <br>
+      <small>Effectiveness of the search tools.</small>
+    </div>
+    <div><strong>Conclusion:</strong> The majority find current search tools only somewhat effective, which indicates a need for better tools.</div>
+    
+    <h4>16. Main Challenges in Archetype Search</h4>
+    <p>
+      The main challenges reported by participants are summarized below:
+    </p>
+    <ul>
+      <li>Inclusion of irrelevant archetypes in search results</li>
+      <li>Too many similar archetypes, making selection difficult</li>
+      <li>Lack of search functionality for specific attributes</li>
+      <li>Insufficient documentation or practical examples</li>
+    </ul>
+    <p>
+      Secondary issues include slow search performance, outdated archetypes appearing in results, and language barriers.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/21_What are your main problems duri.png" alt="Main problems during search" width="500">
+      <br>
+      <small>Main problems encountered during archetype search.</small>
+    </div>
+    <div><strong>Conclusion:</strong> Users primarily face challenges such as irrelevant results, similar archetypes, and lack of attribute-based search. This also indicates a need for better search tools with better adjustment to user needs.</div>
+    
+    <h4>17. Tracking Archetype Relationships</h4>
+    <p>
+      Participants use a variety of methods to track archetype relationships:
+    </p>
+    <ul>
+      <li>4 participants do not track relationships at all</li>
+      <li>10 use built-in tools (e.g., CKM features)</li>
+      <li>8 track relationships manually</li>
+    </ul>
+    <div style="text-align: center;">
+      <img src="images/22_How do you keep track of archety.png" alt="Tracking search" width="600">
+      <br>
+      <small>Methods for keeping track of archetype relationships.</small>
+    </div>
+    <div><strong>Conclusion:</strong> Most participants use built-in tools or manual methods to track archetype relationships, while some do not track them at all. The interdependecy of archetyes seems to be sufficiently documented by the existing tools (CKM).</div>
+    
+    <h4>18. Collaboration in Archetype Search</h4>
+    <p>
+      The search process is predominantly individual, with 15 out of 22 participants searching alone. Only 4 participants reported mostly collaborative searches.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/23_Do you search for archetypes col.png" alt="Collaborative search" width="500">
+      <br>
+      <small>Collaborative versus individual archetype search.</small>
+    </div>
+    <div><strong>Conclusion:</strong> Archetype search is usually performed individually rather than collaboratively. There does not seem a need for a collaborative tool.</div>
+    
+    <h4>19. Team size in search collaboration</h4>
+    <p>
+      When collaboration occurs, it typically involves small teams of 2-3 people, as reported by 7 participants.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/24_How many people are typically in.png" alt="Number of people in collaborative search" width="500">
+      <br>
+      <small>Typical team size for collaborative archetype search.</small>
+    </div>
+    <strong>Conclusion:</strong> When collaborative archetype search takes place, it typically involves small teams of 2-3 people. Therefore, any collaborative tool designed for this purpose can remain lightweight and does not need to support large-scale collaboration.
+    
+    <h4>20. Platforms used for collaborative search</h4>
+    <p>
+      Although only 7 participants provided feedback on the platforms used for collaborative search, the most common tools mirror those used for compiling data elements: modelling tools (e.g., Archetype Designer), video conferencing, SharePoint, and email.
+    </p>
+    <div style="text-align: center;">
+      <img src="images/25_What tools or platforms do you u.png" alt="Platforms for collaborative search" width="500">
+      <br>
+      <small>Platforms used for collaborative archetype search.</small>
+    </div>
+    <div><strong>Conclusion:</strong> The main platforms for collaborative search are modelling tools, video conferencing, SharePoint, and email.</div>
+
+
+    <h4>21. Main Expected Benefits of Collaborative Archetype Search</h4>
+    <p>
+      Six participants provided responses regarding the main benefits they expect from collaboration during archetype search. Their answers can be grouped as follows:
+    </p>
+    <ul>
+      <li><strong>Improved Quality and Suitability:</strong> 
+        <ul>
+          <li>Finding better-quality archetypes through shared knowledge</li>
+          <li>Selecting archetypes that best fit the information elements and specific project needs</li>
+          <li>Ensuring all necessary elements are included and nothing important is missed</li>
+          <li>Identifying the most optimal archetype for a given use case or topic</li>
+        </ul>
+      </li>
+      <li><strong>Efficiency and Speed:</strong>
+        <ul>
+          <li>Saving time by leveraging the collective expertise of the group</li>
+          <li>Achieving greater speed and accuracy in archetype selection</li>
+        </ul>
+      </li>
+    </ul>
+    
+    <p>
+      <strong>Summary:</strong> Collaboration in archetype search is valued by participants for enhancing the quality and relevance of selected archetypes, ensuring completeness, and increasing the efficiency of the process. By working together, participants can pool their knowledge, avoid overlooking important elements, and make faster, more accurate decisions.
+    </p>
+
+
+    <h4>22. Main Problems and Desired Changes in Archetype Search</h4>
+    <p>
+      Twelve participants provided responses to the question about the most important problem they face and the one change they would like to see in searching for archetypes. Their answers can be grouped as follows:
+    </p>
+    
+    <ul>
+      <li><strong>Search Precision and Filtering:</strong>
+        <ul>
+          <li>Difficulties in quickly finding the right archetype due to too many similar or irrelevant results</li>
+          <li>Desire for advanced filters, tagging, or structured search options (e.g., by document type, compilation type, or element level)</li>
+          <li>Need for more synonyms and better search on element level</li>
+          <li>Request for a better general index or overview of available archetypes, not just textual search</li>
+          <li>Desire for sorting options (e.g., by date in project/incubator CKM)</li>
+        </ul>
+      </li>
+      <li><strong>Clarity and Semantic Consistency:</strong>
+        <ul>
+          <li>Confusion due to redundancy between main archetypes and included archetypes, leading to inconsistent modelling across organizations</li>
+          <li>Need for more semantic links between data elements (not just coded values)</li>
+          <li>Desire for mapping information elements to archetype elements by label, not just meaning</li>
+        </ul>
+      </li>
+      <li><strong>Tooling and Process Improvements:</strong>
+        <ul>
+          <li>Need for tooling-neutral searching</li>
+          <li>Desire for a more effective process for submitting and handling change requests</li>
+        </ul>
+      </li>
+    </ul>
+    
+    <p>
+      <strong>Summary:</strong> As indicated by the participants, the most pressing issues in archetype search are the lack of precise filtering and advanced search options, leading to difficulty in finding the right archetype efficiently. Participants also highlighted the need for improved clarity, semantic consistency, and better tooling support. Addressing these challenges especially by enhancing search precision, providing better indexing and filtering, and improving semantic clarity would significantly improve the archetype search experience for users.
+    </p>
+
+
+<h3>Optional Final Section: Suggestions and Feedback</h3>
+<h4>23. Key Suggestions for Improving the modelling and Planning Process</h4>
+<p>
+  Eight participants responded to the question: "If you could change one thing about the current modelling and planning process, what would it be?". Their answers can be grouped as follows:
+</p>
+<ul>
+  <li><strong>Flexibility and Adaptability:</strong>
+    <ul>
+      <li>Make archetypes more flexible to accommodate changes without technical issues.</li>
+      <li>Integrate AI-based tools to assist in selecting the right archetypes.</li>
+    </ul>
+  </li>
+  <li><strong>Collaboration and Stakeholder Involvement:</strong>
+    <ul>
+      <li>Involve clinicians early and often to ensure models reflect real-world needs.</li>
+      <li>Promote more structured and well-organized international collaboration, despite differing priorities and projects.</li>
+      <li>Better inform and empower users to contribute to improving information models, not just use them passively.</li>
+    </ul>
+  </li>
+  <li><strong>Process and Methodology Enhancements:</strong>
+    <ul>
+      <li>Provide more structured reasoning and documentation for modelling decisions.</li>
+      <li>Integrate openEHR modelling more closely with FHIR implementation guides.</li>
+    </ul>
+  </li>
+  <li><strong>Terminology and Semantics:</strong>
+    <ul>
+      <li>Give greater weight to terminology (e.g., SNOMED CT) so that semantics drive modelling, regardless of where a data element appears.</li>
+    </ul>
+  </li>
+</ul>
+<p>
+  <strong>Conclusion:</strong> Participants emphasized the need for greater flexibility, better stakeholder engagement (especially clinicians), improved international collaboration, and stronger integration of terminology and standards. Addressing these areas could make the modelling and planning process more effective, inclusive, and aligned with real-world clinical needs.
+</p>
+
+<h4>24. Suggestions for Tools or Features to Improve Workflow with openEHR Models</h4>
+<p>
+  Ten participants provided suggestions for tools or features that would enhance their workflow with openEHR models. Their responses can be grouped as follows:
+</p>
+<ul>
+  <li><strong>Search, Impact Analysis, and Change Management:</strong>
+    <ul>
+      <li>Support for AQL (Archetype Query Language) impact analysis and editing when archetypes or templates change.</li>
+      <li>More effective and timely change request processes, especially for international collaboration.</li>
+      <li>Ability to sort by date in projects and incubators; fix bugs in CKM to Archetype Designer downloads/uploads.</li>
+    </ul>
+  </li>
+  <li><strong>Tool Integration and Usability:</strong>
+    <ul>
+      <li>Closer integration between Archetype Designer and CKM.</li>
+      <li>Expose and leverage the full capabilities of the Archetype Designer API.</li>
+      <li>Tooling improvements to make RM (Reference Model) fields more visible, especially for newcomers.</li>
+      <li>Convert templates to ASCII documents in Archetype Designer with all elements included.</li>
+    </ul>
+  </li>
+  <li><strong>Terminology and Semantic Support:</strong>
+    <ul>
+      <li>Better correspondence and integration between openEHR models and terminologies such as SNOMED CT for more semantic searches.</li>
+      <li>Each data element should have a semantic link to terminology, avoiding reliance on internal codes.</li>
+      <li>More reference templates to guide modelling.</li>
+    </ul>
+  </li>
+</ul>
+<p>
+  <strong>Conclusion:</strong> The most desired improvements focus on better change management, enhanced tool integration, and stronger semantic support. Streamlining workflows, making tools more user-friendly, and ensuring robust links to clinical terminologies would significantly improve the efficiency and quality of working with openEHR models.
+</p>
+
+<h3>Key Findings: openEHR Archetype modelling and Search Questionnaire (TL;DR)</h3>
+
+<ul>
+  <li>
+    <strong>Guidelines and Tools:</strong> Participants use a wide range of guidelines for template creation, including clinical, domain-specific, and project-specific sources. The most common tools for documenting elements are mind maps, spreadsheets, and openEHR-specific modelling tools (CKM, Archetype Designer).
+  </li>
+  <li>
+    <strong>Archetype Search Practices:</strong> The openEHR CKM is the primary tool for searching archetypes (used by 81.8%). Most users find the search only somewhat effective, citing issues like irrelevant or redundant results, lack of advanced filters, and insufficient documentation.
+  </li>
+  <li>
+    <strong>Main Search Challenges:</strong> Key problems include difficulty filtering/searching by specific attributes, too many similar archetypes, outdated results, and language barriers. Users want better indexing, more synonyms, and element-level search.
+  </li>
+  <li>
+    <strong>Tracking Relationships:</strong> Approaches vary: some use built-in tools, others track manually, and a few do not track relationships at all.
+  </li>
+  <li>
+    <strong>Collaboration:</strong> Archetype search is mostly done individually, but when collaboration occurs (typically 2-3 people), it is valued for improving quality, completeness, and speed of selection. Collaboration platforms include modelling tools, video conferencing, SharePoint, and email.
+  </li>
+  <li>
+    <strong>Desired Improvements:</strong> Users want more flexible archetypes, better integration with standards (e.g., FHIR, SNOMED CT), improved change request processes, and AI-based tools for archetype selection. There is a strong call for more structured international collaboration and greater clinician involvement.
+  </li>
+  <li>
+    <strong>Tooling and Workflow Suggestions:</strong> Participants request better impact analysis for AQL, improved tool integration (especially between CKM and Archetype Designer), more visible RM fields, bug fixes, and enhanced semantic support (e.g., semantic links to terminology).
+  </li>
+</ul>
+

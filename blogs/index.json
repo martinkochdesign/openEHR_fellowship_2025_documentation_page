@@ -43,8 +43,18 @@
     }
     ,
     {
+      "title": "🚧 Reflective Journal II",
+      "file": "reflective_journal_2.html"
+    }
+    ,
+    {
       "title": "Initial User Questionnaire",
       "file": "07_user_questionnaire.html"
+    }
+    ,
+    {
+      "title": "User Questionnaire - RESULTS",
+      "file": "07B_questionnaire_results.html"
     }
     ,
     {
@@ -101,7 +111,21 @@
       "title": "Visualization tool - Introduction",
       "file": "20_vis_tool_introduction.html"
     }
-
+    ,
+    {
+      "title": "Visualization tool - User Journey Mapping",
+      "file": "21_vis_tool_role_play.html"
+    }
+    ,
+    {
+      "title": "🚧 ADL extraction - GUI Wireframe",
+      "file": "22_vis_tool_GUI.html"
+    }
+    ,
+    {
+      "title": "🚧 ADL extraction - Visualization Language",
+      "file": "23_vis_tool_visualization_language.html"
+    }
 ]
 
     
