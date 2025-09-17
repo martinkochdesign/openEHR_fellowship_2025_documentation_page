@@ -118,12 +118,12 @@
     }
     ,
     {
-      "title": "ADL extraction - GUI Wireframe",
+      "title": "Visualization tool - GUI Wireframe",
       "file": "22_vis_tool_GUI.html"
     }
     ,
     {
-      "title": "ADL extraction - Visualization Language",
+      "title": "Visualization tool - Visualization Language",
       "file": "23_vis_tool_visualization_language.html"
     }
 ]
