@@ -24,24 +24,107 @@
 
 <h3>Archetype Connection</h3>
 
+<p>
+    In the <strong>Archetype</strong> view, all relationships between the active archetype and other existing archetypes are visualized. Different types of connections are represented with distinct symbols and line styles for clarity:
+</p>
+
+<ul>
+    <li>
+        <strong>Specialized archetypes</strong>: Archetypes that are specialized from the active one are shown with a small black disc, an arrow pointing toward the parent, and a solid black line.
+    </li>
+    <li>
+        <strong>Parent archetypes</strong>: Archetypes that are parents of the active one are indicated by a large black disc, an arrow pointing toward the parent, and a solid black line.
+    </li>
+    <li>
+        <strong>Included archetypes</strong>: Archetypes referenced in inclusion statements within the slots of the active archetype are marked with a green circle and a green dashed connection line.
+    </li>
+    <li>
+        <strong>Excluded archetypes</strong>: Archetypes referenced in exclusion statements within the slots of the active archetype are marked with a red circle and a red dashed connection line.
+    </li>
+</ul>
+
 <div style="text-align: center;">
-    <img src="images/vis_archetypes.png" alt="Archetype visualization legend." width="480">
+    <img src="images/vis_archetypes.png" alt="Archetype visualization legend." width="400">
     <br>
-    <small>Archetype visualization legend.</small>
+    <small>Legend: Symbols and line styles used to represent archetype relationships.</small>
 </div>
 
+<p>
+    An example of the Archetype view is shown below:
+</p>
 
 <div style="text-align: center;">
-    <img src="images/vis_archetype_example.png" alt="Archetype visualization example." width="700">
+    <img src="images/vis_archetype_example.png" alt="Archetype visualization example." width="700" class="img-styled">
     <br>
-    <small>Archetype visualization example.</small>
+    <small>Example visualization of archetype relationships.</small>
 </div>
-
 
 
 
 <h3>Similar Archetypes</h3>
 
+<p>
+    In the <strong>Similar</strong> view, a collection of archetypes that are similar or related to the active archetype is displayed. These similar archetypes are highlighted in a coral color for easy identification. Notably, there are no direct connections shown between the active archetype and the similar ones in this view.
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_similar.png" alt="Similar archetypes legend." width="380">
+    <br>
+    <small>Legend: Similar archetypes are shown in coral red.</small>
+</div>
+
+<p>
+    An example of the Similar view is shown below:
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_similar_example.png" alt="Similar archetypes example." width="700" class="img-styled">
+    <br>
+    <small>Example of similar archetypes displayed in the interface.</small>
+</div>
+
+
 <h3>Collection</h3>
+<p>
+    In the <strong>Collection</strong> view, the "My collection" list displays various archetypes and their relationships. These archetypes include both existing ones from the database and newly proposed archetypes. Relationships can be of the following types: inclusion, exclusion, and parent-child. The coding for these relationships is defined in the following legend:
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_collection.png" alt="Archetype collection legend." width="430">
+    <br>
+    <small>Legend: Archetype collection colors and connectors.</small>
+</div>
+
+<p>
+    An example of the Collection view is shown below:
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_collection_example.png" alt="Archetype collection example." width="650" class="img-styled">
+    <br>
+    <small>Example of archetype collection displayed in the interface.</small>
+</div>
 
 <h3>Project</h3>
+<p>
+    A project is visualized using three columns, arranged from left to right: <strong>Checklist Sections</strong>, <strong>Checklist Elements</strong>, and <strong>Assigned Archetypes</strong>.
+</p>
+
+<p>
+    Checklist elements are connected to their corresponding sections with a dashed line. When an archetype is assigned to an element, it is displayed in the third column and linked to the element with a dashed line as well.
+</p>
+
+<p>Color coding of the linked elements:
+    <ul>
+        <li><strong>Pink:</strong> Section name</li>
+        <li><strong>Green:</strong> Element name</li>
+        <li><strong>Blue:</strong> Existing archetype</li>
+        <li><strong>Yellow:</strong> New archetype</li>
+    </ul>
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_project.png" alt="Project visualization." width="500">
+    <br>
+    <small>Project visualization.</small>
+</div>

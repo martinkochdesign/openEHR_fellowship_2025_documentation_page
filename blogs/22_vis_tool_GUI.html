@@ -1,72 +1,211 @@
 <h2>Visualization tool - GUI</h2>
 
-<h3>Wireframe</h3>
+<h3>Wireframe/Early draft</h3>
+
+<p>
+    The <strong>Main View</strong> provides access to essential <strong>Project Options</strong> at the top of the interface. On the right-hand side, you will find the <strong>Checklist Sidebar</strong>. On the left, the <strong>Archetype List Sidebar</strong> and <strong>Collection</strong> view are located. A simple filter in the Archetype List Sidebar serves as the <strong>Search</strong> function. The <strong>Visualization</strong> area is situated in the middle section, offering different views to select from.
+</p>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_1.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_1.png" alt="Main View wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Main View layout overview</small>
 </div>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_2.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_2.png" alt="Sidebar and Collection wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Checklist sidebar</small>
 </div>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_3.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_3.png" alt="Visualization options wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Archetype list</small>
+</div>
+
+<p>
+    The <strong>Info</strong> panel for a selected archetype is displayed in the lower part of the middle section.
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_tool_GUI_wireframe_4.png" alt="Info panel wireframe" width="900" >
+    <br>
+    <small>Info panel for selected archetype</small>
 </div>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_4.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_5.png" alt="Additional Info panel wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Archetype collection view</small>
 </div>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_5.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_6.png" alt="Info and Visualization combined wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Visualization view collection</small>
+</div>
+
+<p>
+    For editing or creating new archetypes, the <strong>New Archetype Editor</strong> is shown in the lower part of the middle section.
+</p>
+
+<div style="text-align: center;">
+    <img src="images/vis_tool_GUI_wireframe_7.png" alt="New Archetype Editor wireframe" width="900" >
+    <br>
+    <small>New Archetype Editor interface</small>
 </div>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_6.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_8.png" alt="Editor details wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Editor details and options</small>
 </div>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_7.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_GUI_wireframe_9.png" alt="Editor advanced options wireframe" width="900" >
     <br>
-    <small> </small>
+    <small>Expor project report</small>
 </div>
 
+<p>
+    <strong>Note:</strong> There is no dedicated <strong>About</strong> page, <strong>History</strong> view, <strong>Checklist Editor</strong>, or separate <strong>Search</strong> view planned for this tool.
+</p>
+
+<h3>First Iteration of the GUI</h3>
+
+<p>
+    Based on the previously defined wireframe, a first iteration of the GUI was implemented. The <strong>Main View</strong> closely resembles the initial wireframe.
+</p>
+
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_8.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_first_GUI_1.png" alt="First GUI Main View" width="900" >
     <br>
-    <small> </small>
+    <small>First GUI developed - Main View layout.</small>
 </div>
 
+<p>
+    A separate editing view for the checklist was implemented, as shown in the following figure.
+</p>
+
 <div style="text-align: center;">
-    <img src="images/vis_tool_GUI_wireframe_9.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
+    <img src="images/vis_tool_first_GUI_2.png" alt="First GUI Checklist Editor" width="900" >
     <br>
-    <small> </small>
+    <small>First GUI - Checklist Editor view.</small>
 </div>
 
-<h3>First iteration of the GUI</h3>
+<p>
+    This implementation used a fixed grid layout for the views, without allowing users to resize or reposition them. When integrating results from the User Journey Mapping, this rigid grid approach proved problematic, especially when adding additional views to the project.
+</p>
 
+<h3>Second Iteration of the GUI</h3>
+
+<p>
+    Using the comprehensive list of "Design Requirements for Different Views/Pages/Windows" from the User Journey Mapping (<a href="/index.html?blog=21_vis_tool_role_play.html">see details</a>), the second iteration of the GUI was drafted.
+</p>
+
+
+<h4>Main View</h4>
 
 <div style="text-align: center;">
-    <img src="images/vis_tool_first_GUI_1.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
-    <br>
-    <small>First GUI developed.</small>
+    <img src="images/gui_v2_main.png" alt="" width="950" >
 </div>
 
+<h5>Standard view</h5>
 <div style="text-align: center;">
-    <img src="images/vis_tool_first_GUI_2.png" alt="GUI wireframe 1" width="900" onclick="window.open(this.src, '_blank');">
-    <br>
-    <small>First GUI - Checklist editor.</small>
+    <img src="images/gui_v2_standard_view.png" alt="" width="900" >
+</div>
+
+<h5>Information view</h5>
+<div style="text-align: center;">
+    <img src="images/gui_v2_info_view.png" alt="" width="900" >
+</div>
+
+<h5>Checklist editor view</h5>
+<div style="text-align: center;">
+    <img src="images/gui_v2_checklist_editor_view.png" alt="" width="900" >
+</div>
+
+<h5>Search view</h5>
+<div style="text-align: center;">
+    <img src="images/gui_v2_search_view.png" alt="" width="900" >
+</div>
+
+
+<h4>Splash Screen</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_splash.png" alt="" width="600" >
+</div>
+
+<h4>About Page</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_about.png" alt="" width="700" >
+</div>
+
+<h4>Project Options View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_options.png" alt="" width="800" >
+</div>
+
+<h4>Checklist Editor View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_checklist_editor.png" alt="" width="900" >
+</div>
+
+<h4>Checklist Sidebar</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_checklist.png" alt="" width="800" >
+</div>
+
+<h4>Archetype List Sidebar</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_archetypes.png" alt="" width="800" >
+</div>
+
+<h4>Search View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_search.png" alt="" width="900" >
+</div>
+
+<h4>Visualization View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_visualization.png" alt="" width="1000" >
+</div>
+
+<h4>History</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_history.png" alt="" width="900" >
+</div>
+
+<h4>Info View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_info.png" alt="" width="900" >
+</div>
+
+<h4>Collection View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_collection.png" alt="" width="1000" >
+</div>
+
+<h4>New Archetype Editor View</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_archetype_editor.png" alt="" width="900" >
+</div>
+
+<h4>Warning page</h4>
+
+<div style="text-align: center;">
+    <img src="images/gui_v2_warning.png" alt="" width="900" >
 </div>
