@@ -1,0 +1,123 @@
+<h3>Visualization</h3>
+
+<h4>Overview</h4>
+<p>The network visualisation feature of the application provides an intuitive way to see relationships between archetypes. Different visualisation modes allow you to display archetype dependencies, similarities, your archetype collection, and the overall project structure.</p>
+
+<h4>Where to Find It</h4>
+<p>In the standard main view, the visualisation feature is located in the middle section of the screen. Before exploring the different views, it is helpful to understand how to navigate the visualisation canvas.</p>
+
+ <div style="text-align: center;">
+        <img src="images/tut_vis_position.png" width="900" >
+		<br>
+		<small>
+		Where to find the visualization.
+		</small>
+    </div>
+
+
+<h4>Navigating the View</h4>
+<p><strong>Move:</strong> To move the network visualisation canvas, click and hold the left mouse button on an empty space and drag the network around.</p>
+<p><strong>Zoom:</strong> To zoom in or out, use your mouse wheel while the cursor is over the canvas. Alternatively, you can use pinch gestures on a trackpad.</p>
+<p><strong>Reset Zoom:</strong> To reset the position and zoom, click the "Reset Zoom" icon in the lower right-hand corner of the visualisation.</p>
+
+ <div style="text-align: center;">
+        <img src="images/tut_vis_reset_zoom.png" width="350" >
+		<br>
+		<small>
+		Reset zoom button.
+		</small>
+    </div>
+
+<p><strong>Focus Archetype:</strong> To focus on a specific archetype in the network, click on its node with the left mouse button.</p>
+
+<h4>The Different Views</h4>
+<p><strong>Archetype:</strong></p>
+<ul>
+  <li>In the "Archetype" view, you can see the relationships of an archetype with others.</li>
+  <li>The currently selected archetype is shown as a red node.</li>
+  <li>Parent-child relationships are indicated by solid black lines, with arrows pointing from parent to child.</li>
+  <li>Inclusion and exclusion relationships are shown as green and red dashed lines, respectively.</li>
+  <li>This is the default view when opening the application.</li>
+</ul>
+
+ <div style="text-align: center;">
+        <img src="images/tut_vis_archetype_view.png" width="600" >
+		<br>
+		<small>
+		The archetype view.
+		</small>
+    </div>
+
+<p><strong>Similar:</strong></p>
+<ul>
+  <li>The "Similar" view displays recommended archetypes that may be related or similar to the current one.</li>
+  <li>These are shown without connecting lines.</li>
+</ul>
+
+<div style="text-align: center;">
+        <img src="images/tut_vis_similar_view.png" width="600" >
+		<br>
+		<small>
+		The similar archetypes view.
+		</small>
+    </div>
+
+
+<p><strong>Archetype + Similar:</strong></p>
+<ul>
+  <li>This view combines the "Archetype" and "Similar" views, showing both relationships and recommendations.</li>
+</ul>
+
+<div style="text-align: center;">
+        <img src="images/tut_vis_combination_view.png" width="600" >
+		<br>
+		<small>
+		The combined archetypes view.
+		</small>
+    </div>
+
+<p><strong>Collection:</strong></p>
+<ul>
+  <li>The "Collection" view shows relationships between archetypes in your collection list.</li>
+  <li>There is no red focused archetype.</li>
+  <li>Node colours distinguish between archetypes from the database (yellow) and new archetypes (blue).</li>
+  <li>Clicking a node selects it and displays its information.</li>
+  <li>Relationships are shown with solid black lines (parent-child) and dashed red or green lines (exclusions or inclusions).</li>
+</ul>
+
+<div style="text-align: center;">
+        <img src="images/tut_vis_collection_view.png" width="600" >
+		<br>
+		<small>
+		The collection view.
+		</small>
+    </div>
+
+<p><strong>Project:</strong></p>
+<ul>
+  <li>The "Project" view displays the assignment of archetypes to data elements defined in your checklist.</li>
+  <li>Three columns show section names (pink), data elements, and assigned archetypes.</li>
+  <li>Data elements are connected to their sections with grey dashed lines, and assigned archetypes are shown in the third column, connected to data elements with grey dashed lines.</li>
+  <li>Node colours again distinguish between database and new archetypes.</li>
+  <li>This view provides an overview of all archetypes and checklists in your project, including their dependencies.</li>
+</ul>
+
+<div style="text-align: center;">
+        <img src="images/tut_vis_project_view.png" width="600" >
+		<br>
+		<small>
+		The project view.
+		</small>
+    </div>
+
+<h4>Export View</h4>
+<p>For documentation, you can export the current visualisation as an SVG image. Click the "Save as SVG image" button in the lower right-hand corner of the visualisation.
+</p>
+ <div style="text-align: center;">
+        <img src="images/tut_vis_export_svg.png" width="350" >
+		<br>
+		<small>
+		Save to SVG file button.
+		</small>
+    </div>
+<p>The file is saved automatically to your browser's download directory, with a filename containing the time, date, project name, and view mode. The project name may be modified for compatibility.</p>
