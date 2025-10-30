@@ -13,9 +13,26 @@
       "title": "Tutorial: GUI",
       "file": "tutorial - GUI.webm",
       "info": "3-tutorial_GUI.html"
+    },
+	    {
+      "title": "Tutorial: Projects",
+      "file": "tutorial - Project.webm",
+      "info": "4-tutorial_projects.html"
+    },
+		    {
+      "title": "Tutorial: Checklist",
+      "file": "tutorial - checklist.webm",
+      "info": "6-tutorial_checklist.html"
+    },
+	{
+       "title": "Tutorial: Search syntax",
+      "file": "tutorial - search syntax.webm",
+      "info": "5-tutorial_search_syntax.html"
     }
-  
   ]
+  
+  
+  
   
   
   
