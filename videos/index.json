@@ -24,10 +24,20 @@
       "file": "tutorial - checklist.webm",
       "info": "6-tutorial_checklist.html"
     },
+		{
+       "title": "Tutorial: Search (Part 1)",
+      "file": "tutorial - search part 1.webm",
+      "info": "7-tutorial_search part 1.html"
+    },
 	{
        "title": "Tutorial: Search syntax",
       "file": "tutorial - search syntax.webm",
       "info": "5-tutorial_search_syntax.html"
+    },
+		{
+       "title": "Tutorial: Search (Part 2)",
+      "file": "tutorial - search part 2.webm",
+      "info": "8-tutorial_search part 2.html"
     }
   ]
   
