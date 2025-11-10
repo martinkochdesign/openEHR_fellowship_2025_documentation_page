@@ -1,58 +1,58 @@
 [
     {
       "title": "Project Introduction",
-      "file": "project introduction.mp4",
+      "file": "project_introduction.mp4",
       "info": "1-introduction.html"
     },
 	    {
       "title": "Application Overview",
-      "file": "application overview.webm",
+      "file": "application_overview.webm",
       "info": "2-application overview.html"
     },
 	    {
       "title": "Tutorial: GUI",
-      "file": "tutorial - GUI.webm",
+      "file": "tutorial_GUI.webm",
       "info": "3-tutorial_GUI.html"
     },
 	    {
       "title": "Tutorial: Projects",
-      "file": "tutorial - Project.webm",
+      "file": "tutorial_project.webm",
       "info": "4-tutorial_projects.html"
     },
 		    {
       "title": "Tutorial: Checklist",
-      "file": "tutorial - checklist.webm",
+      "file": "tutorial_checklist.webm",
       "info": "6-tutorial_checklist.html"
     },
 		{
        "title": "Tutorial: Search (Part 1)",
-      "file": "tutorial - search part 1.webm",
+      "file": "tutorial_search_part_1.webm",
       "info": "7-tutorial_search part 1.html"
     },
 	{
        "title": "Tutorial: Search syntax",
-      "file": "tutorial - search syntax.webm",
+      "file": "tutorial_search_syntax.webm",
       "info": "5-tutorial_search_syntax.html"
     },
 		{
        "title": "Tutorial: Search (Part 2)",
-      "file": "tutorial - search part 2.webm",
+      "file": "tutorial_search_part_2.webm",
       "info": "8-tutorial_search part 2.html"
     },
 		{
        "title": "Tutorial: New archetype placeholder",
-      "file": "tutorial - archetype placeholder.webm",
+      "file": "tutorial_archetype_placeholder.webm",
       "info": "9-tutorial_archetype placeholer.html"
     },
 	{
        "title": "Tutorial: Assigning archetypes",
-      "file": "tutorial - assigning archetypes.webm",
+      "file": "tutorial_assigning_archetypes.webm",
       "info": "10-tutorial_assigning archetypes.html"
   }
       ,
 	{
        "title": "Tutorial: Planning a template structure",
-      "file": "tutorial - template planner.webm",
+      "file": "tutorial_template_planner.webm",
       "info": "11-tutorial_template planner.html"
     }
   ]
