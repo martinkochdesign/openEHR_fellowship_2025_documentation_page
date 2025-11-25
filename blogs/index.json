@@ -140,7 +140,14 @@
     {
       "title": "Visualisation tool - User Manual",
       "file": "31_vis_tool_manual.html"
-    }
+    }    
+	,
+    {
+      "title": "🚧 First test with real users",
+      "file": "32_user_test.html"
+    } 
+	
+
 ]
 
 
