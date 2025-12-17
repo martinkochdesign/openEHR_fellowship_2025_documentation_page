@@ -1,0 +1,72 @@
+
+  <h2>The openEHR Class Glossary</h2>
+  
+  <h3>Problem Statement</h3>
+  <p>
+    The openEHR specifications are complex and distributed across multiple webpages, making them difficult to navigate. For example, discovering all attributes of a class, including inherited ones, often requires switching between pages, which can quickly become confusing. Additionally, research into classes and their attributes is typically unidirectional. If a user wants to perform a reverse search—such as finding all classes that contain an element of class <code>PARTICIPATION</code>—this is essentially impossible with the current resources.
+  </p>
+  
+  <h3>Existing Solutions</h3>
+  <p>
+    Tools like <a href="https://neoehr.com/openehr/uml" target="_blank">NeoEHR UML</a> improve the visibility and navigability of the specifications by providing UML diagrams. However, these tools still have limitations, particularly regarding advanced search capabilities.
+  </p>
+  <p>
+    A text version of the reference model is available in the openEHR GitHub repository:
+    <a href="https://github.com/openEHR/specifications-ITS-BMM/tree/master/components/RM/Release-1.1.0" target="_blank">
+      openEHR/specifications-ITS-BMM
+    </a>
+    but it does not contain all the information required for comprehensive search and navigation.
+  </p>
+  
+  <h3>Proposed Solution</h3>
+  <p>
+    To address these issues, we generate a comprehensive reference model and store all relevant information in a JSON file. This format is easy to parse and enables a variety of search operations, including reverse lookups.
+  </p>
+  
+  <h3>Implementation</h3>
+  <ol>
+    <li>
+      <strong>Data Extraction:</strong>
+      <ul>
+        <li>
+          A Python script connects to the following openEHR specification webpages:
+          <ul>
+            <li><a href="https://specifications.openehr.org/releases/BASE/latest/base_types.html" target="_blank">BASE Types</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/common.html" target="_blank">Common</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/data_structures.html" target="_blank">Data Structures</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/data_types.html" target="_blank">Data Types</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/demographic.html" target="_blank">Demographic</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/ehr_extract.html" target="_blank">EHR Extract</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/ehr.html" target="_blank">EHR</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/integration.html" target="_blank">Integration</a></li>
+            <li><a href="https://specifications.openehr.org/releases/RM/latest/support.html" target="_blank">Support</a></li>
+          </ul>
+        </li>
+        <li>
+          The script extracts all tables from these pages. If a table represents a class, all relevant information is parsed and stored.
+        </li>
+        <li>
+          The extraction process is automated to update the glossary dataset on a monthly basis.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Glossary Search Interface:</strong>
+      <ul>
+        <li>
+          A dedicated HTML page was added to the Archetype Companion tool, enabling users to search the reference model data.
+        </li>
+        <li>
+          Search capabilities include class name, attribute name, attribute description, and attribute data type.
+        </li>
+      </ul>
+    </li>
+  </ol>
+  
+  <h3>Features</h3>
+  <ul>
+    <li>Comprehensive, up-to-date JSON dataset of the openEHR reference model</li>
+    <li>Automated monthly updates via Python scripting</li>
+    <li>Advanced search functionality, including reverse lookups</li>
+    <li>Seamless integration with the Archetype Companion for easy access</li>
+  </ul>
