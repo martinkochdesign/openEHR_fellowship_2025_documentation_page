@@ -1,3 +1,25 @@
+<style>
+  
+    h1, h2, h3, h4 { color: #16355b; }
+    h1 { margin-bottom: 0.25rem; }
+    h2 { margin-top: 2rem; }
+    h3 { margin-top: 1.5rem; }
+    p, li { font-size: 0.95rem; }
+    .tag { display: inline-block; padding: 2px 6px; margin-right: 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .tag-p1 { background: #ffe5e5; color: #a12828; }
+    .tag-p2 { background: #fff4d6; color: #946200; }
+    .tag-p3 { background: #e7f3ff; color: #215a96; }
+    .tag-p4 { background: #f7d9ff; color: #4a2196; }
+    .meta { color: #555; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .quote { margin: 0.25rem 0 0.75rem 0; padding-left: 0.75rem; border-left: 3px solid #d0d7de; color: #333; font-size: 0.9rem; }
+    ul { margin-top: 0.25rem; }
+    .inline-list > li { margin-bottom: 0.15rem; }
+    .priority-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; margin-top: 0.5rem; }
+    .priority-table th, .priority-table td { border: 1px solid #d0d7de; padding: 6px 8px; vertical-align: top; }
+    .priority-table th { background: #f6f8fa; text-align: left; }
+    strong.label { color: #16355b; }
+  </style>
+
 <h2>Summary of Volunteer Responses: Archetype Companion User Testing</h2>
 
 <p>
@@ -9,72 +31,334 @@ Overall, the cohort brings together both early-career and experienced profession
 </p>
 
 
-<!--
-<table border="1" cellpadding="6" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Professional Position</th>
-      <th>Years of Experience with openEHR</th>
-      <th>Project to Test with Archetype Companion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Clinical Modeller</td>
-      <td>2-4 years</td>
-      <td>
-        Modelling the three main types of situations in which a medical professional cares for an admitted patient: admission, rounds, and discharge.
-      </td>
-    </tr>
-    <tr>
-      <td>Senior Adviser</td>
-      <td>6+ years</td>
-      <td>
-        Currently working on a project concerning instillation therapy for non-muscle invasive bladder cancer, but the project may have come too far for it to be a good testing candidate. Also starting a new project concerning intravitreal injection therapy, which may be a better candidate since it is starting from scratch.
-      </td>
-    </tr>
-    <tr>
-      <td>Data Modeller</td>
-      <td>2-4 years</td>
-      <td>
-        Works in different fields that might be interesting for this project: transfusions, critical care, or alerts and notifications.
-      </td>
-    </tr>
-    <tr>
-      <td>Medical Information Specialist</td>
-      <td>0-2 years</td>
-      <td>
-        Basic medical use cases, likely imaging or medication. Very interested in trying the Archetype Companion.
-      </td>
-    </tr>
-    <tr>
-      <td>Clinical Data Modeler</td>
-      <td>0-2 years</td>
-      <td>
-        Planning to make a template for tracking or assessment of various risk factors.
-      </td>
-    </tr>
-    <tr>
-      <td>Interoperability Coordinator / Resident</td>
-      <td>0-2 years</td>
-      <td>
-        To try and be helpful for my fellow fellow ;) Also has a dataset that needs to be templated.
-      </td>
-    </tr>
-    <tr>
-      <td>Junior Analyst / Clinical Data Modeller</td>
-      <td>0-2 years</td>
-      <td>
-        Two national projects.
-      </td>
-    </tr>
-    <tr>
-      <td>Clinical Modeller</td>
-      <td>2-4 years</td>
-      <td>
-        Adverse Reactions: Would like to use the Archetype Companion to experiment with and test potential improvements to the existing adverse reactions data model. The goal is to explore alternative structures and ensure the template supports the intended clinical and interoperability requirements.
-      </td>
-    </tr>
-  </tbody>
-</table>
--->
+<h2>Archetype Companion – Soft Launch Feedback Analysis</h2>
+  <p class="meta">
+    Participants: 8 invited &middot; 4 questionnaire responses (anonymous) &middot; Period: 09–30 Dec 2025
+  </p>
+
+  <h3>1. Overall Sentiment and Key Strengths</h3>
+
+  <h4>1.1 Overall Experience</h4>
+  <p>
+    Using a 4-point scale (Poor=1, Fair=2, Good=3, Very good=4), average overall rating:</strong> (3 + 4 + 3 + 3) / 4 = <strong>3.25</strong> → between <strong>Good</strong> and <strong>Very good</strong>.</p>
+
+  <h4>1.2 What Users Liked</h4>
+
+  <h5>a) Search &amp; navigation of archetypes</h5>
+  <div class="quote">
+    “The visualization of the relationship of archetypes, and the information about archetypes (such as RM information) and the search is well done and easy.”
+  </div>
+  <div class="quote">
+    “Very useful for browsing &amp; searching archetypes… especially pointing out different connections/inclusions between Archetypes.”
+  </div>
+
+  <h5>b) Network-like visualization &amp; relationships</h5>
+  <div class="quote">
+    “I like the searches that can be made using the tool, using different combination and watching the relationships.”
+  </div>
+  <div class="quote">
+    “Visualization surprisingly responsive and appealing… Navigating the archetype dependencies in the graph was very easy.”
+  </div>
+
+  <h5>c) Archetype information &amp; RM context</h5>
+  <div class="quote">
+    “I like how the information of archetypes is shown in the layout and easier to understand, comparing with CKM, for example: more intuitive, and better explained and shown.”
+  </div>
+  <div class="quote">
+    “Support for checklists and a smooth way to explore specifications and the Reference Model.”
+  </div>
+
+  <h5>d) Overall UX for clinical modellers</h5>
+  <div class="quote">
+    “Among all the tools in the openEHR ecosystem, this is the one I’ve found to be most thoughtfully designed for clinical modellers… With the addition of a few targeted features, it has the potential to become the most valuable and widely used tool in our workflow.”
+  </div>
+
+  <h5>e) New archetype placeholder / template planning concept</h5>
+  <div class="quote">
+    “To be able to keep slots for archetypes not yet created in the template design mode… super useful. It hasn’t been yet embraced in other tools.”
+  </div>
+
+  <h5>f) Exporter</h5>
+  <div class="quote">
+    “The exporter is also very useful.”
+  </div>
+
+  <h5>g) Tutorials and explanations</h5>
+  <div class="quote">
+    “I think tutorials and explanations are excellent.”
+  </div>
+  <p>
+    Tutorials are clearly noticed and used; however, some videos fail to load (see issues).
+  </p>
+
+  <p><strong>Conclusion:</strong> The core concept and overall direction are strongly validated. Users see the Archetype Companion as aligned with clinical modelling workflows and solving real problems, especially around exploration and understanding of archetypes and their relationships.</p>
+
+  <h3>2. Main Pain Points and Issues</h3>
+
+  <h4>2.1 Usability &amp; Interaction Problems</h4>
+
+  <h5>a) Template Planner - element editing friction</h5>
+  <ul>
+    <li>Users must manually add each required element from an archetype, one by one, and type each element name.</li>
+    <li>The <em>element name</em> field in the Template Planner does not allow text selection for deletion or replacement.</li>
+  </ul>
+  <div class="quote">
+    “Having to manually add every required element from an archetype, one by one, and having to manually type each element name… more time-consuming and increases the risk of inconsistencies.”
+  </div>
+  <div class="quote">
+    “In Template Planner, text fields are not selectable for deletion. I have to keep DELETE pressed to delete a string.”
+  </div>
+
+  <h5>b) Difficulty understanding UI layouts and flows</h5>
+  <ul>
+    <li>Users find it hard to get used to the different layouts and to work with the tool in a “deeper way” when designing.</li>
+    <li>Specifically unclear: how to add archetypes to a collection and how to view which archetypes are currently in the collection.</li>
+  </ul>
+  <div class="quote">
+    “There are different layouts and, even if I have been trying the tool for the last week, I am still getting familiar with them and its functionalities.”
+  </div>
+  <div class="quote">
+    “I found it difficult to see how to add the archetypes to my collection, or to check which archetypes are added to my collection.”
+  </div>
+
+  <h5>c) Browser-specific UI issues (Firefox)</h5>
+  <ul>
+    <li>In Firefox (145.0.2), dropdown menus appear like browser “Autofill” instead of real dropdowns.</li>
+    <li>Item labels are truncated with “…” and often unreadable.</li>
+  </ul>
+  <div class="quote">
+    “Dropdown menus are not displayed well: Displayed like ‘Autofill’ suggestions instead of real dropdowns, and item labels are truncated with ‘...’, making most of them not readable.”
+  </div>
+
+  <h5>d) Tutorial video reliability</h5>
+  <ul>
+    <li>Tutorial videos 6 and 9 failed to load for at least one user.</li>
+  </ul>
+  <div class="quote">
+    “Tutorial videos 6 and 9 were not loading for me.”
+  </div>
+
+  <h5>e) Graph navigation ergonomics</h5>
+  <ul>
+    <li>History navigation is powerful but not obvious; discovered through tutorials.</li>
+    <li>Users want a simple way to go “up one step” in the dependency graph directly from the visualization.</li>
+  </ul>
+  <div class="quote">
+    “I discovered in the tutorial video that I can go back via the ‘History’. However, it would be useful to have a button in the visualization for going ‘upwards’ one step instead of only being able to go downwards on the dependency tree.”
+  </div>
+
+  <h4>2.2 Missing or Requested Features</h4>
+
+  <h5>a) Template Planner – structure loading &amp; editing</h5>
+  <ul>
+    <li>Automatically assign A/E typology to archetype elements.</li>
+    <li>Load the inherent structure of the published archetype into the Template Planner (instead of building it manually).</li>
+    <li>Option to load original element names from the archetype by default.</li>
+    <li>Add the ability to hide elements (set occurrences to 0..0) without deleting them.</li>
+    <li>Support value sets / terminology bindings for ELEMENTs of type CODED_TEXT.</li>
+  </ul>
+  <div class="quote">
+    “It would be valuable to automatically assign the A/E typology to archetype elements, or to load the inherent structure of the published archetype.”
+  </div>
+  <div class="quote">
+    “Adding the ability to specify value sets or terminology bindings for ELEMENTS of type CODED TEXT would greatly improve modelling precision and consistency.”
+  </div>
+
+  <h5>b) Export and integration with other tools</h5>
+  <ul>
+    <li>Ability to upload the designed template to an archetype designer / another design tool.</li>
+    <li>Download templates in OPT or OET format, or another suitable format.</li>
+  </ul>
+  <div class="quote">
+    “It would be useful, in the future, to find somehow to be able to upload the template designed in this tool, to the archetype designer… Or to be able to download the template designed in another format.”
+  </div>
+  <div class="quote">
+    “Finally, a download option for templates in OPT or OET format would be useful (although I understand this might not be the purpose of the tool).”
+  </div>
+
+  <h5>c) Additional visualization modes</h5>
+  <ul>
+    <li>Mind map view for archetypes and template designs.</li>
+  </ul>
+  <div class="quote">
+    “Another thing that would be helpful is to have a visualization of the archetypes and templates design in a mind map view.”
+  </div>
+
+  <h5>d) Archetype ID support</h5>
+  <ul>
+    <li>Automatic generation of archetype IDs from concept name and class according to openEHR conventions.</li>
+  </ul>
+  <div class="quote">
+    “Archetype IDs follow a specific structure. The companion could automatically generate this ID from the ‘Concept name’ and ‘Class’ fields instead of having to write it myself.”
+  </div>
+
+  <h3>3. Thematic Improvement Areas</h3>
+
+  <h4>3.1 Template Planner Workflow</h4>
+  <p><strong>Problems:</strong></p>
+  <ul>
+    <li>Manual, repetitive and error-prone element creation.</li>
+    <li>Poor text editing (no selection/replacement) in element fields.</li>
+    <li>No way to simply hide (0..0) elements; only deletion.</li>
+    <li>No support for value sets / terminology bindings for CODED_TEXT.</li>
+  </ul>
+  <p><strong>Why it matters:</strong> Template Planner is key for turning exploration into actual modelling work. Current friction risks limiting the tool to a browse-only prototype instead of an everyday tool.</p>
+
+  <h4>3.2 UI Learnability &amp; Discoverability</h4>
+  <p><strong>Problems:</strong></p>
+  <ul>
+    <li>Multiple layouts and views are confusing for new users.</li>
+    <li>Critical workflows (e.g., adding archetypes to a collection and viewing the collection) are not obvious.</li>
+  </ul>
+  <p><strong>Desired:</strong> Clearer labels, affordances and guidance; more explicit “Add to collection” and “My collection” areas, and potentially lightweight onboarding for first-time users.</p>
+
+  <h4>3.3 Robustness &amp; Cross-Browser Polish</h4>
+  <p><strong>Problems:</strong></p>
+  <ul>
+    <li>Firefox rendering issues for dropdowns, making options unreadable.</li>
+    <li>Some tutorial videos do not load, reducing self-service learning.</li>
+  </ul>
+
+  <h4>3.4 Graph Navigation Enhancements</h4>
+  <p><strong>Problem:</strong> Users can navigate down dependency trees easily but lack an obvious “up one step” control, and the powerful History feature is not visible enough.</p>
+
+  <h4>3.5 Export &amp; Ecosystem Integration</h4>
+  <p><strong>Problem:</strong> Templates created or planned in the Companion are not yet easily usable in downstream tools (archetype designers, runtime environments).</p>
+
+  <h4>3.6 Additional Visualization Mode</h4>
+  <p><strong>Opportunity:</strong> A mind map view could provide a complementary, more conceptual overview of archetypes and templates, especially useful in early-stage planning and stakeholder discussions.</p>
+
+  <h4>3.7 Archetype ID Assistance</h4>
+  <p><strong>Opportunity:</strong> Auto-generating archetype IDs from concept name and class can reduce errors and speed up archetype creation.</p>
+
+  <h2>4. Prioritized Improvements and Importance</h2>
+
+  <p>
+    Priorities are grouped into three levels:
+  </p>
+  <ul>
+    <li><span class="tag tag-p1">P1 – Critical</span> Directly affects core workflow or basic usability.</li>
+    <li><span class="tag tag-p2">P2 – High</span> Strongly improves productivity/adoption; not strictly blocking.</li>
+    <li><span class="tag tag-p3">P3 – Nice-to-have</span> Valuable but can be scheduled after P1/P2 items.</li>
+    <li><span class="tag tag-p4">P4 – Out of scope</span> Feature out of scope that might be of interest when the scope is re-defined.</li>
+  </ul>
+
+  <table class="priority-table">
+    <thead>
+      <tr>
+        <th>Priority</th>
+        <th>Improvement</th>
+        <th>Rationale / Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-p1">P1</span></td>
+        <td><strong class="label">Fix Template Planner text fields (selection &amp; editing)</strong></td>
+        <td>
+          Users cannot select text to delete or replace; must hold DELETE. This affects every edit in the Planner and creates strong frustration in a core workflow.
+        </td>
+      </tr>
+
+      <tr>
+        <td><span class="tag tag-p1">P1</span></td>
+        <td><strong class="label">Fix Firefox dropdown rendering &amp; truncation</strong></td>
+        <td>
+          Dropdowns render like browser autofill, labels are truncated and unreadable. Firefox users cannot reliably access many configuration options; this undermines perceived quality and basic usability.
+        </td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-p1">P1</span></td>
+        <td><strong class="label">Ensure all tutorial videos load reliably (esp. 6 &amp; 9)</strong></td>
+        <td>
+          Tutorials are central to learning a multi-layout UI. Broken videos reduce learnability and directly contradict the otherwise positive impression of the tutorials.
+        </td>
+      </tr>
+
+      <tr>
+        <td><span class="tag tag-p2">P2</span></td>
+        <td><strong class="label">Auto-load archetype structure in Template Planner</strong></td>
+        <td>
+          Instead of manually adding every element, the Planner should import the published archetype structure and original element names. This turns the tool from a prototype into a practical daily tool for modellers.
+        </td>
+      </tr>
+
+
+      <tr>
+        <td><span class="tag tag-p2">P2</span></td>
+        <td><strong class="label">Enhance graph navigation with “up one level” control</strong></td>
+        <td>
+          Adds a clear navigation affordance directly in the graph view so users can go up the dependency tree without relying only on the History list.
+        </td>
+      </tr>
+
+
+      <tr>
+        <td><span class="tag tag-p2">P2</span></td>
+        <td><strong class="label">Auto-generate archetype IDs from concept name &amp; class</strong></td>
+        <td>
+          Reduces cognitive load and mistakes with openEHR ID conventions; speeds up creation and encourages consistency across artefacts.
+        </td>
+      </tr>
+
+      <tr>
+        <td><span class="tag tag-p3">P3</span></td>
+        <td><strong class="label">Clarify &amp; streamline “collection” workflow</strong></td>
+        <td>
+          It is unclear how to add archetypes to a collection and how to view the collection. This blocks a key promise of the tool: moving from search to a curated set for template design.
+        </td>
+      </tr>
+
+      <tr>
+        <td><span class="tag tag-p3">P3</span></td>
+        <td><strong class="label">Add “hide element” (0..0) in Template Planner</strong></td>
+        <td>
+          Allowing users to hide elements (set occurrences 0..0) instead of deleting them matches how template specialisation typically works, and reduces the risk of losing information.
+        </td>
+      </tr>
+
+      <tr>
+        <td><span class="tag tag-p3">P3</span></td>
+        <td><strong class="label">Add mind map view for archetypes/templates</strong></td>
+        <td>
+          Provides an additional high-level visualisation useful in early design and communication, especially with stakeholders less familiar with technical dependency graphs.
+        </td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-p3">P3</span></td>
+        <td><strong class="label">Additional onboarding aids for multi-layout UI</strong></td>
+        <td>
+          Once core usability issues are fixed, add guided tours, first-time tooltips, or a “design your first template in 5 steps” overlay to further reduce learning curve.
+        </td>
+      </tr>
+
+
+      <tr>
+        <td><span class="tag tag-p4">P4</span></td>
+        <td><strong class="label">Support value sets / terminology bindings for CODED_TEXT</strong></td>
+        <td>
+          Being able to define value sets and terminology bindings is essential for serious data modelling.
+        </td>
+      </tr>
+
+            <tr>
+        <td><span class="tag tag-p4">P4</span></td>
+        <td><strong class="label">Export templates in OPT/OET and/or other interoperable formats</strong></td>
+        <td>
+          Makes the Archetype Companion part of the real modelling pipeline instead of a standalone exploration tool, enabling users to continue work in their usual archetype/template designers.
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <h3>5. Strategic Summary</h3>
+  <ul>
+    <li><strong>Validated strengths:</strong> network visualisation, archetype search, RM integration, clear archetype information, and the concept of new-archetype placeholders are all strongly appreciated.</li>
+    <li><strong>Main adoption blockers:</strong> friction in the Template Planner, confusing collection flow, Firefox visual bugs, and unreliable tutorial videos.</li>
+    <li><strong>High-leverage direction:</strong> focus on “from browsing to production templates”:
+      <ul>
+        <li>Search and visualise → add to collection → auto-load archetypes into Template Planner → tweak via hide/constraints &amp; terminology bindings → export (OPT/OET) or send to archetype designer.</li>
+      </ul>
+    </li>
+  </ul>
